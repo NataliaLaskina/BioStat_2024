@@ -30,7 +30,10 @@ read_rds('C:/Users/laskn/BioStat_2024/data/originals/numeric_data.rds')
 dataframe1 <- read_rds('C:/Users/laskn/BioStat_2024/data/originals/numeric_data.rds')
 describe(dataframe1, na.rm = TRUE, skew = FALSE, ranges = TRUE)
 ```
-
+```{r read}
+read_tsv('C:/Users/laskn/BioStat_2024/data/originals/data_tsv.tsv')
+dataframe2 <- read_tsv('C:/Users/laskn/BioStat_2024/data/originals/data_tsv.tsv')
+```
 ## Including Plots
 
 You can also embed plots, for example:
