@@ -25,8 +25,10 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
+```{r describe}
+read_rds('C:/Users/laskn/BioStat_2024/data/originals/numeric_data.rds')
+dataframe1 <- read_rds('C:/Users/laskn/BioStat_2024/data/originals/numeric_data.rds')
+describe(dataframe1, na.rm = TRUE, skew = FALSE, ranges = TRUE)
 ```
 
 ## Including Plots
