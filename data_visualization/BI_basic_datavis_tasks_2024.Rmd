@@ -1,0 +1,319 @@
+---
+title: "BI_basic_datavis_tasks_2024"
+author: "NataliaLaskina"
+date: "2024-09-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = FALSE, fig.width=16, fig.height=10)
+
+library(tidyverse)
+```
+
+## Data reading
+
+```{r dataLoading}
+hogwarts <- read_csv("data/hogwarts_2024.csv")
+hogwarts |> head()
+```
+
+### Checking dataset structure
+
+```{r}
+hogwarts |> glimpse()
+
+# Changing some variables type to factors
+hogwarts <- hogwarts |> mutate(
+  across(c(house, course, sex, wandCore, bloodStatus), ~ as.factor(.x))
+)
+```
+
+### NA checking
+
+```{r}
+sum(is.na(hogwarts))
+```
+
+### Summary output
+
+```{r}
+hogwarts |> summary()
+```
+
+## Data visualisation
+
+### Столбчатые диаграммы
+
+#### Первый график
+
+```{r first_task_1}
+
+theme_custom <- theme(
+    axis.text = element_text(size = 20),
+    axis.title = element_text(size = 25),
+    legend.title = element_text(size = 20),
+    legend.text = element_text(size = 20)
+  )
+
+first_barplot <- ggplot(hogwarts)+
+  geom_bar(aes(x = course, fill=course), colour = "black")+ 
+  scale_fill_manual(values = c("1" = "#9900CC", 
+                               "2" = "#CC0066", 
+                               "3" = "#FFFF66", 
+                               "4" = "#00FF99",
+                               "5" = "#FF3300", 
+                               "6" = "#CC66CC", 
+                               "7" = "#0033CC"))+
+  theme_classic()+theme_custom
+
+first_barplot
+```
+
+#### Второй график
+
+```{r second_task_1}
+
+second_barplot <- ggplot(hogwarts)+
+  geom_bar(aes(x = fct_infreq(house), 
+               fill = bloodStatus), 
+           colour = "black", 
+           position = "fill")+ 
+  scale_x_discrete(name = "house")+
+  theme_classic()+theme_custom
+
+second_barplot
+
+```
+
+##### Вывод из графика second_barplot
+
+На всех четырех факультетах больше половины учащихся - полукровки. Это самая распространенная категория учеников. Чистокровных учеников меньше 25% также на всех четырех факультетах. Магглорожденные представлены в количестве около 5-10% учащихся на каждом факультете (меньше всего на факультете Слизерин, больше всего на факультете Гриффиндор). В связи с этим находим политику выделения чистокровных волшебников и дискриминации полукровок и магглорожденных крайне деструктивной и ведущей к вырождению и вымиранию всего волшебного сообщества. Предлагаем деканам и старостам факультетов разработать и применить в учебном процессе и досуге учащихся факультативы, программы, брошюры и игры, популяризирующие десегрегацию и отрицание исключительной ценности происхождения.
+
+#### Третий график
+
+```{r third_task_1}
+third_barplot <- hogwarts |> 
+  filter(bloodStatus == c("pure-blood", "muggle-born")) |> 
+  ggplot()+
+  geom_bar(aes(x = fct_infreq(house), 
+               fill = bloodStatus), 
+           colour = "black", 
+           position = "fill")+ 
+  scale_x_discrete(name = "Факультет")+
+  labs(x = "Факультет", 
+       y = "Доля",
+       fill = "Происхождение")+
+  scale_fill_discrete(labels = c("Маглорожденный", "Чистокровный"))+
+  theme_classic()+theme_custom+
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "red", size = 1.5)
+
+third_barplot
+```
+
+### Боксплоты
+
+#### Первый график
+
+```{r first_task_2}
+first_boxplot <- ggplot(hogwarts)+
+  geom_boxplot(aes(y = `week_3`, 
+                   x = fct_reorder(house, week_3, .desc=TRUE)), 
+               colour = "black")+
+  scale_x_discrete(name = "Факультет")+
+  labs(x = "Факультет", 
+       y = "3-я неделя обучения")+
+  theme_classic()+
+  theme_custom
+first_boxplot
+```
+
+#### Второй график
+
+```{r second_task_2}
+knitr::opts_chunk$set(fig.width=14, fig.height=14)
+
+ second_boxplot <- ggplot(hogwarts)+
+  geom_boxplot(aes(y = `week_3`, 
+                   x = fct_reorder(house, week_3, .desc=TRUE), 
+         fill= bloodStatus), notch = TRUE)+
+  scale_x_discrete(name = "Факультет")+
+  labs(x = "Факультет", 
+       y = "3-я неделя обучения",
+       fill = "Происхождение")+
+    scale_fill_discrete(labels = c("Полукровка", "Маглорожденный", "Чистокровный"))+
+  theme_classic()+
+  theme_custom
+ 
+ second_boxplot
+```
+
+#### Третий график
+
+```{r third_task_2}
+knitr::opts_chunk$set(fig.width=14, fig.height=14)
+
+third_boxplot <- hogwarts |> ggplot(aes(y = `week_3`, 
+                   x = fct_reorder(house, week_3, .desc=TRUE), 
+         fill= bloodStatus))+
+  geom_boxplot(notch = TRUE, outliers = FALSE, width = 4, 
+               linewidth = 0.5)+
+  scale_x_discrete(name = "Факультет")+
+  labs(title = "Успеваемость на 3-й неделе обучения",
+       x = "Факультет", 
+       y = "3-я неделя обучения",
+       fill = "Происхождение",
+       caption = "Данные взяты из базы данных школы Хогвартс")+
+    scale_fill_discrete(labels = c("Полукровка", "Маглорожденный", "Чистокровный"))+
+   geom_jitter()+
+  theme_classic()+
+  theme_custom+
+  theme(plot.title = element_text(size = 30, face = "bold",  hjust = 0.5), plot.caption= element_text(size = 17))
+
+third_boxplot
+```
+
+### Разное
+
+#### Lollipop-plot
+
+```{r lollipop-plot}
+
+wand_colors <- c("dragon heartstring" = "red",
+                "phoenix feather" = "yellow",
+                "unicorn hair" = "grey")
+
+  lollipop_plot <- hogwarts |> 
+  filter(course == 5) |> 
+  mutate(id = as.factor(id)) |> 
+  ggplot()+
+  geom_segment(aes(x = 0, 
+                   xend = result, 
+                   y = fct_reorder(id, result, .desc = TRUE), 
+                   yend = fct_reorder(id, result, .desc = TRUE)))+
+  geom_point(aes(x = result, 
+                 y = fct_reorder(id, result, .desc = TRUE), color=wandCore), size = 3)+
+  scale_color_manual(values = wand_colors) + 
+  labs(title = "Успеваемость студентов 5 курса за год",
+       x = "итоговые баллы", 
+       y = "id",
+       color = "Сердцевина волшебной палочки")+
+  theme_classic()+
+  theme_custom+
+    theme(
+    plot.title = element_text(size = 30, hjust = 0.5))
+  
+lollipop_plot  
+
+```
+
+#### Гистограмма
+
+```{r histogram}
+
+histogram <- ggplot(hogwarts)+
+  geom_histogram(aes(x = `Astronomy exam`, fill=house), 
+                 colour = "black", 
+                 bins = ceiling(log2(nrow(hogwarts))+1))+
+  labs(title = "Экзамен по астрономии",
+       x = "Баллы",
+       y = "Number of students", # Изменяем название оси y
+       fill = "Факультет")+
+  scale_fill_manual(values = c("Gryffindor" = "grey",
+                              "Hufflepuff" = "grey",
+                              "Ravenclaw" = "grey",
+                              "Slytherin" = "green"))+
+  theme_classic()+
+  theme(axis.text = element_text(size = 18), 
+        axis.title.y = element_text(size = 20), 
+        axis.title.x = element_text(size = 22), 
+        legend.text = element_text(size = 18),
+        legend.title = element_text(size = 20),
+        plot.title = element_text(size = 30, hjust = 0.5))
+
+histogram
+
+```
+
+#### Модифицированный боксплот
+
+```{r modified boxplot}
+
+theme_custom_onemore <- theme(
+    axis.text = element_text(size = 20),
+    axis.title = element_text(size = 25),
+    legend.title = element_text(size = 20),
+    legend.text = element_text(size = 20),
+    panel.background = element_rect(fill = "white"),
+    plot.background = element_rect(fill = "white") 
+)
+  
+
+modified_third_boxplot <- hogwarts |> ggplot(aes(y = `week_3`, 
+                   x = fct_reorder(house, week_3, .desc=TRUE), 
+         fill= bloodStatus))+
+  geom_boxplot(notch = TRUE, outliers = FALSE, width = 4, 
+               linewidth = 0.5)+
+  scale_x_discrete(name = "Факультет")+
+  labs(title = "Успеваемость на 3-й неделе обучения",
+       x = "Факультет", 
+       y = "3-я неделя обучения",
+       fill = "Происхождение",
+       caption = "Данные взяты из базы данных школы Хогвартс")+
+    scale_fill_discrete(labels = c("Полукровка", "Маглорожденный", "Чистокровный"))+
+   geom_jitter()+
+  theme_custom_onemore+
+  theme(plot.title = element_text(size = 30, face = "bold",  hjust = 0.5), plot.caption= element_text(size = 17))
+
+modified_third_boxplot
+```
+
+### Фасетирование
+
+#### Способы фасетирования для визуализации разных типов графиков
+
+Для визуализации гистограммы лучше использовать способ фасетирования по строкам. При фасетировании по строкам гистограммы каждой группы данных располагаются одна под другой, что позволяет легко сравнивать формы распределений и выявлять различия между группами.
+
+Для визуализации violin-plot лучше использовать способ фасетирования по столбцам. Violin-plot часто используют для визуализации различий в медианах и формах распределения. Фасетирование по столбцам позволяет легко сравнивать медианы различных групп, так как они расположены рядом друг с другом.
+
+Если нужно показать распределение данных внутри каждой группы - лучше фасетировать по строкам. Если нужно сравнить распределения между группами - по столбцам. Фасетирование по строкам для гистограмм позволяет лучше сравнивать формы распределений, а фасетирование по столбцам для violin-plot - медианы и формы распределения разных групп.
+
+Но не всегда есть однозначно правильный способ фасетирования. Иногда может быть лучше использовать фасетирование по строкам для violin-plot или по столбцам для гистограмм в зависимости от конкретного набора данных и целей визуализации. Важно экспериментировать с разными способами фасетирования, чтобы найти самый эффективный и наглядный способ визуализации ваших данных.
+
+#### Фасетирование гистограммы
+
+```{r facet_histogram}
+
+facet_histogram <- ggplot(hogwarts)+
+  geom_histogram(aes(x = `Care of magical creatures exam`), 
+                 fill = "purple", 
+                 colour = "black", 
+                 bins = ceiling(log2(nrow(hogwarts))+1))+
+  facet_wrap(vars(course))+
+  theme_classic()+
+  theme(strip.text = element_text(size = 20))+
+  theme_custom
+
+facet_histogram
+```
+
+#### Плотность вероятности, фасетирование
+
+```{r facet_density}
+
+facet_density <- ggplot(hogwarts)+
+  geom_density(aes(x = `Defence against the dark arts exam`), 
+               fill = "darkblue", 
+               colour = "black", 
+               alpha = 0.5)+
+  geom_density(aes(x = `Herbology exam`), 
+               fill = "violet", 
+               colour = "darkblue", 
+               alpha = 0.5)+
+  xlim(c(-20, 100))+
+  facet_grid(sex~.)+
+  theme(strip.text = element_text(size = 20))+
+  theme_custom_onemore
+
+facet_density
+```
