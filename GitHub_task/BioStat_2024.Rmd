@@ -6,40 +6,136 @@ output: word_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = FALSE)
 
 library(psych)
 library(flextable)
-library(dplyr)
-library(tidyr)
 library(stringi)
-library(tibble)
-library(ggplot2)
-library(readr)
 library(readxl)
+library(tidyverse)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# Выполнение заданий по курсу на Stepik
 
 ```{r describe}
 read_rds('C:/Users/laskn/BioStat_2024/data/originals/numeric_data.rds')
 dataframe1 <- read_rds('C:/Users/laskn/BioStat_2024/data/originals/numeric_data.rds')
 describe(dataframe1, na.rm = TRUE, skew = FALSE, ranges = TRUE)
 ```
+
 ```{r read}
 read_tsv('C:/Users/laskn/BioStat_2024/data/originals/data_tsv.tsv')
 dataframe2 <- read_tsv('C:/Users/laskn/BioStat_2024/data/originals/data_tsv.tsv')
 ```
-## Including Plots
 
-You can also embed plots, for example:
+# Лекция 1. Автоматизация обработки данных
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+read_csv2('C:/Users/laskn/BioStat_2024/data/originals/team_1.csv') -> original_data
+#rename('Визит 0_Демография_Возраст'=V0_DEM_AGE) #пример переименования
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+original_data %>% 
+#select(where(function(x) any(str_detect(x, "Жен")))) #выбрали только ту переменную, где есть подстрока "Жен"
+#select(where(function(x)any(str_detect(x, "Жен"))& function(x) mean(x, na.rm = TRUE)>20))#так не работает
+#сначала выбираем все количественные переменные
+  select(where(is.numeric)) %>%
+#и потом уже из этой подгруппы фильтруем по значению среднего:
+  select(where(function(x) mean(x, na.rm = TRUE)>20))
+```
+
+```{r}
+original_data %>% 
+#select(where(is.numeric))%>%
+  #select(contains("RBC"))%>% #хотим посчитать среднее значение RBC на двух визитах.
+#могли бы сделать новую переменную через mutate и посчитать в ней mean, но так мы посчитаем среднее сначала по одному визиту (по всем субъектам, по столбцу), потом по второму, и усредним эти два числа, а мы хотим посчитать среднее для каждого субъекта по этой паре значений (двух визитов, по строкам).Поэтому функция, которая группирует датафрейм в строки.
+  #select здесь просто для наглядности, в датафрейм можно эту новую переменную добавить и без него
+rowwise()%>%
+  mutate('Mean RBS by visits' = mean(c_across(contains('RBC')), na.rm=TRUE))%>%
+#c_across позволяет задать, по каким именно столбцам мы считаем статистику, сгруппированную по строкам#
+  ungroup()
+#отменяем действие rowise(), дальше статистика снова считается по столбцам.
+
+```
+
+```{r}
+read_csv2('C:/Users/laskn/BioStat_2024/data/originals/team_1.csv') -> original_data
+#сначала смотрим, какие у нас вообще есть переменные
+#original_data %>%
+#glimpse()
+#Перекодируем сначала повторяющиеся элементы (чтобы не все вручную переименовывать)
+tempdir()
+dir.create(tempdir())
+original_data %>%
+  select(contains(c("GRP", "GEN", "VAS", "WBC", "RBC", "HGB")))%>% #отбираем несколько переменных из датасета для демонстрации
+  rename_with(function(x) x %>% 
+                str_replace("V0_", "Визит 0__") %>% 
+                str_replace("V1_", "Визит 1__") %>% 
+                str_replace("V2_", "Визит 2__") %>%
+                str_replace("GEN", "Sex") %>%
+                str_replace("CB_", "") %>% #сейчас нас не интересует раздел, поэтому вырезаем его, но оставляем пустую строку на случай, если еще захотим его переименовать
+                #str_remove("DEM_") можно удалять так, но если еще захотим это включить, то придется строчку кода переписывать, поэтому через replace
+                str_replace("DEM_", "") %>% 
+                str_replace("WBC", "White blood cells") %>%
+                str_replace("RBC", "Red blood cells") %>%
+                str_replace("HGB", "Hemoglobin")) %>%
+  rename(Group = `Визит 0__GRP`) %>%
+  mutate(across(where(is.character), function(x) as.factor(x))) -> cleaned_data
+  #переделываем все строковые (chr) данные в факторные(fct, категориальный формат) - для экономии места в оперативной памяти (перекодирует в количественную  : 0-женский, 1-мужской, со словариком этого перекодирования (нам выводится словами), и обращается с переменной, как с категориальной, а не количественной)
+  #glimpse()
+
+cleaned_data %>%
+  glimpse()
+
+```
+
+\newpage
+
+# Таблица 1 - Количественные переменные
+
+```{r}
+
+statistics <- list(
+  
+	      `_Количество субъектов` = ~length(.x) %>% as.character(),
+	      `_Количество (есть данные)` = ~sum(!is.na(.x)) %>% as.character(),
+	      `_Нет данных` = ~sum(is.na(.x)) %>% as.character(),
+	      `_Ср. знач.` = ~ifelse(sum(!is.na(.x)) == 0, "Н/П*", mean(.x, na.rm = TRUE) %>% round(2) %>% as.character()),
+	      `_Станд. отклон.` = ~ifelse(sum(!is.na(.x)) < 3, "Н/П*", sd(.x, na.rm = TRUE) %>% round(2) %>% as.character()),
+	      #`_95% ДИ для среднего` = ~sd(.x, na.rm = TRUE) %>% round(2) %>% as.character(),
+	      `_мин. - макс.` = ~ifelse(sum(!is.na(.x)) == 0, "Н/П*", paste0(min(.x, na.rm = TRUE) %>% round(2), " - ", max(.x, na.rm = TRUE) %>% round(2))),
+	      `_Медиана` = ~ifelse(sum(!is.na(.x)) == 0, "Н/П*", median(.x, na.rm = TRUE) %>% round(2) %>% as.character()),
+	      `_Q1 - Q3` = ~ifelse(sum(!is.na(.x)) == 0, "Н/П*", paste0(quantile(.x, 0.25, na.rm = TRUE) %>% round(2), " - ", quantile(.x, 0.75, na.rm = TRUE) %>% round(2)))
+	)
+
+cleaned_data %>%
+  #выбираем одну факторную переменную - группу, и четыре (все) количественные переменные, собранные на двух визитах
+  select(Group, where(is.numeric)) %>% 
+  #группируем по факторной переменной (две группы-2 значения факторной переменной)
+  group_by(Group) %>% 
+  #следующая функция применит статистику из составленного нами списка к каждой выбранной переменной (у нас - все кличественные)
+  summarize(across(where(is.numeric), statistics)) %>%
+  pivot_longer(!Group) %>%
+  #переменная name содержит в себе склеенные значения, разрезаем их в два этапа, становится #понятно, зачем до этого переименовывали визиты с двойным подчеркиванием - сейчас по нему разделяем
+  #separate(name, into = c("Visit", "interim_var"), sep = "__") %>%
+  #separate(interim_var, into = c("Variable", "Statistics"), sep = "_")
+#а если сразу в statistics сделать _ перед каждым расчетом, то второй _ добавится в таблицу автоматически, и можно будет только один раз разделять по нему
+  separate(name, into = c("Visit", "Variable", "Statistics"), sep = "__") %>%
+  rename(Value = value) %>%
+  relocate(Variable, .before = Visit) %>%
+  
+  #библиотека flextable помогает нам печатать таблички прямо в статотчет, в документ ворд.
+  flextable() %>%
+  #изменяем тему
+  theme_box() %>%
+  #форматируем по центру
+  align(align = "center", part = "all") %>%
+  #склеим строки
+  merge_v(c("Group", "Visit", "Variable"))
+#после этого шага решили сделать relocate чуть выше, так лучше будет смотреться
+  
+  
+
+```
