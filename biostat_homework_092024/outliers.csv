@@ -1,0 +1,1930 @@
+cardiovascular_disease,age_days,age_years,gender,height,weight,systolic_blood_pressure,diastolic_blood_pressure,cholesterol,glucose,smoking,alcohol_intake,physical_activity
+yes,23652,64.8,women,NA,NA,NA,1000,normal,above normal,no,no,yes
+no,23646,64.7,men,NA,165,NA,NA,normal,normal,no,no,no
+yes,23611,64.6,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+no,23593,64.6,women,NA,130,NA,NA,normal,above normal,no,no,yes
+yes,23580,64.6,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,23578,64.6,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23576,64.5,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,23569,64.5,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,23565,64.5,men,NA,132,NA,NA,above normal,well above normal,yes,no,yes
+no,23562,64.5,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23541,64.5,men,NA,122,NA,NA,normal,above normal,yes,yes,no
+yes,23539,64.4,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,23517,64.4,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,23515,64.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,23515,64.4,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,23513,64.4,women,NA,NA,NA,1000,normal,normal,no,no,no
+no,23510,64.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23509,64.4,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+no,23501,64.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23499,64.3,women,NA,126,NA,NA,normal,normal,no,no,yes
+no,23492,64.3,men,193,NA,NA,NA,well above normal,normal,yes,yes,yes
+yes,23488,64.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23486,64.3,women,NA,125,NA,NA,normal,normal,no,no,yes
+yes,23486,64.3,men,NA,NA,NA,1100,normal,normal,no,no,yes
+no,23483,64.3,women,NA,155,NA,NA,above normal,normal,no,no,yes
+yes,23476,64.3,women,NA,120,NA,NA,above normal,above normal,no,no,no
+yes,23476,64.3,women,105,NA,NA,NA,normal,normal,no,no,yes
+yes,23475,64.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,23473,64.3,men,NA,NA,NA,700,normal,normal,yes,yes,yes
+yes,23469,64.3,men,NA,120,NA,NA,normal,well above normal,no,no,yes
+no,23468,64.3,men,NA,NA,NA,1000,normal,above normal,no,no,yes
+no,23463,64.2,men,NA,119,NA,NA,above normal,above normal,no,no,yes
+no,23460,64.2,women,NA,120,NA,NA,above normal,normal,no,no,yes
+no,23454,64.2,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,23454,64.2,men,NA,118,NA,NA,well above normal,normal,no,no,yes
+yes,23450,64.2,men,NA,118,NA,NA,normal,normal,no,no,yes
+yes,23448,64.2,women,NA,NA,NA,1000,normal,well above normal,no,no,yes
+yes,23441,64.2,women,NA,NA,NA,1000,normal,normal,no,yes,yes
+no,23441,64.2,men,130,NA,NA,NA,normal,normal,no,no,yes
+yes,23436,64.2,women,NA,130,NA,NA,normal,normal,no,no,yes
+yes,23435,64.2,women,NA,NA,NA,1000,normal,normal,no,yes,yes
+no,23430,64.1,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23423,64.1,men,NA,NA,NA,1001,normal,above normal,no,no,yes
+no,23422,64.1,women,113,NA,NA,NA,normal,normal,no,no,no
+yes,23418,64.1,women,NA,NA,1420,NA,above normal,normal,no,no,yes
+yes,23416,64.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,23408,64.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23407,64.1,women,NA,NA,NA,1000,above normal,above normal,no,no,no
+yes,23407,64.1,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23407,64.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23399,64.1,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,23399,64.1,women,NA,NA,NA,1200,above normal,above normal,no,no,yes
+yes,23398,64.1,women,130,NA,NA,NA,normal,normal,no,no,yes
+yes,23397,64.1,men,NA,NA,NA,1100,well above normal,well above normal,no,no,yes
+yes,23394,64,women,NA,152,NA,NA,normal,well above normal,no,no,yes
+yes,23389,64,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23389,64,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,23388,64,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23387,64,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,23386,64,women,55,NA,NA,NA,normal,normal,no,no,yes
+yes,23375,64,men,NA,134,NA,NA,normal,normal,no,no,yes
+yes,23375,64,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23372,64,women,NA,NA,NA,1120,well above normal,above normal,no,no,yes
+yes,23370,64,women,NA,124,NA,NA,above normal,normal,no,no,yes
+no,23369,64,women,NA,118,NA,NA,normal,normal,no,no,yes
+yes,23363,64,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23360,64,men,NA,120,NA,NA,normal,normal,no,no,yes
+yes,23356,63.9,men,NA,NA,NA,1100,well above normal,normal,no,no,yes
+yes,23353,63.9,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,23353,63.9,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,23353,63.9,women,NA,NA,NA,1211,well above normal,above normal,no,yes,yes
+no,23351,63.9,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+yes,23347,63.9,women,NA,NA,NA,1100,above normal,above normal,no,no,yes
+yes,23346,63.9,men,NA,122,NA,NA,well above normal,well above normal,no,yes,yes
+yes,23340,63.9,men,NA,NA,NA,1000,above normal,normal,yes,no,yes
+yes,23336,63.9,women,138,NA,NA,NA,above normal,normal,no,no,yes
+yes,23330,63.9,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23328,63.9,men,NA,120,NA,NA,normal,normal,no,no,yes
+yes,23319,63.8,women,109,NA,NA,NA,normal,normal,no,no,yes
+yes,23314,63.8,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,23312,63.8,women,NA,NA,NA,1100,well above normal,normal,no,no,yes
+yes,23308,63.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23306,63.8,women,NA,NA,NA,1100,well above normal,well above normal,no,no,yes
+yes,23305,63.8,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,23301,63.8,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,23300,63.8,women,NA,NA,NA,1000,well above normal,normal,no,no,no
+no,23297,63.8,women,75,NA,NA,NA,normal,normal,no,no,yes
+yes,23295,63.8,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,23290,63.8,women,NA,NA,NA,1000,normal,normal,no,no,no
+no,23287,63.8,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,23286,63.8,men,NA,120,NA,NA,normal,well above normal,no,no,yes
+no,23284,63.7,women,NA,23,NA,NA,normal,normal,no,no,yes
+yes,23278,63.7,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,23274,63.7,women,198,NA,NA,NA,normal,normal,no,no,yes
+yes,23273,63.7,women,NA,NA,NA,1000,normal,normal,yes,no,yes
+yes,23273,63.7,women,NA,133,NA,NA,well above normal,well above normal,no,no,yes
+yes,23268,63.7,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,23266,63.7,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23264,63.7,women,NA,NA,1110,NA,normal,normal,no,no,no
+yes,23263,63.7,men,NA,NA,NA,1000,above normal,normal,no,no,no
+no,23260,63.7,men,NA,134,NA,NA,well above normal,well above normal,no,no,yes
+yes,23256,63.7,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,23253,63.7,men,NA,120,NA,1100,above normal,normal,no,no,yes
+yes,23246,63.6,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,23245,63.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23245,63.6,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23242,63.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23236,63.6,women,NA,120,NA,NA,well above normal,normal,no,no,yes
+yes,23228,63.6,women,NA,129,NA,NA,normal,well above normal,no,no,yes
+yes,23224,63.6,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,23222,63.6,men,NA,119,NA,NA,normal,normal,no,no,yes
+yes,23221,63.6,women,NA,NA,NA,11000,normal,normal,no,no,yes
+yes,23219,63.6,women,NA,NA,NA,1100,normal,normal,no,no,no
+yes,23217,63.6,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,23216,63.6,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,23211,63.5,men,NA,120,NA,NA,normal,normal,no,no,yes
+yes,23211,63.5,women,NA,118,NA,NA,above normal,above normal,no,no,yes
+no,23210,63.5,women,NA,123,NA,NA,above normal,above normal,no,no,yes
+yes,23203,63.5,women,NA,NA,NA,1000,above normal,normal,no,no,no
+yes,23194,63.5,women,138,NA,NA,NA,normal,normal,no,no,yes
+yes,23194,63.5,women,NA,134,NA,NA,well above normal,well above normal,no,no,yes
+yes,23193,63.5,women,NA,162,NA,NA,normal,normal,no,no,yes
+no,23183,63.5,women,NA,120,NA,NA,normal,normal,no,no,yes
+no,23182,63.5,women,NA,NA,13010,NA,normal,normal,no,no,no
+no,23180,63.5,women,130,NA,NA,NA,normal,normal,no,no,yes
+yes,23166,63.4,women,NA,123,NA,NA,well above normal,well above normal,no,no,yes
+yes,23164,63.4,men,NA,140,NA,NA,well above normal,well above normal,yes,no,no
+yes,23156,63.4,women,NA,NA,NA,1100,well above normal,normal,no,no,yes
+yes,23154,63.4,men,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,23153,63.4,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,23150,63.4,women,NA,NA,NA,1000,above normal,normal,no,no,no
+yes,23150,63.4,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23145,63.4,women,NA,NA,NA,1000,well above normal,above normal,no,no,no
+yes,23141,63.4,men,NA,123,NA,NA,above normal,normal,no,no,no
+yes,23135,63.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23118,63.3,men,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,23116,63.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,23116,63.3,men,190,NA,NA,NA,normal,normal,yes,no,yes
+no,23113,63.3,men,NA,118,NA,NA,normal,normal,no,no,yes
+yes,23109,63.3,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,23097,63.2,men,NA,NA,NA,1003,normal,normal,yes,no,yes
+yes,23064,63.1,women,NA,128,NA,NA,well above normal,well above normal,no,no,yes
+yes,23062,63.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22898,62.7,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22897,62.7,men,NA,122,NA,NA,normal,normal,no,no,no
+yes,22855,62.6,men,NA,121,NA,NA,well above normal,well above normal,yes,no,no
+yes,22848,62.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22846,62.5,women,NA,NA,NA,1000,normal,above normal,no,no,yes
+yes,22836,62.5,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,22831,62.5,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+yes,22822,62.5,men,NA,123,NA,NA,well above normal,well above normal,no,no,yes
+yes,22812,62.5,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22807,62.4,men,NA,NA,NA,1000,normal,normal,yes,no,no
+yes,22806,62.4,women,NA,130,NA,NA,above normal,normal,no,no,yes
+yes,22799,62.4,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22799,62.4,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22789,62.4,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,22771,62.3,men,NA,149,NA,NA,normal,normal,no,no,yes
+yes,22769,62.3,men,130,NA,NA,NA,normal,normal,no,no,yes
+yes,22752,62.3,men,NA,NA,NA,1100,normal,normal,no,no,no
+no,22743,62.3,men,NA,120,NA,1000,normal,normal,no,no,yes
+yes,22735,62.2,men,NA,NA,NA,1100,normal,normal,yes,no,yes
+no,22734,62.2,men,NA,123,NA,NA,well above normal,normal,no,no,yes
+yes,22731,62.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22729,62.2,men,NA,NA,NA,1000,well above normal,well above normal,yes,no,yes
+yes,22719,62.2,men,NA,NA,NA,1000,normal,normal,yes,no,yes
+yes,22715,62.2,men,NA,NA,NA,1000,normal,normal,yes,yes,yes
+no,22712,62.2,men,NA,NA,906,NA,normal,normal,no,no,yes
+yes,22712,62.2,men,NA,121,NA,NA,well above normal,well above normal,no,no,yes
+yes,22711,62.2,women,NA,126,NA,NA,normal,normal,no,no,yes
+yes,22707,62.2,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,22701,62.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22688,62.1,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,22687,62.1,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,22685,62.1,women,NA,120,NA,NA,well above normal,well above normal,no,no,yes
+yes,22684,62.1,men,NA,120,NA,NA,above normal,normal,no,no,yes
+no,22682,62.1,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+no,22679,62.1,women,NA,NA,NA,902,normal,normal,no,no,yes
+yes,22679,62.1,men,NA,126,NA,NA,well above normal,normal,no,no,yes
+no,22678,62.1,women,NA,NA,NA,1044,normal,normal,no,no,yes
+no,22668,62.1,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,22663,62,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22660,62,women,NA,130,NA,NA,normal,normal,no,no,yes
+yes,22659,62,women,NA,NA,701,NA,normal,normal,no,no,yes
+yes,22659,62,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22657,62,men,137,NA,NA,NA,normal,above normal,no,no,yes
+no,22656,62,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,22651,62,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,22645,62,women,NA,NA,NA,850,normal,normal,no,no,yes
+no,22644,62,women,NA,131,NA,NA,well above normal,well above normal,no,no,no
+yes,22640,62,men,NA,NA,NA,1000,well above normal,normal,yes,no,yes
+no,22635,62,women,NA,NA,NA,1000,normal,above normal,no,no,no
+yes,22633,62,men,NA,NA,NA,1000,normal,normal,yes,yes,yes
+yes,22630,62,men,NA,135,NA,NA,normal,normal,no,no,no
+yes,22629,62,men,138,NA,NA,NA,normal,normal,no,no,yes
+yes,22626,61.9,women,NA,NA,NA,1100,normal,normal,no,no,no
+yes,22623,61.9,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22620,61.9,women,NA,NA,NA,1011,well above normal,well above normal,no,no,yes
+yes,22612,61.9,women,NA,NA,NA,1000,well above normal,well above normal,no,no,no
+yes,22611,61.9,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22606,61.9,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+no,22604,61.9,men,130,NA,NA,NA,normal,normal,yes,no,yes
+yes,22604,61.9,women,NA,121,NA,NA,normal,normal,no,no,yes
+no,22601,61.9,men,193,NA,NA,NA,normal,above normal,no,no,yes
+yes,22601,61.9,women,NA,126,NA,NA,above normal,above normal,no,no,yes
+no,22599,61.9,women,NA,125,NA,NA,well above normal,well above normal,no,no,yes
+no,22596,61.9,men,NA,NA,NA,1000,normal,well above normal,no,no,yes
+yes,22593,61.9,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,22592,61.9,men,190,NA,NA,NA,normal,normal,no,no,yes
+yes,22592,61.9,men,190,NA,NA,NA,above normal,normal,no,no,yes
+yes,22589,61.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22584,61.8,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,22583,61.8,men,NA,NA,NA,1000,above normal,well above normal,no,no,yes
+yes,22582,61.8,women,NA,NA,NA,1200,normal,normal,no,no,yes
+yes,22581,61.8,men,NA,123,NA,NA,above normal,normal,no,no,no
+yes,22577,61.8,men,NA,NA,NA,1000,normal,normal,yes,no,yes
+yes,22569,61.8,men,NA,NA,NA,1000,well above normal,well above normal,yes,no,yes
+yes,22568,61.8,men,NA,123,NA,NA,well above normal,well above normal,no,yes,yes
+yes,22566,61.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22566,61.8,men,NA,160,NA,NA,well above normal,well above normal,no,no,yes
+no,22564,61.8,women,134,NA,NA,NA,normal,normal,no,no,yes
+yes,22561,61.8,women,NA,130,NA,NA,above normal,above normal,no,no,yes
+no,22561,61.8,men,NA,NA,NA,1000,well above normal,well above normal,no,no,no
+yes,22560,61.8,women,139,NA,NA,NA,normal,normal,no,no,yes
+yes,22560,61.8,women,NA,NA,NA,1000,normal,normal,no,yes,no
+yes,22552,61.7,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22549,61.7,women,NA,125,NA,NA,above normal,above normal,no,no,yes
+yes,22544,61.7,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22542,61.7,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,22541,61.7,women,130,NA,NA,NA,normal,normal,no,no,yes
+yes,22541,61.7,women,NA,118,NA,NA,well above normal,normal,yes,no,yes
+yes,22539,61.7,women,198,NA,NA,NA,normal,above normal,no,no,yes
+yes,22534,61.7,men,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,22531,61.7,men,NA,NA,NA,1000,normal,normal,yes,no,no
+yes,22524,61.7,women,135,NA,NA,NA,well above normal,normal,no,no,no
+yes,22522,61.7,women,NA,NA,NA,1088,normal,normal,no,no,yes
+yes,22521,61.7,women,NA,145,NA,NA,normal,normal,no,no,no
+yes,22512,61.6,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,22501,61.6,men,NA,135,NA,NA,normal,normal,yes,no,yes
+yes,22500,61.6,women,NA,129,NA,NA,well above normal,well above normal,no,no,no
+yes,22500,61.6,men,NA,123,NA,NA,well above normal,above normal,no,yes,yes
+yes,22497,61.6,men,198,NA,NA,NA,normal,normal,yes,no,no
+no,22493,61.6,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,22492,61.6,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,22491,61.6,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,22488,61.6,men,NA,NA,NA,1000,above normal,normal,yes,yes,yes
+no,22488,61.6,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,22482,61.6,men,120,NA,NA,1000,above normal,normal,no,no,no
+yes,22479,61.5,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,22477,61.5,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22472,61.5,women,138,NA,NA,NA,normal,normal,no,no,yes
+yes,22464,61.5,men,NA,123,NA,NA,normal,normal,no,no,yes
+yes,22459,61.5,women,NA,NA,NA,902,above normal,above normal,no,no,yes
+no,22456,61.5,men,71,NA,NA,NA,well above normal,normal,no,no,yes
+no,22456,61.5,men,189,NA,NA,NA,normal,normal,no,no,no
+yes,22448,61.5,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,22445,61.5,men,NA,NA,NA,1000,normal,normal,yes,no,yes
+yes,22444,61.4,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,22444,61.4,men,NA,143,NA,NA,normal,above normal,yes,no,yes
+yes,22443,61.4,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,22441,61.4,men,NA,NA,NA,1000,normal,normal,yes,yes,yes
+yes,22441,61.4,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,22435,61.4,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,22435,61.4,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22428,61.4,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,22425,61.4,men,NA,NA,NA,1000,well above normal,above normal,no,no,yes
+no,22422,61.4,men,189,NA,NA,NA,normal,normal,yes,no,yes
+yes,22420,61.4,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+no,22420,61.4,women,139,NA,NA,NA,normal,normal,no,no,yes
+yes,22419,61.4,women,NA,119,NA,NA,normal,normal,no,no,yes
+no,22418,61.4,women,NA,NA,NA,1000,normal,normal,no,no,no
+no,22417,61.4,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,22412,61.4,women,NA,136,NA,NA,well above normal,well above normal,no,no,yes
+yes,22409,61.4,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,22408,61.3,women,NA,120,NA,NA,normal,normal,no,no,no
+yes,22404,61.3,women,NA,NA,NA,1100,well above normal,normal,no,no,yes
+yes,22398,61.3,men,NA,NA,907,NA,well above normal,well above normal,no,no,yes
+yes,22395,61.3,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22376,61.3,men,NA,125,NA,NA,well above normal,normal,no,no,yes
+yes,22366,61.2,women,NA,125,NA,NA,normal,normal,no,no,no
+yes,22363,61.2,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22361,61.2,men,NA,NA,NA,1000,well above normal,well above normal,yes,no,yes
+yes,22349,61.2,men,NA,NA,NA,1000,normal,normal,no,no,no
+no,22192,60.8,men,198,NA,NA,NA,normal,normal,no,no,no
+yes,22156,60.7,men,198,NA,NA,NA,normal,normal,no,no,yes
+yes,22132,60.6,men,NA,118,NA,NA,well above normal,well above normal,no,no,yes
+no,22131,60.6,women,190,NA,NA,NA,normal,normal,no,no,no
+yes,22109,60.5,women,NA,129,NA,NA,well above normal,normal,no,no,yes
+yes,22101,60.5,women,NA,NA,NA,1000,above normal,well above normal,no,no,yes
+yes,22088,60.5,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,22083,60.5,women,120,NA,NA,NA,normal,normal,no,no,yes
+yes,22077,60.4,women,137,161,NA,NA,above normal,normal,no,no,no
+yes,22073,60.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,22064,60.4,men,191,NA,NA,NA,normal,normal,no,no,yes
+no,22064,60.4,women,NA,123,NA,NA,normal,normal,no,no,yes
+yes,22059,60.4,women,NA,123,NA,NA,normal,normal,no,no,yes
+yes,22053,60.4,men,120,NA,NA,NA,normal,normal,no,no,yes
+no,22051,60.4,women,105,NA,NA,NA,normal,well above normal,no,no,yes
+yes,22047,60.4,women,NA,NA,NA,1120,above normal,above normal,no,no,no
+yes,22045,60.4,men,190,NA,NA,NA,normal,normal,no,no,yes
+no,22038,60.3,women,NA,141,NA,NA,normal,normal,no,no,yes
+yes,22037,60.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,22035,60.3,women,190,NA,NA,NA,normal,normal,no,no,no
+yes,22034,60.3,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,22033,60.3,men,120,NA,NA,NA,normal,normal,yes,no,yes
+no,22031,60.3,women,NA,165,NA,NA,normal,normal,no,no,yes
+no,22029,60.3,women,NA,130,NA,NA,above normal,above normal,no,no,yes
+yes,22025,60.3,women,NA,NA,NA,1000,above normal,above normal,no,no,no
+yes,22017,60.3,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,22014,60.3,women,NA,NA,NA,1100,well above normal,well above normal,no,no,yes
+yes,22014,60.3,women,NA,126,NA,NA,normal,normal,no,no,yes
+no,22013,60.3,women,120,NA,NA,NA,normal,normal,no,no,no
+no,22012,60.3,women,NA,152,NA,NA,well above normal,normal,no,no,no
+yes,22005,60.2,women,67,NA,NA,NA,normal,normal,no,no,yes
+yes,22004,60.2,women,120,NA,NA,NA,well above normal,above normal,no,no,yes
+yes,22003,60.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21992,60.2,men,NA,NA,NA,1100,normal,normal,yes,no,yes
+no,21992,60.2,women,NA,123,NA,NA,normal,normal,no,no,yes
+yes,21991,60.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21989,60.2,men,NA,120,NA,1000,normal,normal,no,no,yes
+yes,21988,60.2,men,NA,NA,NA,1000,well above normal,well above normal,yes,yes,yes
+yes,21985,60.2,men,NA,125,NA,1000,normal,normal,no,no,yes
+yes,21983,60.2,men,NA,NA,NA,1000,well above normal,above normal,no,no,yes
+yes,21982,60.2,women,NA,130,NA,NA,well above normal,normal,no,no,no
+yes,21978,60.2,women,NA,125,NA,NA,above normal,above normal,no,no,yes
+yes,21977,60.2,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,21976,60.2,men,136,NA,NA,NA,normal,normal,yes,no,yes
+no,21976,60.2,men,NA,NA,NA,1000,normal,normal,yes,no,yes
+yes,21972,60.2,women,NA,NA,NA,1000,normal,above normal,no,yes,yes
+yes,21968,60.1,women,NA,119,NA,NA,normal,normal,no,no,no
+yes,21968,60.1,men,NA,NA,NA,1200,normal,normal,no,no,yes
+yes,21965,60.1,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,21963,60.1,women,NA,128,NA,NA,above normal,above normal,no,no,no
+yes,21962,60.1,women,NA,NA,NA,1001,normal,normal,no,no,yes
+yes,21959,60.1,men,NA,118,NA,NA,normal,normal,no,no,yes
+yes,21958,60.1,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21950,60.1,men,NA,NA,NA,1000,normal,normal,no,no,no
+no,21948,60.1,men,NA,NA,1300,NA,normal,normal,no,yes,yes
+no,21943,60.1,men,NA,126,NA,NA,well above normal,well above normal,no,yes,yes
+no,21940,60.1,women,NA,135,NA,NA,above normal,normal,no,no,yes
+yes,21932,60,men,NA,NA,NA,1000,above normal,normal,no,no,no
+yes,21932,60,women,NA,120,NA,NA,well above normal,well above normal,no,no,yes
+no,21931,60,women,NA,131,NA,NA,normal,normal,no,no,yes
+no,21930,60,men,189,NA,NA,NA,normal,normal,no,no,no
+no,21929,60,women,137,NA,NA,NA,normal,normal,no,no,yes
+no,21927,60,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,21926,60,women,137,NA,NA,NA,well above normal,well above normal,no,no,yes
+yes,21925,60,men,NA,118,NA,NA,normal,normal,no,no,yes
+yes,21924,60,women,NA,170,NA,NA,normal,normal,no,no,yes
+no,21922,60,men,NA,122,NA,NA,normal,normal,no,no,no
+no,21916,60,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,21909,60,women,NA,120,NA,NA,well above normal,normal,no,no,yes
+yes,21908,60,women,NA,123,NA,NA,above normal,well above normal,no,no,yes
+yes,21907,60,men,NA,NA,NA,1000,normal,normal,yes,no,yes
+no,21906,60,men,NA,NA,NA,9800,normal,normal,no,no,yes
+yes,21906,60,women,NA,126,NA,NA,well above normal,well above normal,no,no,yes
+yes,21905,60,women,NA,133,NA,NA,above normal,normal,no,no,yes
+yes,21905,60,women,NA,125,NA,NA,normal,normal,no,no,yes
+no,21904,60,men,NA,130,NA,NA,normal,normal,no,no,no
+no,21902,60,women,190,NA,NA,NA,normal,normal,no,no,no
+yes,21898,60,men,NA,NA,NA,1200,above normal,above normal,yes,no,yes
+yes,21897,60,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,21893,59.9,women,NA,123,NA,NA,well above normal,well above normal,no,no,yes
+yes,21891,59.9,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,21891,59.9,men,NA,118,NA,NA,normal,normal,no,no,yes
+yes,21890,59.9,women,NA,118,NA,NA,well above normal,well above normal,no,no,no
+yes,21888,59.9,men,110,NA,NA,NA,normal,normal,no,no,yes
+yes,21881,59.9,men,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,21880,59.9,women,NA,124,NA,NA,normal,normal,no,no,yes
+yes,21876,59.9,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,21873,59.9,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,21871,59.9,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,21868,59.9,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,21868,59.9,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+yes,21868,59.9,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,21867,59.9,women,NA,NA,1400,NA,normal,normal,no,no,yes
+yes,21866,59.9,women,NA,123,NA,NA,well above normal,well above normal,no,no,yes
+yes,21865,59.9,men,NA,129,NA,1110,well above normal,normal,no,no,yes
+yes,21863,59.9,women,120,NA,NA,NA,normal,normal,no,no,yes
+yes,21861,59.9,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21858,59.8,women,NA,123,NA,NA,above normal,above normal,no,no,no
+yes,21855,59.8,women,NA,21,NA,NA,above normal,normal,no,no,yes
+no,21854,59.8,women,NA,120,NA,NA,well above normal,well above normal,no,no,yes
+yes,21854,59.8,women,NA,NA,NA,1000,normal,normal,no,no,no
+no,21852,59.8,men,NA,NA,NA,1000,normal,normal,no,no,no
+no,21850,59.8,men,NA,129,NA,NA,normal,normal,no,no,no
+yes,21848,59.8,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,21848,59.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21844,59.8,women,NA,NA,NA,1100,above normal,above normal,no,no,yes
+yes,21844,59.8,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,21843,59.8,women,NA,120,NA,NA,well above normal,normal,no,no,no
+yes,21842,59.8,women,NA,NA,NA,1000,above normal,normal,no,no,no
+yes,21842,59.8,men,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,21841,59.8,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+no,21841,59.8,women,NA,120,NA,NA,well above normal,well above normal,no,no,yes
+yes,21840,59.8,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21839,59.8,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21838,59.8,women,133,NA,NA,NA,normal,normal,no,no,yes
+no,21833,59.8,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,21831,59.8,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,21816,59.7,women,NA,118,NA,NA,above normal,above normal,no,no,yes
+no,21815,59.7,women,196,NA,NA,NA,normal,normal,no,no,yes
+yes,21813,59.7,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21813,59.7,men,NA,124,NA,NA,normal,normal,no,no,yes
+yes,21812,59.7,men,198,NA,NA,NA,normal,normal,no,no,yes
+yes,21810,59.7,women,NA,120,NA,NA,well above normal,normal,no,no,yes
+yes,21809,59.7,men,190,NA,NA,NA,normal,normal,no,no,yes
+yes,21808,59.7,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,21807,59.7,men,NA,NA,NA,710,normal,normal,yes,no,yes
+no,21806,59.7,men,190,NA,NA,NA,normal,normal,yes,no,yes
+yes,21806,59.7,men,NA,120,NA,NA,normal,normal,no,no,yes
+yes,21806,59.7,women,NA,131,NA,NA,normal,normal,no,no,yes
+yes,21805,59.7,women,NA,121,NA,NA,above normal,above normal,no,no,yes
+no,21805,59.7,men,195,NA,NA,NA,normal,normal,no,no,no
+yes,21804,59.7,men,NA,123,NA,NA,normal,above normal,no,yes,yes
+yes,21803,59.7,women,NA,142,NA,NA,normal,above normal,no,no,yes
+yes,21802,59.7,women,NA,125,NA,NA,well above normal,normal,no,no,yes
+yes,21802,59.7,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+no,21801,59.7,men,NA,120,NA,NA,normal,normal,no,no,yes
+no,21800,59.7,men,76,NA,NA,NA,normal,normal,no,no,yes
+yes,21798,59.7,women,NA,NA,NA,1000,above normal,above normal,yes,no,yes
+no,21796,59.7,women,NA,130,NA,NA,well above normal,well above normal,no,no,no
+yes,21796,59.7,women,NA,126,NA,NA,above normal,above normal,no,no,no
+no,21794,59.7,women,NA,NA,NA,1100,well above normal,normal,no,no,yes
+yes,21793,59.7,women,NA,131,NA,NA,normal,well above normal,no,no,yes
+yes,21790,59.7,men,NA,120,NA,NA,normal,normal,no,no,yes
+yes,21780,59.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21778,59.6,men,NA,128,NA,NA,normal,normal,yes,yes,yes
+yes,21776,59.6,men,136,NA,NA,NA,normal,above normal,yes,no,yes
+yes,21775,59.6,men,197,NA,NA,NA,normal,normal,no,no,no
+yes,21774,59.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21769,59.6,men,NA,NA,NA,1177,normal,normal,no,no,yes
+yes,21769,59.6,men,NA,130,NA,NA,above normal,above normal,no,no,no
+yes,21766,59.6,men,NA,120,NA,NA,well above normal,well above normal,no,no,yes
+yes,21764,59.6,women,139,NA,NA,NA,above normal,normal,no,no,yes
+yes,21763,59.6,women,133,123,NA,NA,above normal,normal,no,no,yes
+yes,21761,59.6,men,195,125,NA,NA,well above normal,well above normal,no,no,yes
+yes,21760,59.6,men,190,NA,NA,NA,normal,normal,no,no,yes
+yes,21760,59.6,women,NA,120,NA,NA,well above normal,above normal,no,no,yes
+yes,21758,59.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21756,59.6,women,NA,134,NA,NA,above normal,above normal,no,no,yes
+yes,21752,59.6,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,21750,59.5,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21747,59.5,men,NA,122,NA,NA,normal,above normal,no,no,yes
+yes,21742,59.5,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,21739,59.5,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,21736,59.5,men,NA,126,NA,NA,normal,normal,no,yes,yes
+yes,21735,59.5,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,21733,59.5,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21733,59.5,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21732,59.5,women,NA,123,NA,1000,normal,normal,no,no,yes
+yes,21731,59.5,women,NA,118,NA,NA,well above normal,normal,no,no,no
+no,21728,59.5,women,NA,162,NA,NA,normal,normal,no,no,yes
+yes,21724,59.5,women,NA,143,NA,NA,well above normal,well above normal,no,no,yes
+yes,21719,59.5,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,21709,59.4,women,NA,NA,NA,1000,above normal,normal,no,no,no
+yes,21705,59.4,women,NA,NA,NA,1000,normal,normal,no,no,no
+no,21705,59.4,women,NA,172,NA,NA,above normal,normal,no,no,yes
+yes,21697,59.4,women,NA,120,NA,NA,well above normal,normal,no,no,yes
+yes,21695,59.4,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,21694,59.4,women,NA,135,NA,NA,normal,normal,no,no,yes
+yes,21689,59.4,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,21683,59.4,men,NA,126,NA,NA,normal,normal,no,no,yes
+no,21681,59.4,women,NA,118,NA,NA,well above normal,normal,no,no,yes
+yes,21674,59.3,women,NA,132,NA,NA,above normal,above normal,no,no,yes
+yes,21669,59.3,women,NA,119,NA,NA,normal,above normal,yes,no,yes
+yes,21667,59.3,men,NA,NA,NA,1000,well above normal,normal,yes,no,yes
+yes,21666,59.3,men,NA,120,NA,NA,above normal,above normal,no,no,yes
+no,21658,59.3,women,NA,NA,NA,809,above normal,above normal,no,no,yes
+yes,21657,59.3,women,NA,135,NA,NA,normal,normal,no,no,no
+no,21638,59.2,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,21624,59.2,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21600,59.1,women,NA,NA,NA,1200,normal,normal,no,no,yes
+yes,21596,59.1,men,NA,135,NA,NA,above normal,above normal,no,yes,yes
+yes,21582,59.1,men,NA,11,NA,NA,normal,normal,no,no,yes
+yes,21492,58.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21486,58.8,women,NA,120,NA,NA,normal,normal,no,no,no
+yes,21466,58.8,men,NA,NA,NA,9011,normal,normal,yes,yes,yes
+yes,21460,58.8,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,21442,58.7,men,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,21436,58.7,men,NA,NA,NA,1000,well above normal,well above normal,no,no,no
+yes,21416,58.6,men,198,NA,NA,NA,above normal,well above normal,no,no,yes
+yes,21416,58.6,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21410,58.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,21405,58.6,men,120,NA,NA,NA,above normal,above normal,no,no,yes
+yes,21401,58.6,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,21400,58.6,women,NA,131,NA,NA,normal,normal,no,no,yes
+yes,21399,58.6,women,NA,148,NA,NA,well above normal,above normal,no,no,yes
+yes,21392,58.6,women,NA,160,NA,NA,above normal,above normal,no,no,yes
+yes,21390,58.6,men,NA,NA,NA,1111,normal,normal,yes,no,yes
+yes,21375,58.5,women,NA,126,NA,NA,above normal,normal,no,no,yes
+yes,21371,58.5,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,21367,58.5,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21364,58.5,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,21363,58.5,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21361,58.5,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,21361,58.5,women,NA,NA,14020,NA,well above normal,well above normal,no,no,yes
+no,21349,58.5,men,190,NA,NA,NA,normal,normal,no,no,no
+yes,21349,58.5,women,189,NA,NA,NA,normal,normal,no,no,no
+yes,21348,58.4,women,66,NA,NA,NA,normal,normal,no,no,no
+yes,21344,58.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21343,58.4,women,NA,121,NA,NA,normal,well above normal,no,no,yes
+no,21334,58.4,women,NA,30,NA,NA,above normal,normal,no,no,yes
+no,21325,58.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,21319,58.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,21315,58.4,men,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,21314,58.4,men,NA,121,NA,NA,well above normal,normal,no,no,yes
+yes,21314,58.4,men,NA,137,NA,NA,normal,normal,no,no,no
+yes,21310,58.3,women,NA,140,NA,NA,well above normal,normal,no,no,no
+yes,21306,58.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,21304,58.3,men,135,NA,NA,NA,normal,normal,no,no,yes
+yes,21302,58.3,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,21300,58.3,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21296,58.3,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,21291,58.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21290,58.3,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,21288,58.3,men,197,NA,NA,NA,normal,normal,no,no,no
+yes,21285,58.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21278,58.3,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,21275,58.2,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,21269,58.2,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,21265,58.2,women,NA,145,NA,NA,normal,normal,no,no,no
+yes,21265,58.2,women,NA,NA,NA,1100,normal,normal,no,no,no
+yes,21265,58.2,men,NA,NA,NA,1000,normal,normal,yes,no,no
+yes,21264,58.2,men,NA,129,NA,NA,normal,above normal,yes,no,yes
+yes,21262,58.2,men,NA,120,NA,NA,normal,normal,no,yes,yes
+yes,21259,58.2,women,100,NA,NA,NA,normal,normal,no,no,yes
+yes,21255,58.2,men,NA,129,NA,NA,normal,normal,no,no,yes
+yes,21254,58.2,men,NA,NA,NA,1100,above normal,normal,no,no,yes
+yes,21254,58.2,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21252,58.2,men,NA,NA,NA,1008,normal,normal,no,no,yes
+no,21245,58.2,men,189,NA,NA,NA,normal,normal,no,no,yes
+yes,21243,58.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21239,58.1,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21238,58.1,women,190,NA,NA,NA,normal,normal,no,no,yes
+yes,21237,58.1,men,NA,120,NA,NA,normal,well above normal,no,no,yes
+yes,21236,58.1,women,NA,NA,NA,1000,above normal,above normal,no,no,no
+yes,21235,58.1,women,139,NA,NA,NA,normal,normal,no,no,yes
+yes,21235,58.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,21232,58.1,men,189,NA,NA,NA,normal,normal,no,no,yes
+yes,21231,58.1,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,21231,58.1,men,NA,NA,NA,1100,above normal,normal,no,no,yes
+yes,21227,58.1,men,117,NA,NA,NA,normal,normal,no,no,yes
+yes,21225,58.1,women,NA,NA,NA,1000,normal,above normal,no,no,yes
+yes,21225,58.1,women,NA,120,NA,NA,normal,normal,no,no,yes
+no,21222,58.1,women,NA,127,NA,NA,well above normal,well above normal,no,no,yes
+yes,21220,58.1,men,NA,NA,NA,1000,normal,normal,yes,no,yes
+yes,21220,58.1,women,250,NA,NA,NA,well above normal,normal,no,no,yes
+no,21220,58.1,women,NA,NA,NA,8200,above normal,well above normal,no,no,yes
+yes,21220,58.1,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,21213,58.1,men,NA,140,NA,NA,normal,normal,yes,no,yes
+no,21213,58.1,women,NA,118,NA,NA,above normal,well above normal,no,no,yes
+yes,21208,58.1,women,NA,NA,NA,1001,above normal,normal,no,no,no
+no,21207,58.1,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21206,58.1,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21203,58.1,women,NA,NA,NA,1125,above normal,normal,no,no,yes
+yes,21201,58,women,198,NA,NA,NA,normal,normal,no,no,yes
+yes,21196,58,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21195,58,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21189,58,women,NA,NA,NA,1000,normal,above normal,no,no,yes
+yes,21188,58,women,NA,124,NA,NA,normal,above normal,no,no,no
+yes,21183,58,men,NA,120,NA,NA,above normal,normal,yes,no,yes
+no,21182,58,women,NA,126,NA,NA,well above normal,well above normal,no,no,no
+yes,21181,58,men,NA,128,NA,NA,normal,normal,no,no,no
+yes,21179,58,men,NA,NA,NA,1000,above normal,normal,no,no,no
+yes,21179,58,men,NA,NA,NA,1400,normal,normal,no,no,yes
+yes,21178,58,women,NA,NA,NA,1000,normal,normal,no,no,no
+no,21177,58,women,NA,127,NA,NA,well above normal,well above normal,no,no,yes
+yes,21177,58,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,21175,58,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,21175,58,women,130,NA,NA,NA,normal,normal,no,no,yes
+yes,21174,58,men,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,21174,58,men,NA,132,NA,NA,well above normal,normal,no,no,no
+yes,21174,58,women,NA,NA,NA,900,above normal,normal,no,no,yes
+yes,21171,58,women,96,NA,NA,NA,normal,normal,no,no,yes
+yes,21168,58,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21167,58,women,NA,NA,NA,1033,above normal,above normal,no,no,yes
+no,21166,57.9,men,NA,119,NA,NA,normal,normal,no,no,no
+yes,21162,57.9,men,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,21161,57.9,women,NA,NA,NA,1100,well above normal,normal,yes,yes,yes
+yes,21159,57.9,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21159,57.9,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21159,57.9,men,NA,118,NA,NA,normal,normal,yes,no,yes
+yes,21156,57.9,women,NA,NA,NA,1000,well above normal,normal,no,no,no
+yes,21153,57.9,men,190,NA,NA,NA,normal,normal,no,no,yes
+no,21152,57.9,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,21146,57.9,women,NA,125,NA,NA,well above normal,normal,no,no,yes
+yes,21145,57.9,women,130,NA,NA,NA,normal,normal,no,no,yes
+no,21142,57.9,men,190,NA,NA,NA,normal,normal,no,no,yes
+no,21137,57.9,men,NA,120,NA,NA,normal,well above normal,no,no,yes
+yes,21137,57.9,men,NA,NA,NA,1100,normal,normal,no,no,no
+yes,21135,57.9,women,NA,153,NA,NA,normal,normal,no,no,yes
+yes,21134,57.9,women,NA,NA,NA,1100,normal,normal,no,no,yes
+no,21133,57.9,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,21133,57.9,women,NA,NA,NA,870,well above normal,well above normal,no,no,yes
+no,21131,57.9,men,NA,121,NA,NA,normal,normal,no,no,no
+yes,21131,57.9,women,NA,NA,NA,1100,normal,normal,no,no,yes
+no,21128,57.8,women,NA,120,NA,NA,above normal,normal,no,no,yes
+yes,21124,57.8,women,NA,NA,NA,1100,normal,normal,no,no,no
+yes,21121,57.8,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21117,57.8,women,NA,NA,1202,NA,normal,normal,no,no,yes
+yes,21116,57.8,men,NA,NA,NA,1100,well above normal,normal,yes,no,yes
+no,21115,57.8,men,NA,120,NA,NA,normal,normal,yes,no,yes
+no,21115,57.8,women,NA,164,NA,NA,normal,normal,no,no,yes
+yes,21114,57.8,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,21112,57.8,women,190,NA,NA,NA,normal,normal,no,no,yes
+yes,21107,57.8,men,NA,NA,NA,1000,well above normal,well above normal,yes,no,yes
+no,21106,57.8,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,21105,57.8,men,189,NA,NA,NA,well above normal,normal,no,no,no
+no,21103,57.8,men,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+no,21102,57.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21102,57.8,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,21092,57.7,women,NA,NA,NA,1000,normal,normal,no,no,no
+no,21091,57.7,women,NA,NA,NA,1000,above normal,above normal,no,no,no
+yes,21089,57.7,women,NA,NA,NA,1100,normal,well above normal,no,no,yes
+no,21089,57.7,men,NA,123,NA,NA,normal,above normal,no,yes,yes
+yes,21088,57.7,men,190,NA,NA,NA,normal,normal,no,no,yes
+yes,21086,57.7,men,NA,148,NA,NA,well above normal,normal,yes,no,yes
+yes,21080,57.7,women,NA,122,NA,NA,normal,normal,no,no,no
+yes,21078,57.7,women,NA,142,NA,NA,normal,normal,no,no,yes
+yes,21076,57.7,women,NA,154,NA,NA,normal,normal,no,no,yes
+no,21072,57.7,men,NA,NA,NA,1000,normal,normal,yes,no,yes
+no,21066,57.7,women,130,NA,NA,NA,above normal,above normal,no,yes,no
+yes,21065,57.7,women,NA,118,NA,NA,above normal,above normal,no,no,yes
+no,21065,57.7,women,NA,118,NA,NA,above normal,above normal,no,no,yes
+yes,21063,57.7,women,NA,128,NA,NA,normal,normal,no,no,no
+yes,21061,57.7,men,192,NA,NA,NA,normal,normal,no,no,yes
+yes,21059,57.7,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21056,57.6,men,NA,NA,NA,810,above normal,above normal,yes,yes,yes
+yes,21055,57.6,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,21054,57.6,men,NA,119,NA,NA,normal,normal,no,no,yes
+yes,21049,57.6,men,NA,118,NA,NA,normal,normal,no,no,no
+yes,21046,57.6,women,138,NA,NA,NA,normal,normal,no,no,yes
+yes,21045,57.6,men,NA,NA,NA,1100,above normal,normal,yes,no,yes
+yes,21043,57.6,men,NA,NA,NA,1000,above normal,normal,no,no,no
+no,21043,57.6,men,NA,NA,NA,809,well above normal,well above normal,no,no,yes
+yes,21042,57.6,women,NA,138,NA,NA,normal,normal,no,no,yes
+yes,21039,57.6,men,192,NA,NA,NA,normal,well above normal,no,no,yes
+no,21038,57.6,men,NA,119,NA,NA,normal,normal,no,no,yes
+yes,21038,57.6,women,NA,136,NA,NA,normal,above normal,no,no,yes
+yes,21036,57.6,women,NA,NA,NA,1200,normal,normal,no,no,yes
+yes,21034,57.6,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21032,57.6,women,NA,NA,11500,NA,normal,normal,no,no,yes
+yes,21032,57.6,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,21027,57.6,men,NA,NA,NA,1000,well above normal,normal,no,yes,yes
+yes,21026,57.6,women,NA,NA,NA,1000,above normal,well above normal,no,no,no
+no,21025,57.6,women,NA,150,NA,NA,above normal,normal,no,no,no
+yes,21025,57.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21024,57.6,women,NA,121,NA,NA,well above normal,well above normal,no,no,yes
+yes,21016,57.5,women,NA,128,NA,NA,well above normal,normal,no,no,yes
+yes,21016,57.5,men,NA,118,NA,NA,normal,normal,no,no,yes
+no,21010,57.5,women,NA,NA,NA,1100,normal,normal,no,no,no
+yes,21008,57.5,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21007,57.5,men,NA,NA,NA,1003,normal,normal,no,no,yes
+no,21006,57.5,men,68,NA,NA,NA,normal,normal,no,no,yes
+yes,21005,57.5,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,21005,57.5,men,NA,130,NA,NA,normal,normal,yes,no,yes
+yes,21001,57.5,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20998,57.5,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,20997,57.5,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,20994,57.5,men,NA,NA,NA,10000,normal,normal,no,no,yes
+yes,20992,57.5,men,NA,NA,NA,1110,above normal,above normal,no,no,yes
+no,20991,57.5,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20990,57.5,women,122,161,NA,NA,normal,normal,no,no,yes
+yes,20988,57.5,women,NA,150,NA,NA,normal,normal,no,no,yes
+yes,20988,57.5,men,NA,120,NA,NA,normal,normal,no,no,no
+no,20988,57.5,women,120,NA,NA,NA,normal,normal,no,no,no
+no,20985,57.5,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,20978,57.4,women,64,NA,NA,NA,normal,normal,no,no,yes
+yes,20973,57.4,men,NA,119,NA,NA,above normal,normal,yes,yes,no
+no,20970,57.4,women,NA,NA,806,NA,normal,normal,no,no,yes
+yes,20969,57.4,men,NA,NA,NA,1007,normal,normal,no,no,yes
+yes,20965,57.4,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,20964,57.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20962,57.4,women,NA,NA,NA,1100,normal,normal,no,no,yes
+no,20961,57.4,men,NA,NA,1400,NA,above normal,normal,no,no,yes
+yes,20954,57.4,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,20954,57.4,men,NA,NA,NA,1000,above normal,normal,yes,yes,yes
+yes,20953,57.4,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,20951,57.4,men,NA,NA,NA,1000,above normal,above normal,yes,yes,no
+yes,20951,57.4,men,NA,NA,NA,1000,normal,normal,yes,no,no
+yes,20948,57.4,women,NA,122,NA,NA,above normal,normal,no,no,no
+yes,20942,57.3,men,NA,130,NA,NA,normal,normal,no,no,yes
+yes,20939,57.3,women,NA,NA,NA,1008,normal,normal,no,no,yes
+yes,20939,57.3,men,NA,183,NA,NA,well above normal,well above normal,no,yes,yes
+yes,20930,57.3,men,NA,118,NA,NA,normal,normal,yes,no,yes
+yes,20928,57.3,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20922,57.3,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20918,57.3,women,NA,118,NA,NA,well above normal,well above normal,no,no,yes
+yes,20912,57.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,20912,57.3,men,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,20886,57.2,women,NA,131,NA,NA,well above normal,above normal,no,no,yes
+yes,20875,57.2,men,NA,129,NA,NA,above normal,normal,no,no,no
+yes,20756,56.8,men,NA,NA,NA,1000,above normal,well above normal,no,no,yes
+yes,20734,56.8,women,NA,136,NA,NA,above normal,above normal,no,no,no
+yes,20716,56.7,women,120,NA,NA,NA,above normal,normal,no,no,no
+yes,20712,56.7,women,NA,NA,NA,1100,normal,normal,no,no,no
+yes,20673,56.6,women,NA,120,NA,NA,well above normal,normal,no,no,yes
+yes,20667,56.6,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,20661,56.6,men,NA,NA,NA,1100,normal,normal,no,no,yes
+no,20656,56.6,men,NA,178,NA,NA,normal,normal,yes,yes,yes
+yes,20651,56.5,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20650,56.5,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,20648,56.5,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,20645,56.5,women,NA,NA,NA,1100,well above normal,normal,no,no,no
+yes,20643,56.5,women,NA,133,NA,NA,normal,normal,no,no,yes
+no,20637,56.5,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,20633,56.5,men,NA,125,NA,NA,well above normal,well above normal,no,no,yes
+yes,20627,56.5,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+yes,20627,56.5,men,120,NA,NA,NA,normal,normal,no,no,no
+no,20626,56.5,men,NA,NA,NA,8099,normal,normal,no,no,yes
+yes,20621,56.5,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,20615,56.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20614,56.4,men,NA,119,NA,NA,above normal,above normal,no,no,yes
+yes,20612,56.4,men,NA,NA,1130,NA,normal,normal,no,no,yes
+yes,20603,56.4,women,NA,NA,NA,800,normal,normal,no,no,yes
+yes,20597,56.4,men,190,NA,NA,NA,normal,normal,no,no,yes
+no,20594,56.4,men,NA,NA,NA,1100,above normal,normal,no,no,yes
+no,20592,56.4,women,NA,124,NA,NA,well above normal,normal,no,no,yes
+no,20589,56.4,women,120,NA,NA,NA,normal,normal,no,no,no
+yes,20588,56.4,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20579,56.3,men,117,NA,NA,NA,normal,normal,yes,no,yes
+yes,20579,56.3,men,NA,128,NA,NA,above normal,normal,yes,no,yes
+yes,20578,56.3,men,192,NA,NA,NA,normal,normal,no,no,yes
+yes,20564,56.3,women,NA,138,NA,NA,normal,normal,no,no,yes
+yes,20564,56.3,women,NA,135,NA,NA,well above normal,well above normal,no,no,yes
+yes,20562,56.3,women,NA,NA,NA,1000,above normal,normal,no,yes,yes
+no,20561,56.3,men,NA,118,NA,NA,well above normal,normal,no,no,yes
+yes,20559,56.3,women,NA,125,NA,NA,above normal,well above normal,yes,no,yes
+yes,20557,56.3,women,NA,120,NA,NA,well above normal,well above normal,no,no,yes
+yes,20554,56.3,women,NA,NA,NA,1000,well above normal,normal,no,no,no
+yes,20554,56.3,women,NA,120,NA,NA,well above normal,well above normal,no,no,yes
+yes,20542,56.2,women,NA,NA,NA,1100,normal,normal,no,yes,yes
+no,20542,56.2,women,189,NA,NA,NA,normal,normal,no,no,no
+yes,20541,56.2,men,67,NA,NA,NA,normal,normal,no,no,no
+yes,20539,56.2,women,NA,NA,NA,1100,well above normal,well above normal,no,no,yes
+yes,20539,56.2,men,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,20537,56.2,women,NA,NA,NA,1000,normal,normal,yes,no,yes
+no,20536,56.2,men,NA,128,NA,NA,well above normal,well above normal,no,no,yes
+yes,20535,56.2,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,20531,56.2,women,NA,130,NA,NA,normal,normal,no,no,yes
+yes,20523,56.2,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,20522,56.2,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,20514,56.2,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,20513,56.2,women,NA,118,NA,NA,normal,normal,no,no,yes
+yes,20506,56.1,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,20506,56.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,20503,56.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20498,56.1,women,NA,NA,NA,1200,normal,normal,no,no,yes
+yes,20498,56.1,men,NA,NA,NA,1000,above normal,normal,yes,no,yes
+yes,20496,56.1,women,NA,NA,NA,1100,well above normal,normal,no,no,yes
+no,20496,56.1,women,NA,NA,NA,1100,normal,normal,no,no,no
+yes,20491,56.1,men,NA,NA,NA,1100,normal,normal,no,no,yes
+no,20489,56.1,women,NA,NA,NA,1011,well above normal,normal,no,no,yes
+no,20488,56.1,women,NA,120,NA,NA,normal,normal,no,no,no
+yes,20488,56.1,women,NA,130,NA,NA,above normal,normal,no,no,yes
+yes,20488,56.1,women,NA,120,NA,NA,well above normal,normal,no,no,no
+yes,20483,56.1,men,NA,NA,NA,1000,above normal,normal,no,no,no
+yes,20481,56.1,women,NA,123,NA,1000,normal,normal,no,no,yes
+yes,20477,56.1,men,NA,130,NA,1000,above normal,normal,no,no,yes
+yes,20472,56,men,NA,NA,NA,1000,above normal,normal,no,no,no
+yes,20472,56,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20471,56,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20471,56,men,NA,130,NA,NA,normal,above normal,no,no,yes
+yes,20471,56,women,NA,124,NA,NA,normal,normal,no,no,yes
+yes,20470,56,women,NA,NA,NA,1110,above normal,above normal,no,no,yes
+yes,20464,56,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20464,56,women,NA,164,NA,NA,well above normal,well above normal,no,no,yes
+yes,20464,56,men,NA,NA,NA,1100,well above normal,normal,no,no,yes
+no,20463,56,men,NA,118,NA,NA,above normal,normal,yes,no,yes
+no,20461,56,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20460,56,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20456,56,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20456,56,men,NA,NA,906,NA,normal,normal,no,no,yes
+yes,20454,56,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20454,56,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20453,56,women,NA,158,NA,NA,normal,normal,no,no,yes
+yes,20451,56,men,NA,NA,NA,1000,above normal,normal,yes,yes,yes
+yes,20451,56,men,NA,NA,NA,1000,above normal,normal,no,yes,yes
+yes,20445,56,men,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,20444,56,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,20442,56,women,NA,126,NA,NA,well above normal,normal,no,no,yes
+yes,20442,56,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,20441,56,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,20435,55.9,women,133,NA,NA,NA,normal,normal,no,no,no
+yes,20434,55.9,men,NA,NA,NA,1110,normal,normal,yes,no,yes
+yes,20431,55.9,men,NA,130,NA,NA,normal,normal,yes,yes,yes
+yes,20430,55.9,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20430,55.9,women,NA,166,NA,NA,well above normal,well above normal,no,no,yes
+yes,20430,55.9,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,20425,55.9,men,NA,NA,NA,1000,above normal,well above normal,no,no,yes
+yes,20423,55.9,women,NA,129,NA,NA,normal,normal,no,no,yes
+yes,20418,55.9,men,NA,129,NA,NA,well above normal,well above normal,no,no,yes
+yes,20416,55.9,men,120,NA,NA,NA,well above normal,well above normal,no,no,no
+no,20414,55.9,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,20413,55.9,women,NA,140,NA,NA,normal,normal,no,no,yes
+yes,20413,55.9,men,NA,NA,NA,1000,normal,normal,yes,no,yes
+no,20408,55.9,men,NA,22,NA,NA,normal,normal,yes,yes,yes
+yes,20407,55.9,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,20407,55.9,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,20407,55.9,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,20406,55.9,men,NA,NA,NA,1000,above normal,normal,yes,no,yes
+yes,20405,55.9,men,NA,125,NA,NA,above normal,above normal,no,no,yes
+yes,20402,55.9,men,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+no,20401,55.9,women,NA,NA,NA,6800,normal,normal,no,no,yes
+yes,20401,55.9,men,120,NA,NA,NA,normal,above normal,no,no,yes
+yes,20398,55.8,women,NA,NA,NA,8044,well above normal,well above normal,no,no,no
+yes,20398,55.8,women,NA,146,NA,NA,normal,normal,no,no,no
+no,20396,55.8,women,133,NA,NA,NA,normal,normal,no,no,no
+yes,20395,55.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20394,55.8,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,20390,55.8,women,NA,121,NA,NA,normal,normal,no,no,yes
+no,20389,55.8,women,NA,130,NA,NA,normal,normal,no,no,yes
+yes,20389,55.8,men,NA,126,NA,NA,normal,normal,yes,no,yes
+yes,20388,55.8,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,20385,55.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,20381,55.8,women,198,NA,NA,NA,normal,normal,no,no,yes
+yes,20377,55.8,men,NA,122,NA,NA,above normal,normal,no,no,yes
+yes,20377,55.8,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20376,55.8,men,NA,125,NA,NA,above normal,above normal,no,no,yes
+no,20376,55.8,men,125,NA,NA,NA,normal,normal,no,no,yes
+no,20375,55.8,women,NA,126,NA,NA,above normal,above normal,no,no,yes
+yes,20374,55.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20374,55.8,women,NA,128,NA,NA,normal,above normal,no,no,yes
+yes,20374,55.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20367,55.8,men,NA,NA,NA,1000,above normal,above normal,no,no,yes
+no,20360,55.7,women,190,NA,NA,NA,normal,normal,no,no,yes
+yes,20359,55.7,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20357,55.7,men,NA,NA,NA,1000,above normal,normal,no,no,no
+yes,20353,55.7,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+yes,20353,55.7,men,NA,150,NA,NA,above normal,above normal,no,no,yes
+yes,20352,55.7,women,NA,118,NA,NA,normal,normal,no,no,yes
+yes,20351,55.7,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20349,55.7,men,NA,NA,NA,1000,above normal,normal,no,yes,yes
+yes,20349,55.7,women,NA,126,NA,NA,well above normal,well above normal,no,no,yes
+yes,20348,55.7,women,NA,119,NA,1000,normal,normal,no,no,yes
+no,20347,55.7,men,192,NA,NA,NA,normal,well above normal,yes,yes,no
+yes,20346,55.7,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,20344,55.7,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,20340,55.7,men,NA,120,NA,NA,above normal,above normal,no,no,yes
+no,20338,55.7,men,190,NA,NA,NA,normal,normal,yes,no,yes
+yes,20337,55.7,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,20337,55.7,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,20336,55.7,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+yes,20334,55.7,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,20325,55.6,women,NA,NA,NA,1000,above normal,normal,yes,no,yes
+no,20323,55.6,women,NA,NA,NA,1900,normal,normal,no,no,yes
+yes,20321,55.6,men,189,NA,NA,NA,normal,normal,no,no,yes
+yes,20319,55.6,women,NA,131,NA,NA,above normal,above normal,no,no,yes
+no,20316,55.6,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20315,55.6,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,20313,55.6,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20308,55.6,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20304,55.6,men,NA,NA,NA,1100,above normal,normal,no,no,yes
+no,20299,55.6,women,NA,120,NA,NA,normal,above normal,no,no,yes
+yes,20299,55.6,women,NA,NA,NA,1002,normal,normal,no,no,yes
+yes,20295,55.6,women,NA,130,NA,NA,normal,normal,no,yes,yes
+yes,20292,55.6,women,NA,127,NA,NA,well above normal,above normal,no,no,yes
+no,20292,55.6,men,NA,NA,NA,1000,well above normal,above normal,no,no,no
+yes,20291,55.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,20288,55.5,women,NA,130,NA,NA,normal,normal,no,no,yes
+yes,20281,55.5,men,NA,NA,NA,1100,well above normal,normal,no,no,yes
+no,20281,55.5,women,NA,130,NA,NA,normal,normal,no,no,yes
+yes,20281,55.5,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20277,55.5,men,189,NA,NA,NA,normal,normal,yes,yes,yes
+yes,20272,55.5,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,20271,55.5,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20270,55.5,women,NA,125,NA,NA,normal,normal,no,no,yes
+yes,20261,55.5,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,20261,55.5,men,NA,120,NA,NA,normal,normal,no,no,yes
+yes,20260,55.5,women,NA,NA,NA,1100,normal,above normal,no,no,yes
+yes,20260,55.5,women,NA,NA,NA,1100,well above normal,normal,no,no,no
+yes,20260,55.5,women,130,NA,NA,NA,normal,normal,no,no,no
+no,20260,55.5,men,189,NA,NA,NA,well above normal,normal,no,no,yes
+yes,20260,55.5,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,20257,55.5,men,NA,NA,NA,1110,normal,above normal,no,no,yes
+yes,20250,55.4,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+yes,20249,55.4,men,NA,NA,NA,1000,normal,above normal,yes,yes,yes
+yes,20242,55.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20242,55.4,women,NA,120,NA,NA,normal,normal,no,no,yes
+no,20238,55.4,women,NA,145,NA,NA,normal,normal,no,no,yes
+yes,20237,55.4,men,120,NA,NA,NA,normal,normal,no,no,yes
+yes,20236,55.4,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,20225,55.4,women,NA,NA,NA,850,normal,normal,no,no,no
+no,20224,55.4,women,NA,126,NA,NA,normal,normal,no,no,yes
+yes,20224,55.4,women,NA,130,NA,NA,well above normal,well above normal,no,no,no
+yes,20223,55.4,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,20221,55.4,men,192,NA,NA,NA,normal,normal,no,no,no
+yes,20218,55.4,men,NA,124,NA,NA,well above normal,well above normal,yes,no,no
+yes,20215,55.3,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,20212,55.3,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,20208,55.3,men,NA,120,NA,1001,normal,normal,no,no,yes
+yes,20196,55.3,women,196,NA,NA,NA,normal,normal,no,no,yes
+yes,20196,55.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,20184,55.3,women,NA,118,NA,NA,normal,above normal,no,no,no
+yes,20171,55.2,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,20170,55.2,men,NA,127,NA,NA,normal,above normal,yes,no,yes
+no,20169,55.2,women,NA,140,NA,NA,normal,normal,yes,no,yes
+yes,20168,55.2,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+no,20020,54.8,men,NA,123,NA,NA,normal,normal,yes,yes,no
+yes,19969,54.7,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19967,54.7,women,NA,125,NA,NA,normal,normal,no,no,no
+yes,19934,54.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19932,54.6,men,NA,NA,NA,5700,normal,above normal,no,no,yes
+yes,19909,54.5,women,NA,175,NA,1000,normal,normal,no,no,yes
+yes,19904,54.5,men,NA,NA,NA,1000,well above normal,above normal,no,no,yes
+yes,19898,54.5,women,NA,139,NA,NA,normal,above normal,no,no,yes
+yes,19896,54.5,women,NA,119,NA,NA,normal,above normal,no,no,yes
+yes,19891,54.5,men,NA,NA,NA,1000,normal,normal,yes,yes,yes
+no,19891,54.5,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,19880,54.4,women,NA,NA,NA,1000,normal,above normal,no,no,yes
+yes,19878,54.4,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+no,19871,54.4,women,132,NA,NA,NA,above normal,normal,no,no,yes
+yes,19871,54.4,men,NA,NA,NA,1000,above normal,normal,no,yes,yes
+yes,19868,54.4,women,NA,149,NA,NA,above normal,above normal,no,no,yes
+yes,19865,54.4,men,NA,130,NA,NA,normal,normal,no,no,yes
+no,19861,54.4,women,NA,133,NA,NA,above normal,above normal,no,no,yes
+yes,19858,54.4,women,NA,120,NA,NA,normal,normal,no,no,yes
+no,19856,54.4,men,NA,125,NA,NA,normal,normal,no,no,yes
+yes,19853,54.4,men,NA,121.3,NA,NA,above normal,normal,no,yes,yes
+yes,19852,54.4,men,NA,NA,NA,1120,well above normal,above normal,no,no,yes
+yes,19849,54.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19846,54.3,women,NA,NA,NA,1000,well above normal,normal,no,no,no
+no,19840,54.3,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,19840,54.3,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,19835,54.3,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,19834,54.3,women,104,159,NA,NA,well above normal,normal,no,no,no
+yes,19822,54.3,women,NA,139,NA,NA,normal,normal,no,no,yes
+yes,19822,54.3,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19822,54.3,women,NA,120,NA,NA,well above normal,well above normal,no,no,no
+yes,19821,54.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,19819,54.3,women,193,NA,NA,NA,normal,normal,no,no,yes
+no,19819,54.3,men,NA,130,NA,NA,normal,normal,no,no,yes
+no,19818,54.3,men,NA,NA,NA,1000,well above normal,above normal,yes,no,yes
+no,19817,54.3,men,139,NA,NA,NA,normal,normal,no,no,yes
+no,19815,54.3,men,NA,130,NA,NA,well above normal,well above normal,yes,no,yes
+no,19810,54.2,men,NA,139,NA,NA,normal,normal,no,no,yes
+yes,19809,54.2,women,NA,NA,NA,800,normal,normal,no,no,yes
+yes,19809,54.2,women,NA,123,NA,NA,well above normal,well above normal,no,no,yes
+yes,19808,54.2,women,NA,127,NA,NA,above normal,normal,yes,no,yes
+yes,19807,54.2,men,189,NA,NA,NA,normal,normal,no,yes,yes
+no,19801,54.2,men,NA,130,NA,NA,normal,above normal,no,no,no
+yes,19795,54.2,men,NA,NA,NA,1000,normal,normal,no,yes,no
+yes,19793,54.2,women,NA,120,NA,NA,above normal,normal,no,no,yes
+yes,19784,54.2,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,19783,54.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,19777,54.1,women,112,167,NA,NA,normal,normal,no,yes,yes
+no,19770,54.1,women,NA,119,NA,NA,above normal,above normal,no,yes,yes
+yes,19770,54.1,women,NA,131,NA,NA,well above normal,well above normal,no,no,yes
+yes,19762,54.1,men,NA,127,NA,NA,well above normal,normal,yes,no,no
+yes,19762,54.1,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+yes,19762,54.1,men,NA,NA,NA,1000,above normal,normal,yes,no,yes
+yes,19757,54.1,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,19754,54.1,men,NA,120,NA,NA,above normal,normal,no,no,yes
+yes,19751,54.1,men,NA,120,NA,NA,well above normal,above normal,no,no,yes
+no,19751,54.1,women,120,NA,NA,NA,normal,normal,no,no,yes
+no,19750,54.1,women,NA,120,NA,NA,well above normal,well above normal,no,no,yes
+no,19749,54.1,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19747,54.1,women,91,NA,NA,NA,normal,normal,no,no,yes
+yes,19746,54.1,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+no,19746,54.1,men,NA,NA,NA,8079,normal,normal,no,no,no
+no,19743,54.1,men,NA,130,NA,NA,above normal,well above normal,yes,yes,no
+yes,19738,54,women,NA,150,NA,NA,normal,normal,no,no,no
+yes,19736,54,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19734,54,women,NA,133,NA,1000,well above normal,well above normal,yes,no,no
+yes,19731,54,women,NA,135,NA,NA,well above normal,above normal,no,no,yes
+no,19731,54,women,NA,NA,14020,NA,normal,normal,no,no,yes
+yes,19731,54,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19729,54,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,19729,54,women,120,NA,NA,NA,normal,normal,no,no,yes
+yes,19729,54,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,19728,54,men,NA,NA,NA,1000,above normal,well above normal,no,no,yes
+yes,19723,54,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,19721,54,women,NA,130,NA,1000,well above normal,well above normal,no,no,yes
+yes,19720,54,women,NA,123,NA,NA,well above normal,normal,no,no,yes
+yes,19719,54,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19717,54,women,NA,119,NA,NA,normal,normal,no,no,no
+no,19714,54,women,NA,121,NA,NA,normal,above normal,no,no,yes
+yes,19714,54,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19711,54,men,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,19711,54,men,NA,134,NA,NA,well above normal,well above normal,no,no,yes
+no,19710,54,men,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,19709,54,men,65,NA,NA,NA,normal,normal,no,no,no
+no,19708,54,men,120,NA,NA,NA,normal,normal,yes,yes,yes
+yes,19706,54,women,NA,122,NA,NA,well above normal,normal,no,no,no
+yes,19705,53.9,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,19704,53.9,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,19703,53.9,men,NA,133,NA,NA,normal,normal,no,no,no
+yes,19700,53.9,men,NA,NA,1620,NA,above normal,normal,no,no,yes
+yes,19700,53.9,women,NA,120,NA,NA,normal,above normal,no,no,yes
+yes,19699,53.9,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,19698,53.9,men,119,NA,NA,NA,normal,normal,no,no,yes
+yes,19698,53.9,women,NA,NA,NA,1100,normal,normal,no,no,no
+yes,19695,53.9,women,NA,139,NA,NA,normal,normal,no,no,yes
+yes,19694,53.9,men,NA,130,NA,NA,normal,normal,no,no,no
+yes,19692,53.9,women,NA,NA,NA,1100,well above normal,normal,no,no,no
+yes,19692,53.9,women,NA,134,NA,NA,normal,normal,no,no,yes
+yes,19692,53.9,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,19690,53.9,men,NA,120,NA,NA,above normal,above normal,no,no,no
+yes,19686,53.9,men,NA,NA,NA,1000,normal,normal,yes,yes,yes
+yes,19686,53.9,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,19683,53.9,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,19683,53.9,men,NA,118,NA,NA,normal,above normal,no,yes,yes
+yes,19681,53.9,women,NA,125,NA,NA,above normal,above normal,no,yes,yes
+yes,19680,53.9,men,74,NA,NA,NA,normal,normal,no,no,yes
+no,19676,53.9,women,139,NA,NA,NA,normal,normal,no,no,yes
+yes,19674,53.9,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,19671,53.9,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,19670,53.9,men,NA,NA,NA,1100,well above normal,normal,no,no,no
+yes,19668,53.8,women,138,NA,NA,NA,well above normal,well above normal,no,no,yes
+yes,19666,53.8,men,NA,118,NA,NA,above normal,normal,no,no,yes
+yes,19666,53.8,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,19666,53.8,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19664,53.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,19664,53.8,men,191,NA,NA,NA,normal,normal,no,no,yes
+yes,19662,53.8,women,NA,118,NA,NA,above normal,above normal,no,no,yes
+yes,19657,53.8,women,NA,NA,NA,1200,well above normal,normal,no,no,no
+yes,19654,53.8,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,19653,53.8,women,NA,NA,NA,1100,normal,normal,no,no,no
+yes,19651,53.8,men,NA,118,NA,NA,normal,normal,no,no,no
+yes,19650,53.8,women,NA,NA,NA,1200,above normal,above normal,no,no,yes
+no,19647,53.8,women,NA,NA,NA,809,normal,normal,no,no,no
+yes,19642,53.8,women,NA,140,NA,1000,normal,normal,no,no,yes
+no,19642,53.8,women,NA,125,NA,NA,normal,above normal,no,no,no
+no,19641,53.8,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,19639,53.8,men,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,19635,53.8,men,NA,NA,NA,900,normal,normal,no,no,no
+yes,19635,53.8,men,NA,130,NA,NA,normal,normal,no,no,yes
+yes,19631,53.7,men,NA,150,NA,1000,normal,normal,yes,no,yes
+yes,19630,53.7,women,NA,181,NA,1100,above normal,normal,no,no,yes
+yes,19629,53.7,women,NA,119,NA,NA,above normal,above normal,yes,no,yes
+no,19627,53.7,women,189,NA,NA,NA,normal,normal,no,no,yes
+yes,19626,53.7,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,19624,53.7,men,NA,NA,NA,1000,well above normal,above normal,no,no,yes
+no,19623,53.7,men,NA,168,NA,NA,above normal,normal,no,yes,yes
+no,19621,53.7,women,196,NA,NA,NA,normal,normal,no,no,yes
+no,19616,53.7,women,NA,137,NA,NA,normal,normal,no,no,yes
+yes,19604,53.7,men,NA,156,NA,NA,normal,normal,no,no,yes
+yes,19600,53.7,men,NA,119,NA,NA,normal,above normal,yes,no,no
+yes,19597,53.7,men,NA,121,NA,NA,normal,normal,no,no,yes
+yes,19594,53.6,women,75,168,NA,NA,normal,normal,yes,no,yes
+yes,19592,53.6,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+no,19591,53.6,women,134,NA,NA,NA,normal,normal,no,no,no
+yes,19586,53.6,women,NA,132,NA,NA,well above normal,normal,no,no,yes
+yes,19585,53.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19579,53.6,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,19578,53.6,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19576,53.6,women,NA,132,NA,NA,above normal,well above normal,no,no,no
+yes,19575,53.6,women,NA,130,NA,NA,well above normal,well above normal,no,no,yes
+no,19573,53.6,women,NA,NA,NA,8099,normal,normal,no,no,no
+yes,19568,53.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19567,53.6,men,NA,NA,NA,1000,normal,above normal,yes,yes,yes
+no,19564,53.6,men,NA,125,NA,NA,above normal,well above normal,yes,yes,no
+yes,19563,53.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19559,53.5,women,NA,118,NA,NA,normal,normal,no,no,yes
+no,19558,53.5,women,NA,NA,NA,708,normal,normal,no,no,yes
+yes,19551,53.5,women,NA,124,NA,NA,above normal,normal,no,no,yes
+yes,19549,53.5,women,NA,NA,NA,1000,normal,above normal,no,no,no
+yes,19548,53.5,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,19548,53.5,women,NA,125,NA,NA,normal,normal,no,no,yes
+yes,19543,53.5,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,19541,53.5,men,NA,128,NA,NA,normal,normal,no,no,no
+no,19536,53.5,women,NA,127,NA,NA,normal,normal,no,no,yes
+yes,19534,53.5,women,NA,NA,1300,NA,well above normal,normal,no,yes,yes
+yes,19533,53.5,women,NA,120,NA,NA,normal,normal,no,no,no
+yes,19528,53.5,women,NA,NA,NA,9100,normal,normal,no,no,yes
+yes,19527,53.5,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,19526,53.5,men,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,19526,53.5,men,190,NA,NA,NA,above normal,normal,no,no,yes
+yes,19526,53.5,women,132,NA,NA,NA,normal,above normal,no,no,yes
+no,19522,53.4,women,191,NA,NA,NA,normal,normal,no,no,yes
+yes,19517,53.4,women,NA,NA,NA,1001,above normal,normal,no,no,yes
+yes,19515,53.4,women,NA,134,NA,NA,above normal,above normal,yes,yes,no
+no,19512,53.4,men,190,120,NA,NA,normal,above normal,yes,yes,no
+yes,19507,53.4,men,NA,130,NA,NA,normal,well above normal,no,no,yes
+yes,19503,53.4,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,19498,53.4,men,NA,NA,NA,1000,well above normal,normal,no,yes,yes
+yes,19497,53.4,men,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+no,19494,53.4,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,19494,53.4,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,19491,53.4,men,NA,121,NA,NA,well above normal,normal,no,yes,no
+yes,19491,53.4,women,NA,118,NA,NA,well above normal,normal,no,no,yes
+yes,19488,53.4,men,NA,NA,NA,1100,normal,normal,yes,no,yes
+yes,19476,53.3,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19475,53.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,19473,53.3,women,NA,NA,NA,8077,normal,normal,no,no,yes
+yes,19469,53.3,men,NA,118,NA,NA,normal,above normal,yes,yes,yes
+yes,19469,53.3,women,NA,119,NA,NA,well above normal,well above normal,no,no,yes
+yes,19467,53.3,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19458,53.3,men,NA,127,NA,NA,normal,normal,no,no,yes
+yes,19450,53.3,women,NA,155,NA,NA,normal,normal,no,no,yes
+no,19438,53.2,women,192,NA,NA,NA,normal,normal,no,no,yes
+yes,19419,53.2,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19417,53.2,men,NA,NA,NA,1000,normal,above normal,no,no,yes
+yes,19390,53.1,women,NA,NA,NA,880,well above normal,normal,no,no,yes
+no,19287,52.8,men,189,NA,NA,NA,normal,normal,yes,no,no
+yes,19283,52.8,men,NA,NA,NA,1100,normal,normal,yes,yes,yes
+no,19251,52.7,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19245,52.7,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,19199,52.6,men,NA,135,NA,NA,normal,normal,yes,no,no
+yes,19195,52.6,women,NA,134,NA,NA,normal,above normal,no,no,no
+yes,19187,52.5,men,200,NA,NA,1100,above normal,above normal,no,no,yes
+yes,19171,52.5,men,NA,177,NA,NA,normal,normal,no,no,yes
+yes,19171,52.5,women,NA,127,NA,NA,normal,normal,no,no,yes
+yes,19170,52.5,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,19168,52.5,women,132,NA,NA,NA,normal,normal,no,no,no
+yes,19158,52.5,women,NA,140,NA,NA,normal,normal,no,no,yes
+no,19154,52.4,women,NA,130,NA,NA,normal,normal,no,no,yes
+no,19153,52.4,women,NA,121,NA,NA,normal,above normal,no,no,yes
+yes,19146,52.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19146,52.4,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19146,52.4,men,NA,NA,NA,1000,above normal,above normal,yes,no,yes
+yes,19123,52.4,men,NA,NA,NA,1000,normal,normal,yes,no,no
+yes,19122,52.4,women,NA,125,NA,NA,above normal,above normal,no,no,yes
+yes,19121,52.4,women,NA,NA,NA,8100,normal,normal,no,no,yes
+no,19120,52.3,women,65,NA,NA,NA,normal,normal,no,no,yes
+yes,19110,52.3,men,NA,NA,NA,1000,well above normal,well above normal,yes,no,yes
+yes,19102,52.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19102,52.3,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19101,52.3,women,NA,127,NA,1200,well above normal,normal,yes,no,yes
+no,19100,52.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19097,52.3,women,NA,120,NA,NA,well above normal,normal,no,no,yes
+yes,19097,52.3,women,NA,NA,NA,910,well above normal,normal,no,no,yes
+no,19095,52.3,men,190,NA,NA,NA,normal,normal,no,no,yes
+yes,19094,52.3,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,19093,52.3,men,NA,NA,NA,1100,normal,above normal,yes,yes,yes
+no,19089,52.3,women,NA,124,NA,NA,normal,normal,no,no,yes
+no,19088,52.3,women,60,NA,NA,NA,normal,normal,no,no,no
+yes,19085,52.3,men,NA,NA,NA,1000,well above normal,normal,yes,no,yes
+yes,19083,52.2,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,19081,52.2,women,NA,126,NA,NA,well above normal,above normal,no,no,yes
+yes,19080,52.2,women,NA,123,NA,NA,normal,normal,no,no,no
+yes,19078,52.2,women,NA,NA,NA,8000,normal,normal,no,no,yes
+yes,19078,52.2,women,NA,118,NA,NA,normal,normal,no,no,yes
+yes,19078,52.2,men,NA,140,NA,NA,well above normal,well above normal,yes,no,yes
+yes,19077,52.2,men,NA,140,NA,NA,normal,normal,no,no,yes
+yes,19077,52.2,men,NA,155,NA,NA,normal,normal,no,no,yes
+yes,19076,52.2,women,NA,NA,NA,1200,above normal,normal,no,no,yes
+no,19074,52.2,women,81,156,NA,NA,normal,normal,no,no,yes
+yes,19074,52.2,men,NA,NA,NA,1200,well above normal,normal,no,no,yes
+no,19072,52.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19067,52.2,women,NA,122,NA,NA,normal,normal,no,no,no
+yes,19065,52.2,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19064,52.2,men,190,NA,NA,NA,well above normal,normal,yes,yes,yes
+yes,19062,52.2,women,NA,NA,NA,1100,well above normal,well above normal,no,no,yes
+yes,19062,52.2,women,NA,NA,NA,10000,above normal,normal,no,no,yes
+yes,19060,52.2,men,190,NA,NA,NA,well above normal,normal,no,no,no
+no,19059,52.2,men,125,NA,NA,NA,normal,normal,no,no,yes
+yes,19059,52.2,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+no,19054,52.2,men,207,NA,NA,NA,normal,normal,no,yes,yes
+yes,19052,52.2,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,19048,52.2,women,NA,122,NA,NA,normal,normal,no,no,yes
+yes,19046,52.1,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,19036,52.1,women,NA,NA,NA,1000,normal,above normal,no,no,yes
+no,19035,52.1,men,NA,NA,NA,1100,normal,normal,no,no,yes
+no,19031,52.1,men,190,NA,NA,NA,normal,normal,no,no,no
+yes,19029,52.1,women,NA,118,NA,NA,normal,normal,no,no,no
+yes,19025,52.1,men,NA,150,NA,NA,normal,normal,no,no,no
+yes,19022,52.1,men,NA,150,NA,NA,above normal,normal,no,yes,yes
+yes,19022,52.1,men,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,19020,52.1,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,19019,52.1,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,19019,52.1,men,NA,NA,NA,1000,normal,well above normal,no,no,yes
+yes,19018,52.1,men,NA,NA,NA,1140,normal,normal,no,no,yes
+yes,19015,52.1,men,NA,NA,NA,1110,well above normal,well above normal,no,yes,yes
+yes,19012,52.1,women,NA,NA,NA,1000,normal,normal,no,yes,yes
+no,19012,52.1,women,120,NA,NA,NA,above normal,normal,no,no,no
+yes,19006,52,women,NA,136,NA,NA,normal,above normal,no,no,yes
+no,19004,52,women,NA,118,NA,NA,well above normal,normal,no,no,yes
+yes,19004,52,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,19003,52,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+no,19000,52,men,190,NA,NA,NA,normal,normal,no,no,yes
+yes,18996,52,women,NA,129,NA,NA,well above normal,well above normal,no,no,no
+yes,18995,52,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18994,52,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,18993,52,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18992,52,men,194,NA,NA,NA,normal,normal,no,no,yes
+yes,18992,52,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18991,52,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+no,18991,52,women,NA,158,NA,NA,above normal,above normal,yes,no,yes
+yes,18989,52,women,NA,150,NA,NA,normal,normal,no,no,yes
+yes,18988,52,men,NA,NA,NA,1000,above normal,well above normal,yes,no,yes
+yes,18981,52,women,NA,NA,NA,1100,normal,normal,no,no,no
+yes,18980,52,men,190,NA,NA,NA,normal,normal,no,no,yes
+yes,18980,52,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,18979,52,women,NA,NA,NA,800,normal,normal,no,no,yes
+yes,18975,52,women,NA,NA,NA,1200,normal,normal,no,no,yes
+yes,18975,52,men,NA,NA,NA,1110,well above normal,well above normal,yes,no,yes
+yes,18975,52,men,NA,180,NA,NA,well above normal,normal,no,no,yes
+yes,18974,51.9,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18972,51.9,men,NA,129,NA,NA,above normal,normal,no,no,yes
+yes,18972,51.9,women,NA,NA,NA,1000,above normal,normal,no,no,no
+yes,18971,51.9,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18964,51.9,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18963,51.9,women,NA,NA,NA,1000,normal,normal,yes,no,yes
+yes,18963,51.9,women,NA,124,NA,NA,above normal,normal,no,no,yes
+yes,18961,51.9,women,110,NA,NA,NA,above normal,normal,no,no,yes
+yes,18958,51.9,women,NA,NA,NA,1200,normal,normal,no,no,yes
+yes,18956,51.9,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18956,51.9,men,NA,178,NA,NA,normal,normal,no,no,yes
+no,18953,51.9,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,18952,51.9,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18949,51.9,women,NA,NA,NA,1177,normal,normal,yes,yes,yes
+yes,18946,51.9,women,NA,124,NA,NA,above normal,above normal,no,no,yes
+no,18945,51.9,men,195,NA,NA,NA,normal,normal,no,no,yes
+yes,18940,51.9,men,120,NA,NA,NA,normal,normal,no,no,no
+yes,18939,51.9,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,18933,51.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18933,51.8,men,NA,NA,NA,1000,normal,normal,yes,no,yes
+yes,18929,51.8,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,18924,51.8,women,NA,119,NA,NA,normal,normal,no,no,yes
+yes,18920,51.8,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,18919,51.8,men,NA,150,NA,NA,normal,normal,no,no,yes
+yes,18917,51.8,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,18911,51.8,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,18910,51.8,men,NA,129,NA,NA,normal,normal,no,no,no
+yes,18908,51.8,women,NA,135,NA,NA,normal,normal,no,no,yes
+yes,18898,51.7,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,18895,51.7,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,18892,51.7,women,136,NA,NA,NA,normal,normal,no,no,no
+yes,18891,51.7,women,NA,NA,NA,1000,normal,normal,no,no,no
+no,18889,51.7,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18889,51.7,men,NA,120,NA,NA,above normal,normal,no,yes,yes
+yes,18875,51.7,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,18875,51.7,women,NA,29,NA,NA,above normal,normal,no,no,yes
+yes,18874,51.7,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18874,51.7,men,NA,127,NA,NA,above normal,above normal,yes,no,yes
+yes,18871,51.7,men,191,123,NA,NA,normal,normal,yes,no,no
+yes,18870,51.7,women,NA,NA,1420,NA,above normal,normal,no,no,yes
+yes,18870,51.7,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18869,51.7,women,NA,135,NA,NA,normal,normal,no,no,yes
+yes,18869,51.7,women,NA,120,NA,NA,normal,normal,no,no,yes
+no,18867,51.7,women,NA,NA,NA,1000,normal,normal,yes,no,yes
+yes,18859,51.6,women,NA,123,NA,NA,above normal,normal,no,no,yes
+yes,18858,51.6,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,18858,51.6,women,NA,NA,NA,801,normal,normal,no,no,yes
+yes,18858,51.6,women,NA,NA,NA,1100,well above normal,well above normal,no,no,no
+yes,18855,51.6,women,NA,NA,NA,1200,normal,normal,no,no,no
+yes,18855,51.6,men,NA,135,NA,NA,well above normal,well above normal,yes,no,yes
+yes,18852,51.6,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,18850,51.6,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18844,51.6,women,NA,120,NA,NA,above normal,above normal,no,no,yes
+no,18838,51.6,women,NA,123,NA,NA,normal,normal,no,no,no
+no,18837,51.6,men,NA,119,NA,NA,above normal,normal,no,yes,no
+no,18835,51.6,women,135,NA,NA,NA,above normal,normal,no,no,yes
+yes,18835,51.6,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18830,51.6,women,NA,120,NA,NA,well above normal,well above normal,no,no,yes
+yes,18830,51.6,women,57,NA,NA,NA,normal,normal,no,no,yes
+yes,18826,51.5,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18824,51.5,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+yes,18824,51.5,men,198,NA,NA,NA,normal,normal,yes,no,yes
+no,18823,51.5,men,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,18820,51.5,women,NA,NA,NA,1000,well above normal,well above normal,no,no,no
+yes,18818,51.5,women,NA,NA,NA,1000,above normal,above normal,no,yes,yes
+yes,18816,51.5,men,NA,120,NA,NA,above normal,above normal,no,no,yes
+yes,18815,51.5,men,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,18812,51.5,women,NA,123,NA,1000,above normal,above normal,no,no,yes
+yes,18804,51.5,men,NA,10,NA,1100,above normal,above normal,no,no,yes
+no,18803,51.5,men,192,NA,NA,NA,normal,normal,no,yes,yes
+yes,18802,51.5,women,137,NA,NA,NA,above normal,normal,no,no,yes
+yes,18799,51.5,women,NA,124,NA,NA,above normal,normal,no,no,yes
+yes,18796,51.5,women,NA,128,NA,NA,normal,normal,no,no,yes
+no,18793,51.5,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,18793,51.5,women,120,NA,NA,NA,normal,normal,no,no,no
+yes,18790,51.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18784,51.4,men,NA,NA,11020,NA,normal,normal,no,no,yes
+yes,18782,51.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18782,51.4,women,NA,128,NA,NA,normal,normal,no,yes,yes
+no,18777,51.4,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,18773,51.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18766,51.4,women,NA,136,NA,NA,above normal,normal,no,no,yes
+yes,18760,51.4,women,NA,NA,NA,1100,normal,normal,no,no,no
+yes,18756,51.4,women,NA,126,NA,NA,well above normal,normal,no,no,yes
+yes,18752,51.3,men,NA,NA,NA,1200,normal,normal,no,no,no
+yes,18750,51.3,men,190,NA,NA,NA,normal,normal,no,no,yes
+yes,18740,51.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18739,51.3,women,111,NA,NA,NA,normal,normal,no,no,yes
+yes,18728,51.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18724,51.3,women,NA,127,NA,NA,normal,normal,yes,no,yes
+yes,18716,51.2,women,NA,NA,NA,1088,normal,normal,no,no,yes
+yes,18704,51.2,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,18704,51.2,women,NA,125,NA,1200,normal,normal,no,no,no
+yes,18686,51.2,women,NA,131,NA,NA,normal,normal,no,no,yes
+yes,18541,50.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18531,50.7,women,NA,NA,NA,1000,above normal,well above normal,no,no,yes
+no,18527,50.7,women,NA,125,NA,NA,normal,well above normal,no,no,no
+no,18524,50.7,women,NA,127,NA,NA,normal,normal,no,no,yes
+no,18511,50.7,women,NA,NA,960,NA,normal,normal,no,no,yes
+no,18506,50.7,men,189,NA,NA,NA,normal,normal,yes,no,yes
+yes,18493,50.6,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,18492,50.6,men,189,NA,NA,NA,well above normal,normal,no,no,yes
+no,18484,50.6,men,195,NA,NA,NA,normal,normal,no,no,yes
+no,18469,50.6,men,NA,NA,NA,5700,normal,normal,no,no,yes
+no,18467,50.6,women,99,NA,NA,NA,normal,normal,no,no,yes
+yes,18458,50.5,men,NA,120,NA,NA,normal,normal,no,no,yes
+yes,18452,50.5,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,18452,50.5,men,NA,132,NA,NA,normal,normal,no,no,yes
+yes,18430,50.5,women,NA,NA,NA,709,normal,normal,no,no,yes
+yes,18428,50.5,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,18427,50.5,men,NA,NA,NA,1008,above normal,normal,no,yes,yes
+no,18426,50.4,women,59,NA,NA,NA,normal,normal,no,no,no
+yes,18420,50.4,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,18417,50.4,women,NA,132,NA,NA,normal,normal,no,no,no
+no,18417,50.4,men,191,NA,NA,NA,normal,normal,no,no,yes
+yes,18412,50.4,women,NA,NA,NA,1001,above normal,normal,no,no,yes
+yes,18412,50.4,men,NA,NA,NA,1100,normal,normal,yes,no,yes
+yes,18402,50.4,men,NA,119,NA,NA,normal,normal,no,no,yes
+yes,18394,50.4,men,190,NA,NA,NA,normal,normal,no,no,no
+yes,18381,50.3,women,NA,NA,NA,7100,normal,normal,no,yes,yes
+no,18377,50.3,men,189,NA,NA,NA,normal,normal,yes,no,no
+yes,18374,50.3,women,NA,120,NA,NA,well above normal,above normal,yes,no,no
+no,18373,50.3,women,NA,NA,NA,1110,normal,normal,no,no,yes
+yes,18371,50.3,men,NA,121,NA,NA,well above normal,normal,yes,yes,yes
+yes,18367,50.3,men,NA,120,NA,NA,well above normal,normal,no,no,yes
+no,18366,50.3,women,NA,NA,NA,801,normal,normal,no,no,yes
+no,18365,50.3,women,189,NA,NA,NA,normal,normal,no,no,yes
+yes,18363,50.3,women,NA,125,NA,NA,normal,normal,no,no,yes
+yes,18362,50.3,women,NA,NA,NA,1077,normal,normal,no,yes,yes
+yes,18360,50.3,men,NA,NA,NA,1000,well above normal,above normal,no,no,yes
+no,18360,50.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18356,50.3,men,NA,120,NA,NA,normal,normal,no,no,yes
+no,18355,50.3,men,NA,NA,NA,1000,above normal,normal,no,no,no
+yes,18352,50.2,women,NA,122,NA,NA,normal,above normal,no,no,yes
+yes,18348,50.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18344,50.2,women,NA,138,NA,NA,normal,normal,no,no,yes
+yes,18337,50.2,women,NA,126,NA,NA,well above normal,normal,no,no,yes
+yes,18336,50.2,women,NA,138,NA,NA,above normal,normal,no,no,yes
+yes,18335,50.2,women,NA,NA,NA,9011,above normal,above normal,no,no,yes
+no,18332,50.2,men,192,NA,NA,NA,normal,normal,no,no,yes
+yes,18329,50.2,women,NA,NA,NA,1000,normal,normal,yes,no,yes
+yes,18327,50.2,men,NA,120,NA,NA,above normal,normal,yes,yes,yes
+yes,18326,50.2,women,NA,124,NA,NA,above normal,normal,no,no,yes
+yes,18320,50.2,women,NA,NA,NA,1100,normal,normal,no,no,yes
+no,18320,50.2,men,120,NA,NA,NA,normal,normal,no,no,yes
+yes,18319,50.2,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18317,50.1,women,NA,123,NA,NA,normal,normal,no,no,yes
+yes,18313,50.1,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18310,50.1,women,NA,127,NA,NA,well above normal,normal,no,no,yes
+no,18307,50.1,women,110,NA,NA,NA,normal,normal,no,no,yes
+yes,18307,50.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18307,50.1,women,NA,NA,13010,NA,above normal,above normal,no,no,yes
+yes,18305,50.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18304,50.1,women,NA,NA,1400,NA,normal,normal,no,no,yes
+yes,18303,50.1,men,NA,118,NA,1000,normal,above normal,no,yes,yes
+yes,18302,50.1,women,NA,119,NA,NA,normal,normal,no,no,yes
+yes,18302,50.1,men,NA,NA,NA,1100,normal,normal,yes,no,yes
+yes,18298,50.1,women,NA,122,NA,NA,normal,normal,no,no,yes
+yes,18298,50.1,men,190,147,NA,NA,normal,above normal,no,yes,yes
+yes,18295,50.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18294,50.1,women,NA,125,NA,NA,normal,normal,no,no,yes
+yes,18294,50.1,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,18291,50.1,men,192,NA,NA,NA,normal,normal,yes,yes,yes
+yes,18287,50.1,women,NA,118,NA,NA,normal,normal,no,no,no
+no,18287,50.1,women,NA,130,NA,NA,normal,normal,no,no,yes
+no,18286,50.1,men,192,NA,NA,NA,normal,normal,no,yes,no
+no,18285,50.1,women,136,NA,NA,NA,normal,normal,no,no,yes
+yes,18285,50.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18282,50.1,women,NA,131,NA,NA,well above normal,well above normal,no,no,yes
+no,18279,50,women,190,NA,NA,NA,normal,normal,no,no,yes
+no,18279,50,men,190,NA,NA,NA,above normal,normal,yes,no,yes
+yes,18278,50,men,NA,135,NA,NA,normal,normal,yes,no,yes
+yes,18274,50,men,189,NA,NA,NA,normal,above normal,no,no,yes
+yes,18273,50,women,NA,168,NA,NA,normal,normal,no,no,yes
+yes,18271,50,men,190,NA,NA,NA,above normal,above normal,yes,no,yes
+yes,18270,50,women,NA,NA,NA,1120,normal,above normal,no,no,yes
+yes,18266,50,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18262,50,men,125,NA,NA,NA,normal,normal,no,no,no
+yes,18260,50,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,18258,50,men,198,NA,NA,NA,normal,normal,no,no,yes
+yes,18258,50,women,NA,NA,NA,1200,well above normal,well above normal,no,no,yes
+no,18257,50,women,NA,120,NA,NA,normal,above normal,no,no,no
+yes,18256,50,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18252,50,men,137,NA,NA,NA,normal,normal,no,no,no
+yes,18247,50,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18244,49.9,men,191,NA,NA,NA,normal,normal,no,no,yes
+yes,18242,49.9,women,NA,150,NA,NA,well above normal,well above normal,no,no,yes
+no,18241,49.9,men,189,NA,NA,NA,normal,normal,yes,yes,yes
+yes,18238,49.9,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18236,49.9,women,NA,130,NA,1100,normal,normal,no,no,no
+yes,18235,49.9,women,NA,150,NA,NA,above normal,normal,no,no,yes
+yes,18235,49.9,men,NA,120,NA,NA,normal,normal,yes,no,yes
+yes,18232,49.9,women,NA,135,NA,NA,well above normal,well above normal,no,no,no
+yes,18226,49.9,men,NA,NA,NA,1000,above normal,normal,yes,yes,yes
+yes,18218,49.9,women,NA,126,NA,NA,normal,well above normal,no,no,yes
+yes,18217,49.9,women,NA,NA,NA,800,normal,normal,no,no,yes
+yes,18213,49.9,women,NA,120,NA,NA,above normal,well above normal,no,no,yes
+yes,18213,49.9,men,NA,133,NA,NA,above normal,normal,no,no,yes
+yes,18208,49.9,men,191,NA,NA,NA,normal,normal,no,no,yes
+no,18205,49.8,women,NA,120,NA,NA,above normal,normal,no,no,no
+yes,18198,49.8,women,NA,136,NA,NA,above normal,above normal,yes,no,yes
+yes,18195,49.8,women,NA,123,NA,NA,normal,normal,no,no,no
+yes,18194,49.8,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18191,49.8,men,NA,NA,NA,1900,normal,normal,yes,no,yes
+yes,18190,49.8,women,NA,NA,NA,1100,normal,normal,no,no,yes
+no,18190,49.8,women,NA,NA,906,NA,normal,normal,no,no,yes
+yes,18188,49.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18187,49.8,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,18186,49.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18183,49.8,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,18182,49.8,men,NA,NA,NA,901,above normal,above normal,no,no,yes
+yes,18179,49.8,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,18177,49.8,women,NA,NA,NA,7099,normal,normal,no,no,yes
+yes,18170,49.7,men,NA,140,NA,NA,well above normal,normal,no,yes,no
+no,18170,49.7,women,NA,120,NA,NA,normal,normal,no,no,no
+yes,18170,49.7,women,NA,130,NA,1100,well above normal,well above normal,no,no,yes
+yes,18165,49.7,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18160,49.7,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18159,49.7,men,NA,NA,NA,1100,above normal,normal,no,no,yes
+yes,18159,49.7,men,NA,120,NA,NA,above normal,above normal,yes,no,no
+yes,18152,49.7,men,NA,NA,NA,1000,well above normal,normal,yes,yes,yes
+yes,18148,49.7,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,18140,49.7,women,NA,NA,NA,1000,normal,above normal,no,no,yes
+yes,18140,49.7,women,NA,30,NA,NA,normal,normal,no,no,yes
+no,18138,49.7,men,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,18137,49.7,men,NA,120,NA,NA,above normal,normal,no,no,yes
+yes,18136,49.7,women,NA,119,NA,NA,above normal,normal,no,no,yes
+yes,18136,49.7,men,NA,128,NA,NA,normal,normal,no,no,yes
+yes,18135,49.7,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,18134,49.6,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,18132,49.6,women,NA,134,NA,NA,well above normal,well above normal,no,no,yes
+yes,18131,49.6,men,190,NA,NA,NA,normal,normal,no,no,yes
+no,18130,49.6,women,110,NA,NA,NA,normal,normal,no,no,yes
+yes,18122,49.6,men,NA,120,NA,NA,above normal,normal,no,no,yes
+yes,18121,49.6,women,120,NA,NA,NA,well above normal,well above normal,no,no,no
+yes,18119,49.6,women,NA,120,NA,NA,normal,normal,no,no,no
+no,18115,49.6,men,NA,145,NA,NA,normal,normal,no,no,yes
+no,18113,49.6,men,NA,120,NA,NA,normal,above normal,yes,no,yes
+yes,18112,49.6,men,NA,129,NA,NA,normal,normal,no,no,no
+yes,18111,49.6,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,18108,49.6,men,NA,126,NA,NA,normal,normal,no,no,yes
+yes,18102,49.6,men,NA,NA,NA,10000,above normal,above normal,no,yes,yes
+yes,18101,49.6,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+no,18099,49.6,men,NA,128,NA,NA,well above normal,well above normal,yes,yes,no
+yes,18099,49.6,men,189,128,NA,NA,normal,normal,no,no,yes
+no,18097,49.5,women,NA,127,NA,NA,above normal,well above normal,no,no,yes
+no,18087,49.5,women,NA,130,NA,NA,above normal,well above normal,yes,no,yes
+yes,18082,49.5,women,192,NA,NA,NA,normal,normal,no,no,no
+no,18082,49.5,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18081,49.5,men,NA,NA,NA,1120,above normal,normal,no,no,no
+yes,18078,49.5,men,NA,140,NA,NA,well above normal,well above normal,no,no,no
+yes,18076,49.5,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,18071,49.5,men,NA,118,NA,NA,well above normal,well above normal,no,yes,yes
+yes,18063,49.5,men,NA,NA,NA,1000,well above normal,well above normal,yes,no,yes
+yes,18061,49.4,men,NA,133,NA,NA,above normal,above normal,no,yes,yes
+yes,18057,49.4,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,18055,49.4,women,NA,120,NA,NA,above normal,normal,no,no,no
+yes,18053,49.4,women,NA,133,NA,NA,well above normal,well above normal,no,yes,yes
+yes,18050,49.4,men,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,18050,49.4,women,135,NA,NA,NA,above normal,well above normal,no,no,yes
+yes,18043,49.4,men,NA,NA,NA,1000,above normal,above normal,yes,no,yes
+yes,18042,49.4,men,NA,NA,NA,1100,normal,normal,no,no,no
+yes,18039,49.4,men,189,NA,NA,NA,well above normal,normal,yes,no,yes
+yes,18038,49.4,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,18038,49.4,women,NA,140,NA,NA,above normal,above normal,no,no,no
+yes,18036,49.4,men,NA,128,NA,NA,well above normal,normal,no,yes,no
+yes,18034,49.4,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,18034,49.4,women,NA,118,NA,NA,normal,normal,no,no,yes
+yes,18031,49.4,men,NA,130,NA,NA,normal,normal,no,no,yes
+no,18027,49.4,women,NA,NA,NA,800,normal,normal,no,no,yes
+no,18026,49.4,men,NA,156,NA,NA,normal,well above normal,no,no,no
+no,18024,49.3,women,NA,136,NA,NA,normal,normal,no,no,yes
+yes,18010,49.3,women,NA,NA,NA,1200,normal,normal,no,no,no
+no,18005,49.3,women,NA,NA,NA,709,above normal,normal,no,no,no
+yes,18000,49.3,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,17998,49.3,men,NA,NA,NA,1000,above normal,normal,no,no,no
+no,17988,49.2,men,NA,NA,906,NA,normal,normal,no,no,yes
+yes,17967,49.2,men,NA,NA,NA,1000,above normal,above normal,yes,yes,no
+no,17753,48.6,men,NA,134,NA,NA,normal,well above normal,yes,yes,yes
+yes,17737,48.6,women,NA,NA,NA,1000,normal,well above normal,yes,no,yes
+no,17675,48.4,men,196,NA,NA,NA,normal,normal,no,no,no
+yes,17672,48.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,17666,48.4,women,NA,130,NA,NA,above normal,well above normal,no,no,yes
+yes,17656,48.3,men,NA,118,NA,NA,well above normal,normal,no,no,no
+no,17655,48.3,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,17646,48.3,men,97,170,NA,NA,normal,normal,yes,no,yes
+no,17643,48.3,women,104,165,NA,NA,normal,normal,no,no,yes
+no,17642,48.3,women,120,NA,NA,NA,normal,normal,no,no,yes
+no,17632,48.3,men,NA,125,NA,NA,normal,well above normal,yes,no,yes
+no,17631,48.3,men,NA,118,NA,NA,above normal,well above normal,yes,no,no
+yes,17619,48.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,17594,48.2,women,NA,NA,NA,1000,normal,above normal,no,no,yes
+yes,17592,48.2,men,NA,118,NA,NA,well above normal,well above normal,yes,no,no
+yes,17589,48.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,17586,48.1,men,NA,135,NA,NA,normal,normal,yes,yes,yes
+no,17582,48.1,women,197,NA,NA,NA,above normal,normal,no,no,no
+yes,17580,48.1,men,120,NA,NA,NA,normal,normal,no,no,no
+yes,17578,48.1,men,NA,NA,NA,1000,well above normal,normal,yes,no,yes
+yes,17578,48.1,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,17574,48.1,women,NA,123,NA,NA,above normal,normal,no,no,yes
+yes,17572,48.1,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,17570,48.1,women,NA,122,NA,NA,normal,normal,no,no,yes
+yes,17566,48.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,17564,48.1,men,NA,123,NA,NA,well above normal,above normal,yes,yes,yes
+yes,17555,48.1,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+no,17553,48.1,men,NA,NA,NA,1000,normal,normal,yes,yes,yes
+yes,17548,48,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+no,17548,48,women,NA,NA,907,NA,normal,normal,no,no,yes
+yes,17545,48,women,NA,155,NA,1000,normal,normal,no,no,yes
+yes,17537,48,women,NA,NA,NA,1000,above normal,normal,yes,yes,yes
+yes,17537,48,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,17530,48,women,NA,120,NA,NA,above normal,normal,no,no,no
+no,17530,48,women,98,NA,NA,NA,normal,normal,no,no,yes
+yes,17528,48,women,NA,121,NA,NA,normal,normal,no,no,yes
+no,17526,48,women,NA,120,NA,1000,normal,normal,no,no,yes
+yes,17523,48,men,197,NA,NA,NA,normal,normal,no,no,no
+yes,17522,48,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,17522,48,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,17521,48,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,17516,48,men,NA,124,NA,NA,normal,normal,yes,no,yes
+yes,17502,47.9,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,17501,47.9,men,NA,130,NA,NA,normal,normal,no,no,no
+yes,17501,47.9,women,NA,121,NA,NA,normal,normal,no,no,yes
+yes,17499,47.9,men,NA,120,NA,NA,above normal,normal,no,no,yes
+yes,17497,47.9,men,NA,121,NA,NA,normal,above normal,no,no,yes
+yes,17493,47.9,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,17489,47.9,men,NA,NA,NA,1100,normal,above normal,yes,no,yes
+yes,17482,47.9,men,NA,NA,NA,1000,normal,normal,yes,yes,yes
+no,17478,47.9,men,NA,118,NA,NA,normal,above normal,yes,no,yes
+yes,17474,47.8,women,NA,136,NA,NA,normal,normal,yes,no,yes
+yes,17474,47.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,17470,47.8,men,NA,NA,NA,1000,normal,normal,no,yes,yes
+no,17463,47.8,women,NA,124,NA,NA,normal,normal,no,no,yes
+yes,17463,47.8,women,NA,NA,NA,1000,normal,normal,no,no,no
+no,17462,47.8,women,NA,120,NA,NA,normal,well above normal,no,no,yes
+yes,17461,47.8,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,17453,47.8,women,NA,135,NA,NA,normal,normal,no,no,no
+yes,17453,47.8,women,109,NA,NA,NA,well above normal,normal,no,no,yes
+yes,17449,47.8,men,NA,NA,NA,1000,normal,normal,yes,no,yes
+yes,17444,47.8,women,NA,NA,NA,1000,above normal,well above normal,no,no,no
+yes,17442,47.8,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,17440,47.7,women,NA,127,NA,NA,normal,above normal,no,no,yes
+yes,17438,47.7,women,NA,NA,16020,NA,normal,normal,no,no,no
+no,17436,47.7,women,NA,127,NA,NA,normal,normal,yes,no,yes
+yes,17434,47.7,men,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,17429,47.7,men,NA,NA,NA,1000,normal,normal,no,yes,yes
+no,17422,47.7,women,NA,118,NA,NA,normal,normal,no,no,no
+yes,17419,47.7,women,NA,142,NA,NA,normal,normal,no,no,yes
+yes,17418,47.7,men,190,180,NA,NA,above normal,above normal,no,no,yes
+yes,17410,47.7,women,NA,124,NA,NA,well above normal,normal,no,no,yes
+yes,17407,47.7,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,17406,47.7,women,NA,136,NA,NA,normal,normal,no,no,yes
+yes,17405,47.7,men,NA,NA,NA,1100,normal,normal,yes,no,no
+yes,17405,47.7,women,125,167,NA,NA,normal,above normal,no,no,yes
+yes,17403,47.6,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,17396,47.6,women,NA,144,NA,NA,normal,above normal,no,no,no
+yes,17391,47.6,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,17382,47.6,women,NA,NA,NA,1200,above normal,normal,no,no,yes
+yes,17381,47.6,women,NA,120,NA,NA,well above normal,normal,no,no,no
+yes,17377,47.6,women,110,NA,NA,NA,normal,normal,no,no,yes
+yes,17371,47.6,men,NA,NA,NA,1000,well above normal,normal,no,no,no
+no,17371,47.6,men,189,NA,NA,NA,normal,normal,no,no,yes
+no,17359,47.5,women,137,NA,NA,NA,above normal,normal,no,no,yes
+yes,17353,47.5,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,17345,47.5,men,NA,135,NA,NA,normal,normal,no,no,yes
+yes,17339,47.5,men,189,NA,NA,NA,normal,normal,no,no,no
+no,17334,47.5,men,NA,121,NA,NA,above normal,normal,no,no,yes
+yes,17322,47.4,men,NA,122,NA,NA,normal,normal,no,no,yes
+no,17317,47.4,men,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,17315,47.4,women,NA,NA,NA,1100,well above normal,normal,no,no,yes
+yes,17314,47.4,men,NA,NA,NA,1000,well above normal,normal,yes,no,yes
+no,17313,47.4,men,194,NA,NA,NA,normal,normal,no,no,yes
+yes,17312,47.4,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,17309,47.4,women,NA,NA,NA,1000,normal,normal,yes,no,yes
+no,17309,47.4,women,NA,119,NA,NA,well above normal,normal,no,no,yes
+no,17289,47.3,men,NA,NA,NA,1100,normal,normal,yes,yes,yes
+yes,17287,47.3,men,NA,133,NA,NA,normal,normal,no,yes,yes
+yes,17279,47.3,men,190,122,NA,NA,normal,normal,no,no,yes
+yes,17274,47.3,men,NA,130,NA,NA,normal,normal,no,no,no
+yes,17272,47.3,men,NA,31,NA,NA,above normal,above normal,no,no,yes
+yes,17260,47.3,women,NA,134,NA,NA,normal,normal,no,no,yes
+no,17257,47.2,men,NA,NA,NA,1000,well above normal,normal,no,no,yes
+yes,17220,47.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,17218,47.1,men,NA,180,NA,NA,normal,normal,no,no,yes
+no,17088,46.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,17085,46.8,women,NA,120,NA,NA,normal,normal,no,no,no
+yes,17060,46.7,men,NA,NA,NA,1001,above normal,normal,no,no,yes
+no,17015,46.6,men,190,NA,NA,NA,normal,normal,no,no,no
+no,17004,46.6,women,NA,120,NA,NA,above normal,normal,no,no,yes
+no,16970,46.5,men,110,NA,NA,NA,above normal,normal,no,no,yes
+yes,16959,46.4,men,NA,NA,NA,1200,normal,above normal,no,no,yes
+yes,16957,46.4,women,189,NA,NA,NA,normal,normal,no,no,yes
+no,16949,46.4,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,16947,46.4,men,189,NA,NA,NA,normal,normal,yes,no,yes
+yes,16936,46.4,women,NA,NA,NA,1000,normal,normal,no,yes,yes
+yes,16929,46.3,women,NA,NA,1205,NA,normal,normal,no,no,no
+yes,16928,46.3,men,NA,NA,NA,1100,normal,normal,yes,no,yes
+no,16928,46.3,men,110,NA,NA,NA,normal,normal,no,no,yes
+yes,16918,46.3,men,NA,NA,1409,NA,normal,normal,no,no,yes
+yes,16916,46.3,men,NA,124,NA,NA,above normal,normal,yes,yes,yes
+yes,16910,46.3,men,120,NA,NA,NA,normal,well above normal,no,no,yes
+yes,16910,46.3,men,NA,NA,14020,NA,normal,normal,no,no,yes
+no,16905,46.3,men,NA,NA,NA,2088,normal,normal,yes,no,yes
+yes,16900,46.3,women,NA,124,NA,NA,above normal,above normal,no,no,yes
+yes,16895,46.3,women,NA,NA,NA,1100,normal,normal,no,no,no
+yes,16889,46.2,women,NA,NA,NA,1100,normal,normal,no,no,no
+yes,16874,46.2,men,NA,NA,NA,1000,above normal,normal,no,yes,yes
+yes,16867,46.2,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,16863,46.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,16846,46.1,men,NA,124,NA,NA,normal,normal,yes,no,yes
+yes,16844,46.1,men,NA,NA,NA,1110,normal,normal,no,no,yes
+yes,16836,46.1,men,195,NA,NA,NA,well above normal,well above normal,no,no,yes
+yes,16835,46.1,men,NA,121,NA,NA,normal,normal,no,no,yes
+yes,16824,46.1,men,NA,127,NA,NA,above normal,above normal,yes,yes,yes
+yes,16820,46.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,16816,46,men,193,NA,NA,NA,well above normal,normal,yes,no,no
+yes,16813,46,men,NA,NA,NA,1000,well above normal,above normal,no,no,yes
+no,16813,46,women,130,NA,NA,NA,normal,normal,no,no,yes
+no,16809,46,women,NA,120,NA,NA,above normal,above normal,no,no,yes
+yes,16804,46,men,NA,NA,NA,1101,normal,normal,no,no,yes
+yes,16802,46,women,NA,130,NA,NA,normal,normal,no,no,yes
+no,16800,46,men,189,NA,NA,NA,normal,normal,no,no,yes
+yes,16799,46,men,NA,126,NA,NA,normal,normal,no,no,yes
+no,16781,45.9,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,16780,45.9,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,16777,45.9,women,NA,135,NA,NA,above normal,above normal,no,no,no
+yes,16774,45.9,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,16772,45.9,men,NA,125,NA,NA,normal,normal,no,no,yes
+yes,16767,45.9,women,NA,NA,NA,1000,well above normal,normal,no,no,yes
+no,16765,45.9,women,NA,200,NA,NA,normal,normal,no,no,no
+yes,16751,45.9,women,NA,NA,NA,1100,normal,normal,no,no,yes
+no,16749,45.9,men,NA,128,NA,NA,normal,well above normal,no,no,yes
+yes,16748,45.9,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,16741,45.8,women,NA,NA,NA,1022,well above normal,well above normal,no,yes,yes
+yes,16733,45.8,men,NA,128,NA,NA,normal,above normal,no,no,yes
+yes,16727,45.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,16727,45.8,women,NA,119,NA,NA,normal,normal,no,no,yes
+yes,16724,45.8,women,NA,141,NA,NA,above normal,normal,no,no,no
+yes,16722,45.8,men,NA,NA,NA,1100,normal,normal,no,no,yes
+no,16718,45.8,men,NA,169,NA,NA,normal,normal,no,no,yes
+yes,16708,45.7,men,NA,130,NA,NA,above normal,normal,no,no,yes
+no,16702,45.7,men,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+no,16698,45.7,women,NA,NA,NA,1100,normal,normal,no,no,yes
+no,16696,45.7,women,138,NA,NA,NA,normal,normal,no,no,yes
+no,16691,45.7,women,NA,131,NA,NA,well above normal,normal,no,no,yes
+yes,16678,45.7,men,NA,123,NA,NA,normal,normal,no,no,yes
+yes,16678,45.7,women,NA,120,NA,NA,above normal,normal,no,no,yes
+no,16674,45.7,women,NA,NA,906,NA,above normal,normal,no,no,yes
+no,16673,45.6,men,NA,140,NA,NA,above normal,above normal,no,no,yes
+yes,16671,45.6,women,198,NA,NA,NA,above normal,normal,no,yes,yes
+yes,16662,45.6,women,NA,140,NA,NA,normal,above normal,no,no,yes
+yes,16656,45.6,women,136,NA,NA,NA,normal,well above normal,no,no,yes
+yes,16654,45.6,men,191,NA,NA,NA,normal,normal,no,no,yes
+no,16636,45.5,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,16635,45.5,men,NA,142,NA,NA,normal,normal,no,no,yes
+yes,16626,45.5,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,16619,45.5,women,NA,NA,NA,1100,well above normal,well above normal,no,no,no
+yes,16616,45.5,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,16615,45.5,men,196,180,NA,NA,well above normal,normal,no,no,yes
+no,16607,45.5,men,198,NA,NA,NA,normal,normal,no,no,yes
+yes,16598,45.4,men,NA,NA,NA,1100,well above normal,well above normal,no,no,yes
+yes,16592,45.4,men,NA,NA,NA,1100,well above normal,normal,no,yes,yes
+no,16580,45.4,men,NA,NA,NA,1100,normal,normal,no,no,no
+yes,16568,45.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,16557,45.3,men,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,16555,45.3,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,16551,45.3,women,NA,118,NA,NA,above normal,normal,no,no,yes
+yes,16546,45.3,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,16527,45.2,men,NA,NA,NA,1000,normal,normal,yes,yes,yes
+yes,16507,45.2,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+yes,16501,45.2,men,NA,121,NA,NA,above normal,normal,no,no,yes
+yes,16291,44.6,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,16266,44.5,women,NA,129,NA,NA,normal,normal,no,no,yes
+yes,16222,44.4,men,NA,146,NA,1100,normal,normal,yes,no,yes
+yes,16221,44.4,men,NA,120,NA,NA,above normal,normal,no,no,yes
+yes,16221,44.4,men,NA,NA,NA,1000,normal,normal,yes,no,yes
+no,16212,44.4,women,NA,NA,NA,710,normal,normal,no,no,yes
+yes,16212,44.4,women,NA,124,NA,NA,normal,normal,no,no,no
+yes,16195,44.3,men,NA,NA,NA,1000,normal,normal,yes,yes,no
+yes,16178,44.3,men,NA,128,NA,1000,above normal,normal,yes,no,no
+yes,16175,44.3,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,16173,44.3,women,NA,130,NA,NA,well above normal,normal,no,yes,yes
+yes,16168,44.3,women,137,NA,NA,NA,normal,normal,no,no,no
+yes,16164,44.3,women,131,NA,NA,NA,above normal,above normal,no,no,yes
+yes,16160,44.2,men,196,NA,NA,NA,normal,normal,yes,yes,yes
+no,16155,44.2,men,NA,NA,NA,1000,normal,normal,yes,no,no
+yes,16150,44.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,16143,44.2,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,16136,44.2,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,16131,44.2,women,NA,NA,906,NA,above normal,normal,no,no,yes
+yes,16131,44.2,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,16129,44.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,16125,44.1,men,NA,127,NA,NA,normal,above normal,no,no,yes
+yes,16120,44.1,men,NA,NA,NA,1100,above normal,normal,yes,no,yes
+yes,16119,44.1,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,16119,44.1,men,NA,140,NA,1100,normal,well above normal,no,no,yes
+no,16115,44.1,men,NA,129,NA,NA,normal,above normal,no,no,yes
+no,16110,44.1,women,120,NA,NA,NA,normal,normal,no,no,yes
+yes,16109,44.1,women,NA,150,NA,NA,above normal,normal,no,no,yes
+yes,16104,44.1,men,NA,118,NA,NA,well above normal,normal,yes,no,no
+yes,16100,44.1,men,NA,140,NA,NA,normal,normal,no,no,yes
+no,16100,44.1,men,NA,135,NA,NA,normal,normal,yes,no,yes
+yes,16097,44.1,men,NA,124,NA,NA,normal,normal,no,no,yes
+yes,16095,44.1,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,16074,44,men,NA,118,NA,NA,normal,normal,no,no,no
+yes,16072,44,men,198,NA,NA,NA,normal,normal,no,no,yes
+no,16070,44,women,NA,NA,907,NA,normal,normal,no,no,yes
+yes,16058,44,men,NA,150,NA,NA,normal,normal,no,no,yes
+yes,16057,44,men,NA,124,NA,NA,normal,normal,yes,no,no
+no,16052,43.9,women,NA,NA,NA,1008,normal,normal,no,no,yes
+yes,16050,43.9,women,NA,118,NA,NA,normal,normal,no,yes,yes
+no,16050,43.9,men,138,NA,NA,NA,normal,normal,no,no,no
+yes,16046,43.9,men,NA,120,NA,NA,normal,normal,no,no,no
+yes,16043,43.9,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,16037,43.9,women,NA,NA,NA,1000,normal,normal,no,no,no
+no,16036,43.9,women,NA,125,NA,NA,normal,above normal,no,no,no
+yes,16027,43.9,men,NA,122,NA,NA,normal,normal,yes,no,no
+no,16021,43.9,men,NA,NA,NA,1000,normal,above normal,no,no,no
+yes,16015,43.8,men,NA,NA,NA,1000,normal,normal,no,no,no
+yes,16014,43.8,men,NA,138,NA,NA,normal,normal,no,no,yes
+yes,16012,43.8,women,NA,121,NA,1000,normal,normal,no,no,yes
+yes,16010,43.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,16010,43.8,men,NA,141,NA,NA,above normal,above normal,yes,yes,yes
+no,15999,43.8,men,NA,NA,NA,8099,normal,normal,no,no,no
+yes,15996,43.8,women,NA,NA,1500,NA,normal,normal,no,no,yes
+yes,15991,43.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,15989,43.8,men,NA,118,NA,NA,well above normal,above normal,no,no,yes
+yes,15988,43.8,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,15982,43.8,men,NA,125,NA,NA,normal,normal,yes,no,no
+no,15977,43.7,women,NA,128,NA,NA,normal,normal,no,no,yes
+no,15972,43.7,men,189,NA,NA,NA,normal,normal,yes,no,yes
+yes,15962,43.7,women,NA,125,NA,NA,above normal,well above normal,no,no,yes
+no,15958,43.7,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,15954,43.7,women,NA,119,NA,NA,normal,normal,no,no,yes
+yes,15947,43.7,women,NA,NA,NA,1000,above normal,normal,no,no,no
+yes,15947,43.7,women,NA,NA,NA,1139,normal,above normal,no,no,yes
+no,15947,43.7,women,NA,135,NA,NA,above normal,normal,no,no,yes
+no,15946,43.7,women,138,NA,NA,NA,normal,normal,no,no,yes
+yes,15942,43.6,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,15937,43.6,men,NA,154,NA,NA,normal,normal,yes,no,yes
+yes,15935,43.6,men,189,NA,NA,NA,normal,normal,no,no,yes
+yes,15912,43.6,women,NA,NA,NA,1100,above normal,normal,no,no,yes
+yes,15906,43.5,women,NA,NA,NA,1001,above normal,normal,no,no,yes
+yes,15903,43.5,men,191,NA,NA,NA,normal,normal,yes,yes,yes
+no,15896,43.5,women,NA,128,NA,NA,normal,normal,no,no,yes
+no,15889,43.5,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,15889,43.5,men,NA,125,NA,NA,above normal,normal,yes,no,yes
+yes,15886,43.5,men,NA,130,NA,NA,normal,normal,yes,no,yes
+yes,15883,43.5,men,NA,130,NA,NA,above normal,normal,no,no,no
+yes,15882,43.5,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,15871,43.5,women,NA,NA,NA,1400,normal,normal,no,no,yes
+no,15868,43.4,women,137,NA,NA,NA,normal,normal,no,no,yes
+no,15859,43.4,women,120,NA,NA,NA,normal,normal,no,no,yes
+yes,15858,43.4,women,NA,123,NA,NA,normal,normal,no,no,yes
+yes,15857,43.4,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,15856,43.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,15855,43.4,women,NA,150,NA,NA,normal,normal,no,no,yes
+yes,15851,43.4,men,192,NA,NA,NA,normal,normal,no,no,yes
+yes,15848,43.4,men,NA,119,NA,NA,normal,normal,no,no,yes
+yes,15846,43.4,men,NA,NA,NA,1000,above normal,above normal,no,no,yes
+yes,15835,43.4,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,15835,43.4,men,NA,NA,14020,NA,above normal,normal,no,no,yes
+no,15812,43.3,women,70,NA,NA,NA,normal,normal,no,no,no
+yes,15811,43.3,men,193,120,NA,NA,well above normal,above normal,no,no,yes
+yes,15803,43.3,women,NA,NA,NA,1110,normal,normal,no,no,no
+yes,15791,43.2,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,15789,43.2,men,NA,132,NA,NA,well above normal,normal,no,no,yes
+yes,15786,43.2,men,NA,144,NA,NA,normal,normal,no,no,no
+yes,15783,43.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,15767,43.2,men,NA,123,NA,NA,normal,normal,no,no,yes
+yes,15757,43.1,women,NA,NA,NA,1000,well above normal,above normal,no,no,yes
+yes,15581,42.7,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,15561,42.6,men,NA,119,NA,NA,normal,normal,no,no,yes
+yes,15526,42.5,men,NA,171,NA,NA,normal,normal,no,no,yes
+yes,15513,42.5,women,NA,122,NA,NA,above normal,above normal,no,no,yes
+yes,15509,42.5,men,NA,NA,NA,1100,above normal,normal,no,yes,yes
+no,15505,42.5,men,NA,165,NA,NA,normal,above normal,no,yes,yes
+yes,15477,42.4,men,NA,NA,NA,1000,above normal,normal,yes,yes,no
+no,15476,42.4,men,189,NA,NA,NA,normal,well above normal,no,no,yes
+yes,15476,42.4,men,191,NA,NA,NA,above normal,normal,yes,no,yes
+yes,15463,42.3,men,189,NA,NA,NA,normal,normal,no,no,no
+yes,15457,42.3,men,NA,125,NA,NA,above normal,above normal,no,no,yes
+no,15432,42.3,men,70,NA,NA,NA,normal,normal,no,no,no
+yes,15421,42.2,women,NA,163,NA,NA,normal,normal,no,no,yes
+yes,15421,42.2,men,NA,NA,NA,1000,normal,normal,no,no,no
+no,15420,42.2,women,NA,125,NA,NA,normal,normal,no,no,no
+no,15409,42.2,women,NA,125,NA,NA,above normal,normal,no,no,yes
+no,15407,42.2,women,NA,125,NA,NA,normal,normal,no,no,no
+no,15406,42.2,women,NA,121.8,NA,NA,normal,normal,no,no,yes
+no,15400,42.2,women,120,30,NA,NA,normal,normal,no,no,yes
+yes,15400,42.2,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,15385,42.1,women,NA,121,NA,NA,above normal,above normal,no,no,yes
+yes,15384,42.1,men,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,15377,42.1,men,191,NA,NA,NA,above normal,normal,no,no,yes
+yes,15374,42.1,women,72,NA,NA,NA,normal,normal,no,no,yes
+yes,15368,42.1,women,NA,119,NA,NA,normal,normal,no,no,yes
+yes,15351,42,women,NA,NA,NA,1110,normal,above normal,no,no,yes
+yes,15348,42,men,NA,NA,NA,1000,well above normal,above normal,no,yes,yes
+no,15347,42,women,NA,127,NA,NA,normal,normal,no,no,no
+no,15339,42,women,120,NA,NA,NA,normal,normal,no,no,yes
+no,15330,42,men,NA,NA,NA,1000,normal,normal,no,yes,yes
+yes,15314,41.9,men,NA,120,NA,NA,above normal,above normal,yes,yes,yes
+no,15314,41.9,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,15314,41.9,women,NA,130,NA,NA,above normal,normal,no,no,yes
+yes,15303,41.9,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,15298,41.9,women,NA,128,NA,NA,well above normal,normal,no,no,yes
+yes,15292,41.9,women,80,178,NA,NA,well above normal,well above normal,no,no,yes
+yes,15285,41.8,women,189,NA,NA,NA,normal,normal,no,no,no
+yes,15283,41.8,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,15281,41.8,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,15272,41.8,men,NA,NA,NA,8000,normal,normal,no,no,no
+no,15262,41.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,15259,41.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,15252,41.8,men,NA,NA,NA,1000,normal,normal,yes,no,yes
+yes,15252,41.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,15251,41.8,men,190,NA,NA,NA,normal,normal,no,no,yes
+no,15250,41.8,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,15243,41.7,women,NA,NA,NA,1000,well above normal,well above normal,no,no,yes
+no,15238,41.7,men,190,NA,NA,NA,above normal,well above normal,yes,no,yes
+yes,15236,41.7,men,NA,127,NA,NA,well above normal,normal,no,no,no
+yes,15226,41.7,women,NA,NA,NA,1033,normal,normal,no,no,yes
+yes,15222,41.7,men,NA,127,NA,NA,normal,normal,no,yes,yes
+yes,15220,41.7,men,195,NA,NA,NA,normal,normal,no,no,yes
+no,15214,41.7,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,15211,41.6,women,NA,NA,NA,1000,normal,normal,no,yes,yes
+yes,15199,41.6,men,NA,NA,NA,1000,above normal,above normal,no,no,yes
+no,15199,41.6,men,NA,127,NA,NA,normal,normal,yes,no,yes
+yes,15189,41.6,women,NA,NA,NA,1100,normal,normal,no,no,yes
+yes,15178,41.6,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,15175,41.5,women,NA,145,NA,NA,well above normal,well above normal,no,yes,yes
+yes,15164,41.5,men,NA,NA,NA,1100,normal,normal,no,no,yes
+no,15133,41.4,men,NA,NA,NA,1000,above normal,normal,no,no,yes
+no,15133,41.4,men,189,NA,NA,NA,normal,above normal,no,no,no
+yes,15130,41.4,men,NA,126,NA,NA,normal,normal,yes,yes,yes
+yes,15129,41.4,women,NA,NA,NA,1000,above normal,normal,yes,no,yes
+no,15126,41.4,men,NA,125,NA,NA,normal,normal,yes,no,no
+yes,15117,41.4,men,NA,200,NA,NA,normal,normal,no,no,yes
+no,15116,41.4,women,NA,NA,902,NA,normal,normal,no,no,yes
+yes,15115,41.4,women,NA,NA,NA,1100,well above normal,normal,no,no,yes
+yes,15115,41.4,men,NA,120,NA,NA,normal,normal,no,no,yes
+no,15109,41.4,women,NA,NA,NA,1000,normal,above normal,yes,no,yes
+yes,15107,41.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,15106,41.4,women,NA,118,NA,NA,normal,normal,no,no,yes
+yes,15104,41.4,men,NA,125,NA,NA,above normal,normal,no,no,yes
+yes,15100,41.3,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,15086,41.3,men,190,165,NA,NA,normal,normal,no,no,no
+no,15075,41.3,women,NA,122,NA,NA,normal,normal,no,no,no
+no,15058,41.2,women,NA,120,NA,NA,above normal,normal,no,no,yes
+yes,15056,41.2,men,NA,119,NA,NA,well above normal,well above normal,no,no,no
+no,15036,41.2,women,NA,120,NA,NA,normal,normal,no,no,yes
+no,15001,41.1,men,NA,NA,NA,1100,above normal,normal,yes,yes,no
+yes,14884,40.8,men,NA,124,NA,NA,normal,normal,no,no,no
+yes,14863,40.7,women,NA,NA,NA,1000,above normal,normal,no,no,yes
+yes,14852,40.7,men,NA,NA,NA,1000,normal,normal,yes,yes,yes
+yes,14848,40.7,men,NA,127,NA,NA,above normal,normal,yes,no,yes
+yes,14806,40.5,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,14738,40.4,women,NA,120,NA,NA,normal,normal,no,no,yes
+no,14732,40.3,women,135,NA,NA,NA,normal,normal,no,no,yes
+no,14729,40.3,men,NA,164,NA,NA,above normal,well above normal,no,no,yes
+yes,14720,40.3,men,NA,139,NA,NA,normal,above normal,no,no,yes
+yes,14707,40.3,women,NA,NA,NA,1100,normal,normal,no,no,yes
+no,14705,40.3,women,NA,125,NA,NA,normal,normal,no,no,no
+no,14697,40.2,women,NA,165,NA,NA,normal,normal,no,no,yes
+yes,14696,40.2,men,NA,130,NA,NA,normal,normal,no,no,yes
+yes,14696,40.2,women,NA,NA,2000,NA,above normal,normal,no,no,yes
+no,14680,40.2,men,NA,152,NA,NA,above normal,above normal,no,no,yes
+yes,14680,40.2,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,14680,40.2,men,100,NA,NA,NA,normal,normal,no,no,yes
+no,14675,40.2,women,NA,119,NA,NA,above normal,above normal,no,no,yes
+yes,14674,40.2,women,NA,NA,NA,1000,above normal,above normal,no,no,yes
+no,14672,40.2,men,NA,121,NA,NA,normal,normal,no,no,yes
+yes,14671,40.2,women,NA,131,NA,NA,normal,normal,no,no,yes
+yes,14670,40.2,women,NA,120,NA,NA,normal,normal,no,no,yes
+yes,14665,40.2,women,NA,130,NA,NA,normal,normal,no,no,yes
+no,14664,40.1,men,128,28,NA,NA,normal,normal,no,no,yes
+no,14661,40.1,men,70,NA,NA,NA,normal,normal,no,no,yes
+yes,14661,40.1,men,NA,NA,NA,1000,above normal,normal,no,no,no
+yes,14658,40.1,women,NA,135,NA,NA,above normal,normal,no,no,yes
+yes,14655,40.1,men,NA,120,NA,NA,normal,normal,no,no,yes
+no,14638,40.1,men,NA,119,NA,NA,well above normal,normal,no,no,yes
+yes,14636,40.1,men,NA,144,NA,NA,normal,normal,yes,yes,no
+no,14626,40,men,189,NA,NA,NA,normal,normal,no,no,yes
+yes,14623,40,women,NA,120,NA,NA,normal,normal,no,no,yes
+no,14618,40,men,120,NA,NA,NA,normal,normal,no,no,yes
+yes,14614,40,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,14613,40,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,14613,40,women,NA,140,NA,NA,well above normal,normal,yes,no,yes
+yes,14606,40,women,108,NA,NA,NA,normal,normal,no,no,yes
+yes,14599,40,men,NA,125,NA,NA,normal,normal,no,no,yes
+no,14595,40,men,NA,NA,NA,820,normal,normal,no,no,no
+no,14595,40,women,120,NA,NA,NA,above normal,normal,no,no,yes
+no,14585,39.9,women,NA,159,NA,NA,normal,normal,no,no,yes
+no,14582,39.9,women,133,NA,NA,NA,normal,normal,no,no,no
+yes,14581,39.9,men,NA,123,NA,NA,above normal,normal,no,no,yes
+no,14579,39.9,women,137,NA,NA,NA,normal,normal,no,no,no
+no,14575,39.9,women,NA,122,NA,NA,normal,well above normal,no,no,yes
+yes,14550,39.8,men,NA,NA,NA,1000,above normal,normal,yes,no,yes
+yes,14546,39.8,women,120,NA,NA,NA,normal,normal,no,no,no
+no,14545,39.8,men,NA,NA,NA,708,normal,above normal,yes,yes,yes
+yes,14543,39.8,men,NA,120,NA,NA,normal,normal,no,no,no
+yes,14539,39.8,women,NA,130,NA,NA,above normal,normal,yes,no,yes
+no,14538,39.8,women,68,NA,NA,NA,normal,normal,no,no,no
+yes,14530,39.8,men,NA,170,NA,NA,normal,normal,yes,no,yes
+yes,14521,39.8,women,130,NA,NA,NA,normal,well above normal,no,yes,yes
+yes,14520,39.8,women,NA,127,NA,1100,normal,above normal,yes,no,yes
+no,14520,39.8,women,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,14518,39.7,men,190,NA,NA,NA,above normal,normal,yes,no,yes
+no,14516,39.7,women,100,NA,NA,NA,normal,normal,no,no,yes
+no,14508,39.7,men,NA,NA,NA,8500,normal,normal,no,no,yes
+yes,14508,39.7,men,NA,130,NA,NA,above normal,normal,yes,no,no
+yes,14502,39.7,men,NA,NA,NA,1000,normal,normal,no,no,yes
+yes,14502,39.7,men,189,NA,NA,NA,well above normal,well above normal,no,no,yes
+no,14499,39.7,men,67,NA,NA,NA,normal,normal,yes,yes,yes
+no,14498,39.7,men,193,NA,NA,NA,normal,normal,yes,yes,no
+yes,14496,39.7,men,NA,NA,NA,1100,well above normal,normal,no,no,yes
+yes,14490,39.7,women,NA,132,NA,NA,normal,normal,no,no,yes
+yes,14479,39.6,women,NA,119,NA,NA,normal,normal,no,no,yes
+yes,14473,39.6,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,14465,39.6,men,NA,131,NA,NA,above normal,normal,no,no,yes
+yes,14461,39.6,men,NA,120,NA,NA,above normal,normal,yes,no,yes
+yes,14446,39.6,women,NA,NA,NA,1000,above normal,normal,no,yes,no
+no,14445,39.5,men,120,NA,NA,NA,normal,normal,no,no,no
+yes,14441,39.5,women,NA,166,NA,NA,normal,normal,no,no,yes
+no,14435,39.5,women,NA,130,NA,NA,normal,normal,no,no,yes
+no,14425,39.5,women,NA,NA,909,NA,above normal,normal,no,no,yes
+no,14410,39.5,men,NA,130,NA,NA,normal,above normal,yes,yes,yes
+no,14408,39.4,men,NA,123,NA,NA,above normal,normal,no,no,yes
+yes,14400,39.4,women,NA,NA,NA,1000,normal,normal,no,no,yes
+no,14396,39.4,women,133,NA,NA,NA,normal,normal,no,no,yes
+no,14375,39.4,men,NA,140,NA,NA,normal,normal,no,no,yes
+no,14374,39.4,women,137,NA,NA,NA,normal,normal,no,no,yes
+yes,14370,39.3,men,189,NA,NA,NA,normal,normal,no,no,no
+yes,14369,39.3,men,NA,NA,NA,1100,normal,normal,no,no,no
+no,14369,39.3,women,NA,130,NA,NA,well above normal,normal,no,no,yes
+no,14353,39.3,women,NA,122,NA,NA,normal,normal,no,yes,yes
+yes,14333,39.2,women,NA,133,NA,NA,well above normal,well above normal,no,no,no
+yes,14324,39.2,women,NA,NA,NA,1000,normal,normal,no,no,no
+yes,14307,39.2,women,NA,NA,NA,802,normal,normal,no,no,no
+yes,14297,39.1,men,NA,NA,NA,1000,normal,normal,no,no,yes
+no,14296,39.1,men,NA,141,NA,NA,normal,normal,yes,yes,yes
