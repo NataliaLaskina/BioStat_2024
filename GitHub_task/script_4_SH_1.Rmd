@@ -1,0 +1,90 @@
+---
+title: "Statistical hypothesis testing (part 1)"
+author: "Evgeny Bakin"
+date: '2024-10-19'
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+
+```
+
+## Эксперимент №2 из предыдущей лекции: Можно ли доверять доверительному интервалу?
+
+```{r exp_2, echo=FALSE, fig.height=15}
+
+num_centers <- 1000 # Сколько центров поучаствует в эксперименте?
+
+sample_size <- 300 # Количество пациентов, прошедших, терапию
+True_Hg_improve <- 0 # Истинное среднее изменение гемоглобина
+Hg_sd <- 6 # Разброс в улучшении Hg
+
+H0_Hg_improve <- 0 # Наша нулевая гипотеза
+
+df_trial <- data.frame(
+  center_ID = rep(1:num_centers, each = sample_size),
+  patient_ID = rep(1:sample_size, num_centers),
+  Hg_change = rnorm(sample_size*num_centers, mean = True_Hg_improve, sd = Hg_sd)
+)
+
+trial_results <- df_trial %>% 
+  group_by(center_ID) %>% 
+  do(broom::tidy(t.test(Hg_change ~ 1, conf.level = 0.95, data = .))) %>% 
+  dplyr::select(estimate, conf.low, conf.high) %>% 
+  mutate(CI_width = conf.high - conf.low) %>% 
+  mutate(out = ifelse((H0_Hg_improve < conf.high) & (H0_Hg_improve > conf.low), 'Fail to reject H0', 'Reject H0'))
+
+table(trial_results$out)
+
+# - Как зависит ошибка первого рода от размера выборки и вариативности признака?
+# - Что произойдет, если мы нарушим H0?
+# - От чего зависит величина ошибки II рода?
+
+```
+
+## Визуализация
+
+```{r exp_2_viz, echo=FALSE, fig.height=15}
+
+ggplot(trial_results, aes(y = center_ID)) +
+  geom_errorbar(mapping = aes(xmin = conf.low, xmax = conf.high, color = out), size = 2) +
+  geom_vline(xintercept=H0_Hg_improve, linetype="dashed", 
+                color = "black", size=2) +
+  theme_bw() +
+  theme(text = element_text(size = 30))  
+
+
+```
+
+## Эксперимент №3 из предыдущей лекции: Точно можно доверять?
+
+```{r exp_3, echo=FALSE}
+
+num_centers <- 1000 # Сколько центров поучаствует в эксперименте?
+
+sample_size <- 10 # Количество пациентов, прошедших, терапию
+True_avg_recovery_time <- 20 # Истинное среднее время до выздоровления (в ГЕНЕРАЛЬНОЙ СОВОКУПНОСТИ)
+
+H0_avg_recovery_time  <- 20 # Наша нулевая гипотеза (исторический контроль)
+
+df_trial <- data.frame(
+  center_ID = rep(1:num_centers, each = sample_size),
+  patient_ID = rep(1:sample_size, num_centers),
+  recovery_time = rexp(sample_size*num_centers, rate = 1/True_avg_recovery_time) 
+)
+
+trial_results <- df_trial %>% 
+  group_by(center_ID) %>% 
+  do(broom::tidy(t.test(recovery_time ~ 1, conf.level = 0.95, data = .))) %>% 
+  dplyr::select(estimate, conf.low, conf.high) %>% 
+  mutate(CI_width = conf.high - conf.low) %>% 
+  mutate(out = ifelse((H0_avg_recovery_time < conf.high) & (H0_avg_recovery_time > conf.low), 'Fail to reject H0', 'Reject H0'))
+
+table(trial_results$out)
+
+# - Как зависит ошибка первого рода от размера выборки?
+
+```

@@ -1,0 +1,594 @@
+---
+title: "BI_basic_datavis_tasks_2_2024"
+author: "NataliaLaskina"
+date: "2024-10-16"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = FALSE, fig.width=16, fig.height=10)
+
+library(tidyverse)
+library(ggpubr)
+library(gridExtra)
+```
+
+## Загрузка данных
+
+```{r}
+
+hogwarts <- read_csv("data/hogwarts_2024.csv")
+hogwarts |> head()
+
+```
+
+### Проверка структуры данных
+
+```{r}
+
+hogwarts |> glimpse()
+
+# Changing some variables type to factors
+hogwarts <- hogwarts |> mutate(
+  across(c(house, course, sex, wandCore, bloodStatus), ~ as.factor(.x))
+)
+
+```
+
+### Поиск пропущенных значений
+
+```{r}
+sum(is.na(hogwarts))
+```
+
+### Сводка по данным
+
+```{r}
+hogwarts |> summary()
+```
+
+### Пересоздание theme_custom
+
+```{r}
+
+theme_custom <- theme(
+    panel.background = element_rect(fill = "white"),
+    plot.title = element_text(size = 30, hjust = 0.5),
+    plot.subtitle = element_text(size = 25, hjust = 0.5),
+    strip.text = element_text(size = 20),
+    axis.text = element_text(size = 20),
+    axis.title = element_text(size = 25),
+    legend.title = element_text(size = 25),
+    legend.text = element_text(size = 20)
+  )
+
+```
+
+## Визуализация
+
+### Диаграммы рассеяния (скаттерплоты)
+
+#### Первый скаттерплот
+
+Постройте скаттерплот, визуализирующий связь между суммарным баллом студента за год и оценкой за экзамен по травологии. Добавьте на график линию тренда. Удалите доверительную область и сделайте линию прямой. Подумайте, как избежать того, чтобы записать одни и те же координаты x и y дважды. Проинтерпретируйте график.
+
+```{r}
+
+scatterplot_0 <- hogwarts |> 
+  ggplot(aes(x = `result`, 
+                 y = `Herbology exam`))+
+  geom_point(shape = 21, 
+             size = 3, color = "blue", fill = "lightgreen", stroke = 1.5)+
+  geom_smooth(se = FALSE,
+              color = "red",
+              method = "lm",
+              linetype = "dashed", 
+              linewidth = 3)+
+  xlab(label = "Year_score")+
+  theme_custom
+
+scatterplot_0
+```
+
+Интерпретация. Оценка за экзамен по травологии имеет положительную корреляцию с суммарным баллом студента за год: чем выше оценка за экзамен, тем выше и годовой балл. Остается только гадать, это студенты с высокой успеваемостью показывают хорошие результаты по всем направлениям, включая травологию (что, конечно логичнее всего, но скучно). Или это студенты со склонностью к изучению растений, уходу за ними, и прочих умиротворяющих и кропотливых занятиях, с этим связанных, демонстрируют большую усидчивость, терпеливость, а главное, спокойный и неконфликтный характер и высокую дисциплину, что отражается на общей годовой оценке. Довольно сложно попадать в неприятности и получать за это штрафные баллы, когда проводишь свое время в мирном копании в грядках.
+
+#### Второй скаттерплот
+
+Отобразите на одной иллюстрации скаттерплоты, аналогичные тому, что вы делали на первом задании, для экзаменов по травологии, магловедению, прорицаниям и зельеварению. На иллюстрации также должна присутствовать линия тренда с характеристиками, аналогичными тем, что были в пункте 1. Раскрасьте точки в разные цвета, в соответствии с факультетами. Используйте стандартные цвета факультетов (как в лекционных rmd). Проинтерпретируйте полученный результат.
+
+```{r}
+theme_custom_2 <- theme(
+    panel.background = element_rect(fill = "white"),
+    plot.title = element_text(size = 30, hjust = 0.5),
+    plot.subtitle = element_text(size = 25, hjust = 0.5),
+    strip.text = element_text(size = 20),
+    axis.text = element_text(size = 15),
+    axis.title = element_text(size = 17),
+    legend.title = element_text(size = 20),
+    legend.text = element_text(size = 18)
+  )
+
+scatterplot_1 <- hogwarts |> 
+  ggplot(aes(x = `result`, 
+                 y = `Herbology exam`))+
+  geom_point(aes(fill = house), shape = 21, 
+             size = 3, stroke = 1,  position = position_jitter(width = 2, height = 2))+
+  geom_smooth(se = FALSE,
+              color = "red",
+              method = "lm",
+              linetype = "dashed", 
+              linewidth = 2.5)+
+  scale_fill_manual(values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25"),
+                    guide = guide_legend(override.aes = list(size = 5, alpha = 1)))+
+  theme(axis.title.x = element_blank(), 
+        axis.text.x = element_blank(), 
+        axis.ticks.x = element_blank())+
+  theme_custom_2
+
+scatterplot_2 <- hogwarts |> 
+  ggplot(aes(x = `result`, 
+                 y = `Muggle studies exam`))+
+  geom_point(aes(fill = house), shape = 21, 
+             size = 3, stroke = 1,  position = position_jitter(width = 2, height = 2))+
+  geom_smooth(se = FALSE,
+              color = "red",
+              method = "lm",
+              linetype = "dashed", 
+              linewidth = 2.5)+
+  scale_fill_manual(values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25"))+
+  theme(axis.title.x = element_blank(), 
+        axis.text.x = element_blank(), 
+        axis.ticks.x = element_blank())+
+  theme_custom_2
+
+scatterplot_3 <- hogwarts |> 
+  ggplot(aes(x = `result`, 
+                 y = `Charms exam`))+
+  geom_point(aes(fill = house), shape = 21, 
+             size = 3, stroke = 1,  position = position_jitter(width = 2, height = 2))+
+  geom_smooth(se = FALSE,
+              color = "red",
+              method = "lm",
+              linetype = "dashed", 
+              linewidth = 2.5)+
+  scale_fill_manual(values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25"))+
+  theme(axis.title.x = element_blank(), 
+        axis.text.x = element_blank(), 
+        axis.ticks.x = element_blank())+
+  theme_custom_2
+
+scatterplot_4 <- hogwarts |> 
+  ggplot(aes(x = `result`, 
+                 y = `Potions exam`))+
+  geom_point(aes(fill = house), shape = 21, 
+             size = 3, stroke = 1)+
+  geom_smooth(se = FALSE,
+              color = "red",
+              method = "lm",
+              linetype = "dashed", 
+              linewidth = 2.5)+
+  xlab(label = "Year_score")+
+ scale_fill_manual(values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25"))+
+  theme_custom_2
+
+
+ggarrange(plotlist = list(scatterplot_1, scatterplot_2, scatterplot_3, scatterplot_4), nrow = 4, common.legend = TRUE, heights = c(1, 1, 1, 1.2))
+```
+
+Интерпретация. Похоже на то, что по результатам всех экзаменов, кроме зельеварения, их оценка положительно скоррелирована с годовым баллом. Это кажется логичным - отличники успевают по всем предметам, и зарабатывают много очков в течение года, и наоборот. Экзамен по зельеварению единственный выбивается из этой картины, да и расположение точек - цветов факультета наводит на определенные мысли. Выделим-ка мы линии тренда отдельно для каждого факультета.
+
+#### Третий скаттерплот
+
+Видоизмените график, полученный на предыдущем шаге. Сгруппируйте и покрасьте линии тренда в соответствии с одной из категориальных переменных (с такой, которая подсвечивает одно из наблюдений на предыдущем этапе, относящееся ко всем 4-м экзаменам). Постарайтесь избежать коллизий в легенде, при этом сохранив и цветовую палитру для раскраски точек по факультетам.
+
+```{r}
+
+scatterplot_5 <- hogwarts |> 
+  ggplot(aes(x = `result`, 
+                 y = `Herbology exam`))+
+  geom_point(aes(fill = house), shape = 21, 
+             size = 2, stroke = 1, alpha = 0.7, position = position_jitter(width = 2, height = 2))+
+  geom_smooth(aes(color = house),
+              se = FALSE,
+              method = "lm",
+              linetype = "dashed", 
+              linewidth = 2.5, show.legend = FALSE)+
+   scale_color_manual(values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25"))+
+  scale_fill_manual(values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25"),
+                     guide = guide_legend(override.aes = list(size = 5, alpha = 1)))+
+  theme(axis.title.x = element_blank(), 
+        axis.text.x = element_blank(), 
+        axis.ticks.x = element_blank())+
+  theme_custom_2
+
+scatterplot_6 <- hogwarts |> 
+  ggplot(aes(x = `result`, 
+                 y = `Muggle studies exam`))+
+  geom_point(aes(fill = house), shape = 21, 
+             size = 2, stroke = 1, alpha = 0.7, position = position_jitter(width = 2, height = 2))+
+  geom_smooth(aes(color = house),
+               se = FALSE,
+              method = "lm",
+              linetype = "dashed", 
+              linewidth = 2.5, show.legend = FALSE)+
+   scale_color_manual(values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25"))+
+  scale_fill_manual(values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25"))+
+  theme(axis.title.x = element_blank(), 
+        axis.text.x = element_blank(), 
+        axis.ticks.x = element_blank())+
+  theme_custom_2
+
+scatterplot_7 <- hogwarts |> 
+  ggplot(aes(x = `result`, 
+                 y = `Charms exam`))+
+  geom_point(aes(fill = house), shape = 21, 
+             size = 2, stroke = 1, alpha = 0.7, position = position_jitter(width = 2, height = 2))+
+  geom_smooth(aes(color = house),
+              se = FALSE,
+              method = "lm",
+              linetype = "dashed", 
+              linewidth = 2.5, show.legend = FALSE)+
+  scale_color_manual(values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25"))+
+  theme(axis.title.x = element_blank(), 
+        axis.text.x = element_blank(), 
+        axis.ticks.x = element_blank())+
+  scale_fill_manual(values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25"))+
+  theme_custom_2
+
+scatterplot_8 <- hogwarts |> 
+  ggplot(aes(x = `result`, 
+                 y = `Potions exam`))+
+  geom_point(aes(fill = house), shape = 21, 
+             size = 2, stroke = 1, alpha = 0.7)+
+  geom_smooth(aes(color = house),
+              se = FALSE,
+              method = "lm",
+              linetype = "dashed", 
+              linewidth = 2.5, show.legend = FALSE)+
+   scale_color_manual(values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25"))+
+  xlab(label = "Year_score")+
+ scale_fill_manual(values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25"))+
+  theme_custom_2
+
+
+ggarrange(plotlist = list(scatterplot_5, scatterplot_6, scatterplot_7, scatterplot_8), nrow = 4, common.legend = TRUE, heights = c(1, 1, 1, 1.2))
+
+```
+
+Интерпретация. Подозрения подтвердились - если по остальным предметам оценки студентов всех факультетов одинаково положительно скоррелированы с годовым баллом, то по зельеварению только студенты факультета Слизерин получают стабильно высокий балл, вне зависимости от годовой оценки, в то время, как все остальные факультеты получают балл стабильно низкий, опять же вне зависимости от годового балла. Обращает на себя внимание и то, что экстремально низкие значения набранных баллов за год показывают также исключительно студенты факультета Слизерин. Судя по всему, настало время пригласить на воспитательную беседу декана факультета Слизерин (он же профессор зельеварения), и заняться подробнее вопросом, как построено обучение, система мотиваций за достижения и санкций за нарушения порядка и учебного процесса на факультете Слизерин.
+
+### Столбчатые диаграммы
+
+#### Первый барплот
+
+Постройте барплот (столбиковую диаграмму) распределения набранных баллов за первый семестр (с 1-й по 17-ю неделю включительно) у студентов разного происхождения. Если у вас возникают трудности, можете обратиться к шпаргалке по dplyr от posit. Выдвиньте гипотезу (или гипотезы), почему распределение получилось именно таким.
+
+```{r}
+
+semester_scores <- hogwarts |> 
+  group_by(bloodStatus) |>
+  summarise(
+    first_semester_score = sum(c_across(week_1:week_17))
+  )
+
+barplot_1 <- ggplot(semester_scores) +
+  geom_col(aes(x = fct_reorder(bloodStatus, first_semester_score, .desc = TRUE),
+               y = first_semester_score,
+               fill = bloodStatus))+
+  scale_fill_manual(values = c("half-blood" = "#C50000", 
+                             "muggle-born" = "#ECB939", 
+                             "pure-blood" = "#41A6D9"))+
+   xlab(label = "bloodStatus")+
+  theme_custom
+
+barplot_1
+
+```
+
+Интерпретация. Самый высокий результат за первый семестр обучения продемонстрировали студенты со статусом "полукровок", самый низкий - со статусом "маглорожденных", "чистокровные" продемонстрировали средний результат. Если забыть об общем числе студентов с тем или иным происхождением, то можно предположить, что "полукровки" знают об своем дискриминизированном положении, и проявляют особое старание в учебе, чтобы укрепить свое положение в сообществе, в то время как "чистокровные" ощущают себя в привилегированном статусе и особого усердия не проявляют. Невысокие успехи "маглорожденных" в первом семестре, вероятно, связаны с тем, что эта категория студентов впервые столкнулась с миром волшебников и магии с поступлением в школу Хогвартс, и им нужно больше времени и на адаптацию в начале обучения, и на возвращение к реалиям школы магии и волшебства после каникул, проведенных в мире маглов.
+
+Более банальное объяснение результатов - полукровок в школе просто больше всего, а маглорожденных - меньше всего, чем и объясняется соответствующий пропорционально вклад каждой из этих групп в колчество набранных баллов.
+
+#### Второй барплот
+
+Модифицируйте предыдущий график – отсортируйте столбцы в порядке убывания суммы баллов. Добавьте на график текстовые метки, отражающие число студентов каждого происхождения. Попробуйте использовать для этой задачи не geom_text, а geom_label. Настройте внешний вид geom_label по своему усмотрению. Поправьте название оси. Проинтерпретируйте график. Соотносится ли интерпретация с вашей гипотезой из пункта 1?
+
+```{r}
+
+students_status <- hogwarts |> 
+  group_by(bloodStatus) |>
+  summarise(count = n())
+
+
+barplot_2 <- barplot_1 +
+  geom_label(data = students_status, aes(x = bloodStatus, y = 1000, label = paste0(count, " students"), fill = NULL), color = "black", size = 8)+
+  guides(fill = guide_legend(override.aes = list(label = "")))
+
+barplot_2
+
+```
+
+Интерпретация. Количество набранных баллов за семестр (любой) напрямую связано с количеством студентов в той или иной категории происхождения, а не с самой категорией. Где больше студентов - там и больше набранных баллов. Интерпретация соотносится со вторым, скучным объяснением графика из пункта 1.
+
+#### Третий барплот
+
+И снова измените график – добавьте на него разбивку не только по происхождению, но и по полу. Раскрасьте столбцы по происхождению. Сделайте подписи к столбцам читаемыми. Дайте графику название,измените, если требуется,название осей. Сделайте шаг для оси, на которой отображены очки, через каждую тысячу баллов. Разместите текстовые метки по правому краю графика. Настройте график таким образом, чтобы метки были видны целиком и не обрезались. Сохраните график на устройство.
+
+```{r}
+semester_scores_2 <- hogwarts |> 
+  group_by(bloodStatus, sex) |>
+  summarise(first_semester_score = sum(c_across(week_1:week_17)))|>
+    mutate(`bloodStatus and sex` = paste0(bloodStatus, " & ", sex))
+  
+
+
+
+barplot_3 <- ggplot(semester_scores_2)+
+  geom_col(aes(y = fct_reorder(`bloodStatus and sex`, first_semester_score, .desc = FALSE), 
+               x = first_semester_score,
+               fill = bloodStatus))+
+  labs(title = "Распределение баллов за первый семестр\nв зависимости от происхождения и пола",
+       x = "Баллы за первый семестр",
+       y = "Происхождение и пол",
+       fill = "Происхождение")+
+  scale_fill_manual(labels = c("half-blood" = "Полукровка",
+                               "muggle-born" = "Маглорожденный",
+                               "pure-blood" = "Чистокровный"),
+                    values = c("half-blood" = "#C50000", 
+                             "muggle-born" = "#ECB939", 
+                             "pure-blood" = "#41A6D9")
+
+                    )+
+  scale_x_continuous(limits = c(-50, 11000), breaks = seq(0, 8000, by = 1000))+
+   geom_text(aes(y = fct_reorder(`bloodStatus and sex`, first_semester_score, .desc = FALSE), 
+               x = first_semester_score,
+               label = paste0(first_semester_score, " points")),
+            colour = "black",
+            size = 8,
+            hjust = -0.05)+
+  theme_custom
+
+barplot_3
+
+ggsave("bloodStatusAndSexSumPoints.png", barplot_3, width = 20, height = 15, dpi = 300, units = "in")
+```
+
+#### Функция coord_flip
+
+Функция coord_flip() из ggplot2 используется для перестановки осей координат графика. Она особенно полезна, когда нужно изменить ориентацию графика с горизонтальной (landscape) на вертикальную (portrait), или наоборот.
+
+Плюсы:
+
+Простота использования: функция требует минимального количества кода для перестановки осей. Удобство восприятия: иногда вертикальная ориентация графика делает его более удобным для чтения, особенно если данных много и требуется компактность. Например, если данные представляют собой набор временных рядов, удобно видеть годы вдоль оси X, а значения вдоль оси Y. Соответствие стандартам: во многих научных публикациях принято использовать определенные форматы графиков, и coord_flip() помогает быстро адаптировать графики под эти требования. Оптимизация пространства: в некоторых случаях, изменение ориентации графика может позволить уместить больше информации на нем.
+
+Минусы:
+
+Необходимость модификации кода: иногда приходится дополнительно менять атрибуты графика (например, метки осей), чтобы они правильно отображались после перестановки осей. Проблемы с размерами: если не учитывать размеры шрифтов и меток при перестановке, могут возникнуть проблемы с читаемостью или масштабированием. Совместимость с другими функциями: некоторые элементы могут работать некорректно при перестановке осей, что потребует дополнительных настроек. Для "сложносочиненных" графиков может совсем не подойти.
+
+В целом, coord_flip() является полезной функцией для создания разнообразных графиков и адаптации их под различные требования.
+
+```{r}
+#Пример использования coord_flip()
+
+scatterplot_0
+
+scatterplot_flip <- scatterplot_0 + coord_flip()
+
+scatterplot_flip
+```
+
+### Разное
+
+#### Первый график
+
+Сравните распределение баллов за экзамен по зельеварению и за экзамен по древним рунам. Сделайте это тремя разными способами. Под разными способами понимаются идеологически разные геомы или способы группировки. Не считаются разными способами изменения константных визуальных параметров (цвет заливки, размер фигур) на сходных в остальном графиках. Объедините графики, таким образом, чтобы результирующий график имел два столбца и 2 строки. Два графика должны находиться в верхней строке и занимать равную площадь. Третий график должен занимать нижнюю строку целиком.
+
+```{r}
+
+boxplot_exam <- hogwarts |> 
+  select(id, `Study of ancient runes exam`, `Potions exam`) |> 
+  pivot_longer(!id, 
+               names_to = "exam", 
+               values_to = "score") |> 
+  ggplot(aes(x = exam, 
+                   y = score,
+                   fill = exam)) +
+  geom_boxplot(notch = TRUE) +
+  scale_fill_manual(name = "exam", values = c("Study of ancient runes exam" = "darkblue", "Potions exam" = "green"))+
+   theme(legend.position = "none",
+         axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())+
+  theme_custom
+
+density_exam <- ggplot(hogwarts, aes(x = `Study of ancient runes exam`)) +
+  geom_density(aes(fill = "Древние руны"), colour = "grey49", alpha = 0.5) +
+  geom_density(aes(x = `Potions exam`, fill = "Зельеварение"), colour = "grey49", alpha = 0.5) +
+  xlim(c(-30, 130)) +
+  labs( x = "score", y = "density") +
+  scale_fill_manual(name = "Предмет", values = c("Древние руны" = "darkblue", "Зельеварение" = "green")) +
+  theme(legend.position = "none")+
+  scale_y_continuous(position = "right")+
+  theme_custom
+
+
+violin_exam <- hogwarts |> 
+  select(id, `Study of ancient runes exam`, `Potions exam`) |> 
+  pivot_longer(!id, 
+               names_to = "exam", 
+               values_to = "score") |> 
+  ggplot()+
+  geom_violin(aes(x = exam, y = score, fill = exam))+
+  labs(title = "Распределение баллов по экзаменам")+
+  scale_fill_manual(name = "exam", values = c("Study of ancient runes exam" = "darkblue", "Potions exam" = "green"))+
+  theme(legend.position = "bottom")+
+  theme_custom
+
+grid.arrange(arrangeGrob(boxplot_exam, density_exam, nrow = 1), violin_exam, nrow = 2)
+```
+
+#### Второй график
+
+Визуализируйте средний балл по зельеварению студентов с различным происхождением. Вы вольны добавить дополнительные детали и информацию на график. Проинтерпретируйте результат. Как вы думаете,почему он именно такой? Если у вас есть гипотеза, проиллюстрируйте ее еще одним графиком (или графиками). Объедините их при помощи ggarrange. Измените порядок ваших фигур на первом графике слева направо следующим образом: маглорожденные,, чистокровные, полукровки. Скорректируйте название оси.
+
+```{r}
+statusPotionsExam <- hogwarts |> 
+  group_by(bloodStatus) |> 
+  summarise(meanPotionsExam = mean(`Potions exam`) |> round(2),
+            Min = (min(`Potions exam`) |> round(2)),
+            Max = (max(`Potions exam`) |> round(2)))
+  
+
+my_order <- c("muggle-born", "pure-blood", "half-blood")
+
+
+statusPotionplot <- ggplot(statusPotionsExam , aes(x = factor(bloodStatus, levels = my_order), 
+               y = meanPotionsExam))+
+  geom_pointrange(aes(ymin = Min,
+                      ymax = Max, 
+                    colour = bloodStatus),
+                linewidth = 2,
+                fatten = 10)+
+  labs(title = "Potions exam mean score")+
+  scale_color_manual(values = c("muggle-born" = "black",
+                               "pure-blood" = "deeppink",
+                               "half-blood" = "chocolate"))+ 
+  ylim(0, 100)+
+  xlab(label = "bloodStatus")+
+  theme_custom
+
+statusPotionsExam_house <- hogwarts |> 
+  group_by(bloodStatus, house) |> 
+  summarise(meanPotionsExam = mean(`Potions exam`) |> round(2),
+            Min = (min(`Potions exam`) |> round(2)),
+            Max = (max(`Potions exam`) |> round(2)))
+
+
+statusPotionplot_house <- ggplot(statusPotionsExam_house , aes(x = fct_reorder(house, meanPotionsExam, .desc = TRUE),
+               y = meanPotionsExam, fill = house))+
+  geom_pointrange(aes(ymin = Min,
+                      ymax = Max, 
+                    colour = house),
+                linewidth = 2,
+                fatten = 10)+
+  ylim(0, 100)+
+   scale_color_manual(values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25"))+
+  xlab(label = "house")+
+  facet_wrap(~ bloodStatus)+
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())+
+  theme_custom
+
+ggarrange(plotlist = list(statusPotionplot, statusPotionplot_house), nrow = 2, heights = c(1,2))
+```
+
+Интерпретация. Первый график: особой разницы в среднем баллле по зельеварению в зависимости от происхождения студентов не наблюдается. Более того, по всем трем категориям он довольно низкий. Гипотеза: профессор зельеварения, он же декан факультета Слизерин, ненавидит всех студентов одинаково, вне зависимости от их происхождения. Исключение - студенты факультета Слизерин.
+
+Второй график: что и требовалось доказать. Ну, хотя-бы в сегрегации по признаку происхождения профессора зельеварения обвинить нельзя, спасибо и на этом.
+
+### Воспроизведение графика
+
+```{r}
+
+theme_custom_3 <- theme(
+    panel.background = element_rect(fill = "white"),
+    plot.title = element_text(size = 30, hjust = 0.5),
+    plot.subtitle = element_text(size = 18, hjust = 0.5),
+    strip.text = element_text(size = 20),
+    axis.text = element_text(size = 20),
+    axis.title = element_text(size = 25),
+    legend.title = element_text(size = 25),
+    legend.text = element_text(size = 20)
+  )
+
+hogwarts_modified <- hogwarts %>% 
+  mutate(
+    mean_all_exams = rowMeans(.[, 8:20], na.rm = TRUE), 
+    sex = factor(sex, levels = c("female", "male"), labels = c("Девочки", "Мальчики")) 
+  ) 
+
+
+ggplot(hogwarts_modified) +
+  geom_violin(aes(x = house, y = `result`, fill = house )) +
+  geom_boxplot(aes(x = house, y = `result`, fill = house), width = 0.1, outlier.colour = "black", outlier.shape = 16, fill = "white") + 
+   geom_point(aes(x = house, y = mean_all_exams, color = house), 
+             stat = "summary", 
+             fun = "mean", 
+             shape = 23,
+             stroke = 2,
+             color = "black", 
+             size = 8,
+             fill = "darkred")+ 
+ scale_fill_manual(labels = c("Gryffindor" = "Гриффиндор", 
+                             "Hufflepuff" = "Пуффендуй", 
+                             "Ravenclaw" = "Когтевран", 
+                             "Slytherin" = "Слизерин"),
+                    values = c("Gryffindor" = "#C50000", 
+                             "Hufflepuff" = "#ECB939", 
+                             "Ravenclaw" = "#41A6D9", 
+                             "Slytherin" = "#1F5D25")
+                    )+
+  facet_wrap(~ sex) +
+  scale_y_continuous(limits = c(-300, 250), breaks = seq(-300, 250, by = 50))+
+  geom_hline(yintercept = 0, linetype = "dashed", color = "#FF3366", size = 1.5)+
+  labs(title = "Баллы студентов Хогвартса",
+       subtitle = "Распределение числа баллов у студентов различных факультетов Хогвартса в 2023-2024 учебном году",
+       y = "Количество очков",
+       fill = "Факультет",
+       caption = "Источник нездоровая фантазия автора лекции")+
+  theme(plot.subtitle = element_text(color = "#663300"),
+         axis.text.x = element_blank(), 
+    axis.ticks.x = element_blank(), 
+    axis.title.x = element_blank(),
+    legend.position = "bottom",
+    legend.direction = "vertical",
+    legend.justification = "center"
+  )+
+  theme_custom_3
+  
+
+
+
+```
+
+Интерпретация. Студенты факультета Когтевран, как девочки, так и мальчики, набирают большее количество баллов за год, чем студенты факультетов Гриффиндор и Пуффендуй, что в целом соотносится с их имиджем "заучек". Но при этом средний балл, полученный на экзаменах, вообще у всех примерно одинаковый! Даже у факультета Пуффендуй, что говорит о том, что мы их недооцениваем. Кроме факультета Слизерин, мальчики и девочки с одного и того же факультета показывают схожие результаты (и по набранным баллам, и по результатам экзаменов). Выбивается из этого ряда только факультет Слизерин - девочки из Слизерина показывают результаты на уровне девочек из Когтеврана, в то время как мальчики из Слизерина показывают вообще худший результат из всех: единственные, где вообще никто не справляется с тем, чтобы набрать положительную сумму баллов за год (средний балл за экзамены у них при этом незначительно ниже остальных факультетов, он хотя-бы положительный). Выше мы давали рекомендации провести проверку, как построено обучение и контроль дисциплины на факультете Слизерин. Уточнение к рекомендациям: именно у мальчиков с факультета Слизерин. Возможно, на факультете имеется некий лидер мужского пола, оказывающий сильное и в то же время отрицательное влияние на остальных мальчиков.
+
+\*Я понимаю, что в исходном графике красным ромбом обозначен какой-то другой показатель, но я не смогла его подобрать, а отображение на данном графике среднего балла за все экзамены мне показалось интереснее и логичнее всего.

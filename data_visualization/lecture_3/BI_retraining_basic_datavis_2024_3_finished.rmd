@@ -1,0 +1,471 @@
+---
+title: "BI_retraining_basic_datavis_2024_3_final"
+author: "B.V. Sotnikov"
+date: "2024-09-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = FALSE, fig.width=16, fig.height=10)
+
+library(tidyverse)
+library(ggExtra)
+library(ggridges)
+library(ggpubr)
+
+# Избавляемся от scientific notation
+options(scipen = 999)
+```
+
+## Загрузка данных
+
+```{r}
+hogwarts <- read_csv("data/hogwarts_2024.csv")
+hogwarts |> head()
+```
+
+### Проверка структуры данных
+
+```{r}
+hogwarts |> glimpse()
+
+# Changing some variables type to factors
+hogwarts <- hogwarts |> mutate(
+  across(c(house, course, sex, wandCore, bloodStatus), ~ as.factor(.x))
+)
+```
+
+### Поиск пропущенных значений
+
+```{r}
+sum(is.na(hogwarts))
+```
+
+### Сводка по данным
+
+```{r}
+hogwarts |> summary()
+```
+
+### Пересоздание theme_custom
+
+```{r}
+theme_custom <- theme(
+    panel.background = element_rect(fill = "white"),
+    plot.title = element_text(size = 30, hjust = 0.5),
+    plot.subtitle = element_text(size = 25, hjust = 0.5),
+    strip.text = element_text(size = 20),
+    axis.text = element_text(size = 20),
+    axis.title = element_text(size = 25),
+    legend.title = element_text(size = 25),
+    legend.text = element_text(size = 20)
+  )
+```
+
+### Функции и конвееры
+
+Обсудим функции
+
+```{r}
+test_function1 <- function(x){
+  y <- x * 3
+  return(y)
+}
+
+test_function1(2)
+test_function1(5)
+```
+
+Если функции не задать return, она вернет значение, образовавшееся в ходе последнего действия
+
+```{r}
+test_function1 <- function(x){
+  x * 3
+}
+
+test_function1(2)
+test_function1(5)
+
+test_function2 <- function(x){
+  y <- x * 3
+  2 + y
+}
+
+test_function2(2)
+test_function2(5)
+```
+
+![](images/vysocki.png)
+
+Попробуем создать относительно универсальную функцию для создания гистограмм
+
+```{r}
+histCustom <- function(df, x){
+  customPlot <- ggplot(df)+
+    geom_histogram(aes(x = x),
+                   color="black",
+                   fill = "aquamarine2",
+                   bins = 20)+
+    labs(title = "Histogram",
+         caption = "No source of data",
+         y = "Number of objects")+
+    theme_custom
+  
+  return(customPlot)
+}
+
+histCustom(hogwarts, result)
+```
+
+```{r}
+histCustom <- function(df, mapping){
+  customPlot <- ggplot(df)+
+    geom_histogram(mapping,
+                   color="black",
+                   fill = "aquamarine2",
+                   bins = 20)+
+    labs(title = "Histogram",
+         caption = "No source of data",
+         y = "Number of objects")+
+    theme_custom
+  
+  return(customPlot)
+}
+
+histCustom(hogwarts, aes(x = result))
+```
+
+Дубль 3
+
+```{r}
+histCustom <- function(df, x){
+  customPlot <- ggplot(df)+
+    geom_histogram(aes(x = df[[x]]),
+                   color="black",
+                   fill = "aquamarine2",
+                   bins = 20)+
+    labs(title = "Histogram",
+         caption = "No source of data",
+         x = x,
+         y = "Number of objects")+
+    theme_custom
+  
+  return(customPlot)
+}
+
+histCustom(hogwarts, "result")
+```
+
+Дубль 4
+
+```{r}
+histCustom <- function(df, x){
+  customPlot <- ggplot(df)+
+    geom_histogram(aes(x = {{x}}),
+                   color="black",
+                   fill = "aquamarine2",
+                   bins = 20)+
+    labs(title = "Histogram",
+         caption = "No source of data",
+         y = "Number of objects")+
+    theme_custom
+  
+  return(customPlot)
+}
+
+histCustom(hogwarts, result)
+```
+
+Сделаем пару шагов назад.
+
+Можно задать аргументу функции значение по умолчанию
+
+```{r}
+test_function1 <- function(x = 2){
+  y <- x * 3
+  return(y)
+}
+
+test_function1(2)
+test_function1(5)
+test_function1()
+```
+
+Можно разрешить принимать непрописанные аргументы
+
+```{r}
+test_function1(3)
+test_function1(x = 3)
+test_function1(m = 3)
+
+test_function1 <- function(x = 2, ...){
+  y <- x * 3
+  return(y)
+}
+
+test_function1(m = 3)
+```
+
+Применим функцию к одному из слоев.
+
+```{r fig.height=40, fig.width=40}
+# График-подложка
+plotTemplate <- ggplot(hogwarts)+
+  labs(title = "Histogram",
+         caption = "No source of data",
+         y = "Number of objects")+
+    theme_custom
+
+# Функция для подбора числа бинов
+histBinCustom <- function(mapping = aes(x = result), 
+                          color="black",
+                          fill = "aquamarine2",
+                          binNum,
+                          ...){
+  geom_histogram(mapping = mapping, colour = color, fill = fill, bins = binNum, ...)
+}
+
+# Создание конвеера
+binNumbers <- c(3, 5, seq(10, 20, 2), seq(25, 100, 5), seq(100, 500, 100))
+histList <- map(binNumbers, \(x) plotTemplate+histBinCustom(binNum=x)+scale_x_continuous(name = paste0(x, " bins")))
+
+# Вывод итогового графика
+ceiling(length(histList)^0.5)
+ggarrange(plotlist = histList,
+          ncol = ceiling(length(histList)^0.5),
+          nrow = ceiling(length(histList)^0.5))
+```
+
+Резюме.
+
+1\. Если требуются однотипные графики, в которых изменяется малое число эстетик, можно сделать функцию с графиком ggplot внутри.
+
+2\. Оборачивание переменной внутри функции в curly-curly (`{{}}`) позволяет передавать в качестве этой переменной столбец датафрейма.
+
+3\. Для создания конвееров удобно сочетать самодельные функции с графиками и инструменты из пакета `purrr`.
+
+4\. При создании самодельной функции с использованием одной функции ggplot, аргументам по умолчанию можно задать значение в скобках после слова `function`.
+
+5\. Хорошая практика -- добавлять `...` в список возможных аргументов функции.
+
+## Экосистема пакетов
+
+![](./images/packages.jpg)
+
+Большой и шумный датафрейм (он в поросятах знает толк)
+
+```{r}
+# Новый датафрейм (единица наблюдения -- результат экзамена)
+examHogwarts <- hogwarts |> 
+  select(id, where(is.factor), ends_with("exam"), result) |> 
+  pivot_longer(-c(id, where(is.factor), result), names_to = "exam", values_to = "mark")
+
+noisyScatter <- ggplot(examHogwarts)+
+  geom_point(aes(x = result, 
+                 y = mark,
+                 colour = house),
+             position = position_jitter(width=0.5, height = 0.5),
+             alpha = 0.3)+
+  scale_colour_manual(values = c("Gryffindor" = "#C50000", 
+                           "Hufflepuff" = "#ECB939", 
+                           "Ravenclaw" = "#41A6D9", 
+                           "Slytherin" = "#1F5D25"))+
+  theme_custom+
+  theme(legend.position = "inside",
+        legend.justification = "left")
+```
+
+### Маргинплоты
+
+Базовая версия
+
+```{r}
+ggMarginal(noisyScatter, 
+           type = "histogram", 
+           size = 3)
+```
+
+Добавляем группы
+
+```{r}
+ggMarginal(noisyScatter, 
+           type = "density", 
+           groupFill = TRUE,
+           size = 3,
+           margins = "x")
+```
+
+Модифицируем краевые графики
+
+```{r}
+ggMarginal(noisyScatter, 
+           type = "boxplot", 
+           groupFill = TRUE,
+           size = 3,
+           notch = TRUE, 
+           yparams = list(outliers = FALSE, 
+                          colour = "grey49",
+                          linewidth = 2))
+```
+
+Строим двумерную гистограмму
+
+```{r}
+ggplot(examHogwarts,
+       aes(x = result,
+           y = mark,
+           fill = after_stat(density)))+
+  geom_bin2d(colour = "grey80",
+             bins = 50)+
+  theme_custom
+```
+
+### Риджлайн
+
+```{r}
+ggplot(examHogwarts)+
+  geom_density(aes(x = mark, fill = exam),
+               alpha = 0.3)+
+  theme_custom
+```
+
+```{r}
+examHogwarts |> 
+  ggplot()+
+  geom_density_ridges(aes(x = mark, 
+                          y = exam),
+               fill = "lightgreen",
+               alpha = 0.7,
+               scale = 2,
+               quantile_lines = TRUE)+
+  facet_grid(.~house)+
+  theme_custom
+
+```
+
+Добавляем градиент
+
+```{r}
+examHogwarts |> 
+  mutate(mark = case_when(
+    exam == "Divinations exam" ~ mark + 40,
+    exam == "Astronomy exam" ~ mark - 40,
+    TRUE ~ mark
+  )) |> 
+  ggplot()+
+  geom_density_ridges_gradient(aes(x = mark, 
+                          y = exam,
+                          fill = stat(x)),
+               scale = 2)+
+  theme_custom
+```
+
+Резюме.
+
+1\. Для отдельной оценки распределений, связь между которыми мы смотрим на скаттерплоте, можно использовать маргинальные графики `ggMarginal()` из пакета `ggExtra`.
+
+2\. Другой способ оценить связь между двумя переменными с большим количеством наблюдений -- двумерные гистограммы `geom_bin2d()`.
+
+3\. Дополнительный способ сравнить распределение нескольких количественных переменных -- риджлайны из пакета `ggridges`.
+
+## Логарифмическая шкала
+
+```{r}
+# Новый датафрейм -- сумма стипендии в Хогвартсе
+scolarshipHogwarts <- hogwarts |> 
+  mutate(
+    across(ends_with("exam"),~ .x * (result**2 / 100)) |> round(0),
+    ) |> 
+  rowwise() |> 
+  mutate(
+    scolarship = sum(c_across(ends_with("exam")))
+  )
+
+standardScales <- ggplot(scolarshipHogwarts)+
+  geom_histogram(aes(x = scolarship),
+                 colour = "black",
+                 fill = "red")+
+  scale_x_continuous(breaks = seq(0, 600000, l=3))+
+  geom_vline(xintercept = seq(0, 600000, l=3),
+             colour = "black",
+             linetype = "dashed")+
+  theme_custom
+
+logScales <- ggplot(scolarshipHogwarts)+
+  geom_histogram(aes(x = scolarship),
+                 colour = "black",
+                 fill = "forestgreen")+
+  scale_x_log10(breaks = c(1, 10, 100, 1000, 10000, 100000))+
+  geom_vline(xintercept = 1000,
+             size = 2, 
+             colour = "lightblue",
+             linetype = "dashed")+
+  theme_custom
+
+ggarrange(standardScales, logScales)
+```
+
+```{r}
+logone <- scolarshipHogwarts |> 
+  mutate(
+    scolarship = log10(scolarship)
+  ) |> 
+  ggplot()+
+  geom_histogram(aes(x = scolarship),
+                 colour = "black",
+                 fill = "forestgreen")+
+  theme_custom
+
+logtwo <- scolarshipHogwarts |> 
+  mutate(
+    scolarship = log10(scolarship)
+  ) |> 
+  ggplot()+
+  geom_histogram(aes(x = scolarship),
+                 colour = "black",
+                 fill = "forestgreen")+
+  xlab(label = "scolarship (log10)")+
+  theme_custom
+  
+logthree <- ggplot(scolarshipHogwarts)+
+  geom_histogram(aes(x = scolarship),
+                 colour = "black",
+                 fill = "forestgreen")+
+  scale_x_log10()+
+  theme_custom
+  
+logfour <- ggplot(scolarshipHogwarts)+
+  geom_histogram(aes(x = scolarship),
+                 colour = "black",
+                 fill = "forestgreen")+
+  scale_x_log10()+
+  xlab(label = "scolarship (log10)")+
+  theme_custom
+
+ggarrange(plotlist = list(logone, logtwo, logthree, logfour))
+```
+
+## Аннотации
+
+```{r}
+noisyScatter+
+  annotate(geom = "text", x = -200, y = 60, label = "Clewer and troublesome", size = 7)+
+  annotate(geom = "rect", xmin = -300, xmax = -50, ymin = 75, ymax = 100, fill = "lightblue", alpha = 0.5)+
+  annotate(geom = "segment", x = -275, xend = -300, y = 60, yend = 74, arrow = arrow())+
+  annotate(geom = "label", x = 0, y = 50, label = "The end", colour = "forestgreen", fill = "lightblue", size = 50, alpha = 0.5)
+```
+
+![](images/Nicholas_I.jpg)
+
+Ссылочная
+
+-   [Сайт с примерами графиков и полезными советами](https://r-graph-gallery.com/)
+-   [Оригинальная статья с изложением философии ggplot](https://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf)
+-   [Документация ggplot](https://ggplot2.tidyverse.org/)
+-   [Учебник по data-science от авторов ggplot](https://r4ds.hadley.nz/)
+-   [Книга о некоторых принципах визуализации с полезными советами, но без явного отображения кода](https://clauswilke.com/dataviz/)
+-   [Пакеты расширения ggplot2](https://exts.ggplot2.tidyverse.org/gallery/)
+-   [Учебник по ggplot от авторов ggplot (в процессе написания)](https://ggplot2-book.org/)
+-   [Телеграм-канал про визуализацию (не в биомедицине, и не на R, но от этого не менее хороший)](https://t.me/nastengraph)
+-   [Шпаргалка по ggplot2](https://rstudio.github.io/cheatsheets/html/data-visualization.html)
+-   [Шпаргалка по rmd](https://posit.co/wp-content/uploads/2022/10/rmarkdown-1.pdf)

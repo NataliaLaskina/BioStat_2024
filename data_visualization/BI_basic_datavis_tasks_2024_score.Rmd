@@ -1,0 +1,405 @@
+---
+title: "BI_basic_datavis_tasks_2024"
+author: "NataliaLaskina"
+date: "2024-09-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = FALSE, fig.width=16, fig.height=10)
+
+library(tidyverse)
+```
+
+## Data reading
+
+```{r dataLoading}
+hogwarts <- read_csv("data/hogwarts_2024.csv")
+hogwarts |> head()
+```
+
+### Checking dataset structure
+
+```{r}
+hogwarts |> glimpse()
+
+# Changing some variables type to factors
+hogwarts <- hogwarts |> mutate(
+  across(c(house, course, sex, wandCore, bloodStatus), ~ as.factor(.x))
+)
+```
+
+### NA checking
+
+```{r}
+sum(is.na(hogwarts))
+```
+
+### Summary output
+
+```{r}
+hogwarts |> summary()
+```
+
+## Data visualisation
+
+### Столбчатые диаграммы
+
+#### Первый график
+
+```{r first_task_1}
+
+theme_custom <- theme(
+    axis.text = element_text(size = 20),
+    axis.title = element_text(size = 25),
+    legend.title = element_text(size = 20),
+    legend.text = element_text(size = 20)
+  )
+
+first_barplot <- ggplot(hogwarts)+
+  geom_bar(aes(x = course, fill=course), colour = "black")+ 
+  scale_fill_manual(values = c("1" = "#9900CC", 
+                               "2" = "#CC0066", 
+                               "3" = "#FFFF66", 
+                               "4" = "#00FF99",
+                               "5" = "#FF3300", 
+                               "6" = "#CC66CC", 
+                               "7" = "#0033CC"))+
+  theme_classic()+theme_custom
+
+first_barplot
+```
+
+> Результат: 1 б.
+
+> Комментарии:
+
+- Хорошая работа, ниже пара комментариев.
+
+- Использование заголовков -- отличная практика, которая делает навигацию внутри документа более удобной. Спасибо!
+
+- На этом графике использовать разные цвета для разных столбиков полезно для отработки навыка, но не для собственно целей визуализации -- столбцов не очень много, и каждый из них отделен друг от друга некоторым интервалом, поэтому дополнительное разделение цветом здесь может быть дублирующим с точки зрения функции.
+
+- Здорово, что вы работаете со шрифтами и дополнительно модифицируете график, несмотря на то, что это не прописано в задании. Так получается намного более читеамо (в прямом смысле слова).
+
+#### Второй график
+
+```{r second_task_1}
+
+second_barplot <- ggplot(hogwarts)+
+  geom_bar(aes(x = fct_infreq(house), 
+               fill = bloodStatus), 
+           colour = "black", 
+           position = "fill")+ 
+  scale_x_discrete(name = "house")+
+  theme_classic()+theme_custom
+
+second_barplot
+
+```
+
+##### Вывод из графика second_barplot
+
+На всех четырех факультетах больше половины учащихся - полукровки. Это самая распространенная категория учеников. Чистокровных учеников меньше 25% также на всех четырех факультетах. Магглорожденные представлены в количестве около 5-10% учащихся на каждом факультете (меньше всего на факультете Слизерин, больше всего на факультете Гриффиндор). В связи с этим находим политику выделения чистокровных волшебников и дискриминации полукровок и магглорожденных крайне деструктивной и ведущей к вырождению и вымиранию всего волшебного сообщества. Предлагаем деканам и старостам факультетов разработать и применить в учебном процессе и досуге учащихся факультативы, программы, брошюры и игры, популяризирующие десегрегацию и отрицание исключительной ценности происхождения.
+
+> Результат: 1 б.
+
+> Комментарии:
+
+- Хороший график и потрясающая интерпретация (еще и с методическими рекомендациями!). 
+
+#### Третий график
+
+```{r third_task_1}
+third_barplot <- hogwarts |> 
+  filter(bloodStatus == c("pure-blood", "muggle-born")) |> 
+  ggplot()+
+  geom_bar(aes(x = fct_infreq(house), 
+               fill = bloodStatus), 
+           colour = "black", 
+           position = "fill")+ 
+  scale_x_discrete(name = "Факультет")+
+  labs(x = "Факультет", 
+       y = "Доля",
+       fill = "Происхождение")+
+  scale_fill_discrete(labels = c("Маглорожденный", "Чистокровный"))+
+  theme_classic()+theme_custom+
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "red", size = 1.5)
+
+third_barplot
+```
+
+> Результат: 1.5 б.
+
+> Комментарии:
+
+- Хороший график, но есть пара мыслей, как можно сделать его чуть лучше.
+
+- Возможно, стоит придать пунктирной линии иной цвет. Немного другое распределение -- и у нас окажется красная линия на красном фоне, что будет не слишком контрастно.
+
+- При работе с линиями толщину по конвенции лучше задавать через аргумент `linewidth`, а не через `size` (хотя последний тоже работает).
+
+- Ручное задание лейблов вектором в `scale_fill_discrete()` может привести к тому, что подписи на графике не будут соответствовать реальным значениям. Во всех подобных случаях стоит менять лейблы осей эксплицитно присваивая новое имя каждой категории, например `labels = c("pure-blood" = "Чистокровный", "muggle-born" = "Маглорожденный")`
+
+### Боксплоты
+
+#### Первый график
+
+```{r first_task_2}
+first_boxplot <- ggplot(hogwarts)+
+  geom_boxplot(aes(y = `week_3`, 
+                   x = fct_reorder(house, week_3, .desc=TRUE)), 
+               colour = "black")+
+  scale_x_discrete(name = "Факультет")+
+  labs(x = "Факультет", 
+       y = "3-я неделя обучения")+
+  theme_classic()+
+  theme_custom
+first_boxplot
+```
+
+> Результат: 1 б.
+
+#### Второй график
+
+```{r second_task_2}
+knitr::opts_chunk$set(fig.width=14, fig.height=14)
+
+ second_boxplot <- ggplot(hogwarts)+
+  geom_boxplot(aes(y = `week_3`, 
+                   x = fct_reorder(house, week_3, .desc=TRUE), 
+         fill= bloodStatus), notch = TRUE)+
+  scale_x_discrete(name = "Факультет")+
+  labs(x = "Факультет", 
+       y = "3-я неделя обучения",
+       fill = "Происхождение")+
+    scale_fill_discrete(labels = c("Полукровка", "Маглорожденный", "Чистокровный"))+
+  theme_classic()+
+  theme_custom
+ 
+ second_boxplot
+```
+
+> Результат: 0.75 б.
+
+> Комментарии:
+
+- Достойная работа, но нет настройки размера чанка (это можно сделать, например, так `{r fig.width = 14, fig.height = 14}`). `knitr::opts_chunk$set(fig.width=14, fig.height=14)` дает глобальные настройки чанков всему документу ниже места использования (т.е. со следующего чанка), и применяется, как правило, в первом чанке.
+
+#### Третий график
+
+```{r third_task_2}
+knitr::opts_chunk$set(fig.width=14, fig.height=14)
+
+third_boxplot <- hogwarts |> ggplot(aes(y = `week_3`, 
+                   x = fct_reorder(house, week_3, .desc=TRUE), 
+         fill= bloodStatus))+
+  geom_boxplot(notch = TRUE, outliers = FALSE, width = 4, 
+               linewidth = 0.5)+
+  scale_x_discrete(name = "Факультет")+
+  labs(title = "Успеваемость на 3-й неделе обучения",
+       x = "Факультет", 
+       y = "3-я неделя обучения",
+       fill = "Происхождение",
+       caption = "Данные взяты из базы данных школы Хогвартс")+
+    scale_fill_discrete(labels = c("Полукровка", "Маглорожденный", "Чистокровный"))+
+   geom_jitter()+
+  theme_classic()+
+  theme_custom+
+  theme(plot.title = element_text(size = 30, face = "bold",  hjust = 0.5), plot.caption= element_text(size = 17))
+
+third_boxplot
+```
+
+> Результат: 1.5 б.
+
+> Комментарии:
+
+- Отличная работа!
+
+### Разное
+
+#### Lollipop-plot
+
+```{r lollipop-plot}
+
+wand_colors <- c("dragon heartstring" = "red",
+                "phoenix feather" = "yellow",
+                "unicorn hair" = "grey")
+
+  lollipop_plot <- hogwarts |> 
+  filter(course == 5) |> 
+  mutate(id = as.factor(id)) |> 
+  ggplot()+
+  geom_segment(aes(x = 0, 
+                   xend = result, 
+                   y = fct_reorder(id, result, .desc = TRUE), 
+                   yend = fct_reorder(id, result, .desc = TRUE)))+
+  geom_point(aes(x = result, 
+                 y = fct_reorder(id, result, .desc = TRUE), color=wandCore), size = 3)+
+  scale_color_manual(values = wand_colors) + 
+  labs(title = "Успеваемость студентов 5 курса за год",
+       x = "итоговые баллы", 
+       y = "id",
+       color = "Сердцевина волшебной палочки")+
+  theme_classic()+
+  theme_custom+
+    theme(
+    plot.title = element_text(size = 30, hjust = 0.5))
+  
+lollipop_plot  
+
+```
+
+> Результат: 1 б.
+
+> Комментарии:
+
+- Кажется, что это тот редкий случай, когда текст (на одной из осей) все стоило сделать поменьше. Либо, в качестве альтернативы, убрать вовсе (присвоив в теме `axis.text.y = element_blank()`). Подписи наезжают друг на друга. В остальном все здорово.
+
+#### Гистограмма
+
+```{r histogram}
+
+histogram <- ggplot(hogwarts)+
+  geom_histogram(aes(x = `Astronomy exam`, fill=house), 
+                 colour = "black", 
+                 bins = ceiling(log2(nrow(hogwarts))+1))+
+  labs(title = "Экзамен по астрономии",
+       x = "Баллы",
+       y = "Number of students", # Изменяем название оси y
+       fill = "Факультет")+
+  scale_fill_manual(values = c("Gryffindor" = "grey",
+                              "Hufflepuff" = "grey",
+                              "Ravenclaw" = "grey",
+                              "Slytherin" = "green"))+
+  theme_classic()+
+  theme(axis.text = element_text(size = 18), 
+        axis.title.y = element_text(size = 20), 
+        axis.title.x = element_text(size = 22), 
+        legend.text = element_text(size = 18),
+        legend.title = element_text(size = 20),
+        plot.title = element_text(size = 30, hjust = 0.5))
+
+histogram
+
+```
+
+> Результат: 0.75 б.
+
+> Комментарии:
+
+-  На графике есть необязательные элементы в виде черточек между нецелевыми факультетами. Их можно было избежать, например, раскрасив гистограмму по условию `fill = (house == "Slythetin)`. Второй способ -- создание нового датафрейма с бинарной переменной Слизерин/не Слизерин, и раскраска по оной (этот способ мне кажется менее оптимальным, потому что создается дополнительный объект, что может дополнительно расходовать ресурсы на больших данных).
+
+#### Модифицированный боксплот
+
+```{r modified boxplot}
+
+theme_custom_onemore <- theme(
+    axis.text = element_text(size = 20),
+    axis.title = element_text(size = 25),
+    legend.title = element_text(size = 20),
+    legend.text = element_text(size = 20),
+    panel.background = element_rect(fill = "white"),
+    plot.background = element_rect(fill = "white") 
+)
+  
+
+modified_third_boxplot <- hogwarts |> ggplot(aes(y = `week_3`, 
+                   x = fct_reorder(house, week_3, .desc=TRUE), 
+         fill= bloodStatus))+
+  geom_boxplot(notch = TRUE, outliers = FALSE, width = 4, 
+               linewidth = 0.5)+
+  scale_x_discrete(name = "Факультет")+
+  labs(title = "Успеваемость на 3-й неделе обучения",
+       x = "Факультет", 
+       y = "3-я неделя обучения",
+       fill = "Происхождение",
+       caption = "Данные взяты из базы данных школы Хогвартс")+
+    scale_fill_discrete(labels = c("Полукровка", "Маглорожденный", "Чистокровный"))+
+   geom_jitter()+
+  theme_custom_onemore+
+  theme(plot.title = element_text(size = 30, face = "bold",  hjust = 0.5), plot.caption= element_text(size = 17))
+
+modified_third_boxplot
+```
+
+> Результат: 1.5 б.
+
+> Комментарии:
+
+-  Здесь все здорово, но можно было использовать чуть более "ленивый" способ -- сохранить в переменную график из пункта 2.3 (для чистоты эксперимента можно было при этом закомментировать `theme_bw()`), и просто добавить к переменной в этом чанке новую тему.
+
+### Фасетирование
+
+#### Способы фасетирования для визуализации разных типов графиков
+
+Для визуализации гистограммы лучше использовать способ фасетирования по строкам. При фасетировании по строкам гистограммы каждой группы данных располагаются одна под другой, что позволяет легко сравнивать формы распределений и выявлять различия между группами.
+
+Для визуализации violin-plot лучше использовать способ фасетирования по столбцам. Violin-plot часто используют для визуализации различий в медианах и формах распределения. Фасетирование по столбцам позволяет легко сравнивать медианы различных групп, так как они расположены рядом друг с другом.
+
+Если нужно показать распределение данных внутри каждой группы - лучше фасетировать по строкам. Если нужно сравнить распределения между группами - по столбцам. Фасетирование по строкам для гистограмм позволяет лучше сравнивать формы распределений, а фасетирование по столбцам для violin-plot - медианы и формы распределения разных групп.
+
+Но не всегда есть однозначно правильный способ фасетирования. Иногда может быть лучше использовать фасетирование по строкам для violin-plot или по столбцам для гистограмм в зависимости от конкретного набора данных и целей визуализации. Важно экспериментировать с разными способами фасетирования, чтобы найти самый эффективный и наглядный способ визуализации ваших данных.
+
+> Результат: 1.5 б.
+
+> Комментарии:
+
+- Да, все так, выглядит как отличное резюме. Очень здорово, что вы обобщили правило и привязали его к ключевой оси, потому что гипотетически мы можем сделать и вертикальную гистограмму, и горизонтальный виолин-плот, и тогда привычные тенденции повернутся на ~~180~~ 90 градусов. Единственное -- не до конца понял оборот про `ваших данных` из последнего абзаца. Но что важно экспериментировать -- это точно.
+
+#### Фасетирование гистограммы
+
+```{r facet_histogram}
+
+facet_histogram <- ggplot(hogwarts)+
+  geom_histogram(aes(x = `Care of magical creatures exam`), 
+                 fill = "purple", 
+                 colour = "black", 
+                 bins = ceiling(log2(nrow(hogwarts))+1))+
+  facet_wrap(vars(course))+
+  theme_classic()+
+  theme(strip.text = element_text(size = 20))+
+  theme_custom
+
+facet_histogram
+```
+
+> Результат: 1 б.
+
+> Комментарии:
+
+- Красивый график, мне все нравится. И шрифт у названий фасетов подкручен, что отлично.
+
+#### Плотность вероятности, фасетирование
+
+```{r facet_density}
+
+facet_density <- ggplot(hogwarts)+
+  geom_density(aes(x = `Defence against the dark arts exam`), 
+               fill = "darkblue", 
+               colour = "black", 
+               alpha = 0.5)+
+  geom_density(aes(x = `Herbology exam`), 
+               fill = "violet", 
+               colour = "darkblue", 
+               alpha = 0.5)+
+  xlim(c(-20, 100))+
+  facet_grid(sex~.)+
+  theme(strip.text = element_text(size = 20))+
+  theme_custom_onemore
+
+facet_density
+```
+
+> Результат: 0.75 б.
+
+> Комментарии:
+
+- Хороший результат, но из графика непонятно, какой предмет какого цвета (у оси название одного из экзаменов, что может добавить путаницы). Обойти это можно либо переводом данных в длинный формат и раскрашиванием по категориям, либо присвоить гистограммам внутри эстетик для заливки какую-то текстовую константу, а внутри `scale_fill_manual()` задать значения цветов. 
+
+> Итог: 12.25 + 0.5 + 0.5 + 1 = 14.25 б.
+
+> Итоговый комментарий: 
+
+- Отличная работа, было очень приятно проверять. Возможно, потворюсь, но это очень здорово, что вы делате кегль шрифта крупнее -- это улучшит графики, делает их более читаемыми везде: в статье, во время доклада и в файле rmd. Хороший подход -- сохранять итоговые графики в переменные, так их можно быстро переиспользовать в других частях ноутбука или проекта. За общее впечатление о работе (в том числе за интерпретацию графика 1.2) добавил дополнительный балл. Из пожеланий -- будьте аккуратны с веторами лейблов в функциях `scale_smth_discrete()`, лучше всегда явно показывать, чему вы присваиваете новое имя.
