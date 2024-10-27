@@ -14,7 +14,7 @@ library(tidyverse)
 
 ## Эксперимент №1: Статистика критерия и p-значения
 
-```{r exp_2, echo=FALSE, fig.height=6, fig.width=6}
+```{r exp_2, echo=FALSE, fig.height=3, fig.width=6}
 
 num_centers <- 1000 # Сколько раз повторим эксперимент?
 
@@ -30,48 +30,115 @@ df_trial <- data.frame(
 
 trial_results <- df_trial %>% 
   group_by(center_ID) %>% 
-  dplyr::summarise(t = abs(sqrt(sample_size)*mean(Hg_change)/sd(Hg_change))) %>% 
+  dplyr::summarise(t = sqrt(sample_size)*mean(Hg_change)/sd(Hg_change)) %>% 
   ungroup()
 
-hist(trial_results$t)
-abline(v = qt(0.975, sample_size-1), col="red", lwd=3, lty=2)
+# Как распределено t, когда Н0 верна?
+plt_1 <- ggplot(trial_results, aes(x = t)) +
+  geom_histogram(aes(y =..density..),
+                 color = 'black', fill = 'grey') +
+  stat_function(fun = dt, 
+                args = list(df = sample_size-1), color = 'darkgreen') +
+  geom_vline(mapping = aes(xintercept = qt(0.975, sample_size-1)), color = "red") +
+  geom_vline(mapping = aes(xintercept = qt(0.025, sample_size-1)), color = "red") +
+  xlim(c(-5,5)) +
+  theme_bw()
+
+```
+
+# Провели эксперимент: 
+
+```{r new_exp}
 
 new_sample <- rnorm(sample_size, mean = 0.5, sd = Hg_sd)
-
 new_t <- abs(sqrt(sample_size)*mean(new_sample)/sd(new_sample))
-abline(v = new_t, col="blue", lwd=3, lty=2)
 
-print(new_t)
-print("С какой вероятностью мы получали меньшие значения?")
-print(sum(trial_results$t < new_t)/num_centers)
-print("...такие или бОльшие?")
-print(1 - sum(trial_results$t < new_t)/num_centers)
-
+ggplot() +
+  stat_function(fun = dt, 
+                args = list(df = sample_size-1), 
+                fill = 'lightgreen',
+                xlim = c(new_t,5),
+                geom = "area") +
+  geom_vline(aes(xintercept = qt(0.975, sample_size - 1))) +
+  geom_point(aes(x = new_t, y = 0), color = "red") +
+  stat_function(fun = dt, 
+                args = list(df = sample_size-1), 
+                color = 'darkgreen', 
+                size = 3,
+                xlim = c(0, 5)) +
+  geom_text(aes(x = 4, y = 0.35, label = paste0("t = ", signif(new_t,2)," , p = ", signif(2*(1-pt(new_t, sample_size - 1)),2))), size = 4)+
+  theme_bw()
 
 
 ```
-## Эксперимент №2: Всегда ли мы контролируем ошибки I рода?
 
-```{r exp_2, echo=FALSE, fig.height=6, fig.width=6}
+## Как распределено p-значение при верности нулевой гипотезы?
 
-num_centers <- 10000 # Сколько раз повторим эксперимент?
+```{r exp_2, echo=FALSE, fig.height=3, fig.width=6}
 
-sample_size <- 3 # Количество пациентов, прошедших, терапию
-True_Hg_improve <- 1 # Истинное среднее изменение гемоглобина
+num_centers <- 1000 # Сколько раз повторим эксперимент?
+
+sample_size <- 30 # Количество пациентов, прошедших, терапию
+True_Hg_improve <- 0 # Истинное среднее изменение гемоглобина
 Hg_sd <- 6 # Разброс в улучшении Hg
 
-df_trial <- data.frame(
+df_trial_norm <- data.frame(
   center_ID = rep(1:num_centers, each = sample_size),
   patient_ID = rep(1:sample_size, num_centers),
-  Hg_change = rexp(sample_size*num_centers, rate = 1/True_Hg_improve)
+  Hg_change = rnorm(sample_size*num_centers, mean = True_Hg_improve, sd = Hg_sd)
 )
 
-trial_results <- df_trial %>% 
+trial_results <- df_trial_norm %>% 
   group_by(center_ID) %>% 
-  do(broom::tidy(t.test(Hg_change ~ 1, conf.level = 0.95, mu = True_Hg_improve, data = .))) %>% 
+  do(broom::tidy(t.test(Hg_change ~ 1, conf.level = 0.95, mu = 0, data = .))) %>% 
   ungroup()
 
-hist(trial_results$p.value,20)
-abline(h = num_centers/20, col="red", lwd=3, lty=2)
+# Как распределено t, когда Н0 верна?
+ggplot(trial_results, aes(x = p.value)) +
+  geom_histogram(aes(y =..density..),
+                 color = 'black', fill = 'grey',
+                 breaks = seq(0,1,0.05)) +
+  stat_function(fun = dunif, 
+                args = list(min = 0, max = 1), color = 'darkgreen') +
+  geom_vline(mapping = aes(xintercept = 0.05), color = "red") +
+  xlim(c(-0.1,1.1)) +
+  theme_bw()
+
+# Попробуйте провести эксперимент с "работающим" препаратом. Что будет происходить с p-значениями?
+
+```
+
+
+## Как распределено p-значение при верности нулевой гипотезы?
+
+```{r exp_2, echo=FALSE, fig.height=3, fig.width=6}
+
+num_centers <- 1000 # Сколько раз повторим эксперимент?
+
+sample_size <- 3 # Количество пациентов, прошедших, терапию
+True_avg_duration <- 20 # Истинное среднее время до выздоровления
+
+df_trial_norm <- data.frame(
+  center_ID = rep(1:num_centers, each = sample_size),
+  patient_ID = rep(1:sample_size, num_centers),
+  Hg_change = rexp(sample_size*num_centers, rate = 1/True_avg_duration)
+)
+
+trial_results <- df_trial_norm %>% 
+  group_by(center_ID) %>% 
+  do(broom::tidy(t.test(Hg_change ~ 1, conf.level = 0.95, mu = True_avg_duration, data = .))) %>% 
+  ungroup()
+
+# Как распределено t, когда Н0 верна?
+ggplot(trial_results, aes(x = p.value)) +
+  geom_histogram(aes(y =..density..),
+                 color = 'black', fill = 'grey',
+                 breaks = seq(0,1,0.05)) +
+  stat_function(fun = dunif, 
+                args = list(min = 0, max = 1), color = 'darkgreen') +
+  geom_vline(mapping = aes(xintercept = 0.05), color = "red") +
+  xlim(c(-0.1,1.1)) +
+  theme_bw()
+
 
 ```

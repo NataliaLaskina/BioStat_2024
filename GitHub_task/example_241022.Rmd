@@ -1,0 +1,364 @@
+---
+title: "example_241022"
+author: "Eva"
+date: "`r Sys.Date()`"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+
+```
+
+# Основные глаголы в dplyr
+
+```{r}
+
+original_data <- read_csv("data/raw/Plasma_Retinol.csv")
+
+original_data %>% glimpse()
+
+#original_data %>% str()
+
+#lm(Sepal.Length ~ Species, iris) %>% summary() %>% .$terms %>% .[[2]]
+
+```
+
+
+	
+# Переименование, а также перекодирование факторных переменных
+
+```{r}
+
+original_data %>% 
+  rename(
+    
+    `Age (years)` = AGE,
+    `Sex` = SEX,
+    `Smoking status` = SMOKSTAT,
+    `Quetelet (weight/(height^2))` = QUETELET,
+    `Vitamin Use` = VITUSE,
+    `Number of calories consumed per day` = CALORIES,
+    `Grams of fat consumed per day` = FAT,
+    `Grams of fiber consumed per day` = FIBER,
+    `Number of alcoholic drinks consumed per week` = ALCOHOL,
+    `Cholesterol consumed (mg per day)` = CHOLESTEROL,
+    `Dietary beta-carotene consumed (mcg per day)` = BETADIET,
+    `Dietary retinol consumed (mcg per day)` = RETDIET,
+    `Plasma beta-carotene (ng/ml)` = BETAPLASMA,
+    `Plasma Retinol (ng/ml)` = RETPLASMA
+    
+  ) %>%
+  
+  mutate(
+    
+    across(Sex, function(x) x %>% factor(levels = c(1, 2), labels = c("Male", "Female"))),
+    across(`Smoking status`, function(x) x %>% factor(levels = c(1, 2, 3), labels = c("Never", "Former", "Current Smoker"))),
+    across(`Vitamin Use`, function(x) x %>% factor(levels = c(1, 2, 3), labels = c("Yes, fairly often", "Yes, not often", "No")))
+    
+  ) -> cleaned_data
+
+```
+
+## filter, slice
+
+```{r}
+
+cleaned_data %>% 
+  
+  filter(Sex == "Female") 
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  
+  filter(Sex == "Female" & `Age (years)` <= 50)
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  
+  filter(between(`Age (years)`, 50, 55))
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  
+  filter(`Age (years)` > 50 & `Age (years)` < 55)
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  
+  filter(`Vitamin Use` %in% c("Yes, fairly often", "Yes, not often")) %>%
+  
+  count(`Vitamin Use`)
+
+```
+
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  
+  filter(!(`Vitamin Use` %in% c("Yes, fairly often", "Yes, not often"))) %>%
+  
+  count(`Vitamin Use`)
+
+```
+
+```{r}
+
+cleaned_data %>%
+  head()
+
+```
+
+```{r}
+
+cleaned_data %>%
+  tail()
+
+```
+
+```{r}
+
+cleaned_data %>%
+  slice(1:10)
+
+```
+
+```{r}
+
+cleaned_data %>%
+  slice(-(1:10))
+
+```
+
+```{r}
+
+cleaned_data %>%
+  slice_sample(n = 10)
+
+```
+
+```{r}
+
+cleaned_data %>%
+  slice_sample(prop = 0.2)
+
+```
+
+## функции внутри select
+
+```{r}
+
+tibble(
+  
+  week_01 = rnorm(100),
+  week_02 = rnorm(100),
+  week_03 = rnorm(100),
+  week_04 = rnorm(100),
+  week_05 = rnorm(100),
+  week_17 = rnorm(100),
+  random_variable = rbeta(n = 100, shape1 = 1, shape2 = 2)
+  
+) -> example_week_data
+
+example_week_data %>%
+  select(str_c("week_", ifelse(c(1:5, 17) < 10, str_c("0", c(1:5, 17)), c(1:5, 17))))
+  
+all(str_c("week_", 1:5) == paste0("week_", 1:5))
+
+
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  select(ID, `Plasma beta-carotene (ng/ml)`)
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  select(ID, "Plasma beta-carotene (ng/ml)")
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  select(contains("Plasma"))
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  select(ID, contains("Plasma"), contains("Dietary")) %>%
+  glimpse()
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  select(ID, where(is.numeric)) %>%
+  select(ID, where(function(x) mean(x, na.rm = TRUE) < 100)) %>%
+  
+  glimpse()
+
+```
+
+## стат оценки и визуализацию количественных переменных
+
+### Проверка на нормальность
+
+```{r}
+
+cleaned_data$`Age (years)` %>% shapiro.test()
+
+```
+
+```{r}
+
+cleaned_data$`Age (years)` %>% density() %>% plot()
+
+```
+
+
+```{r}
+
+cleaned_data %>%
+  select(where(is.numeric) & !ID) %>% 
+  
+  map(function(x) x %>% shapiro.test() %>% .$p.value %>% `<`(0.05)) %>%
+  enframe() %>%
+  unnest() %>%
+  
+  filter(value != TRUE)
+
+```
+
+```{r}
+
+cleaned_data %>%
+  select(where(is.numeric) & !ID) %>% 
+  
+  sapply(function(x) x %>% shapiro.test() %>% .$p.value %>% `<`(0.05)) %>%
+  enframe() %>%
+  
+  mutate(across(value, function(x) ifelse(value == TRUE, "Распределение отлично от нормального", "Распределение нормальное")))
+  
+
+```
+
+## t.test
+
+```{r}
+
+t.test(`Plasma beta-carotene (ng/ml)` ~ Sex, cleaned_data)$p.value < 0.05
+
+```
+
+## wilcox.test 
+
+```{r}
+
+wilcox.test(`Plasma beta-carotene (ng/ml)` ~ Sex, cleaned_data)$p.value < 0.05
+
+```
+
+```{r}
+
+cleaned_data %>%
+  select(where(is.numeric) & !ID) %>% 
+  
+  names() %>%
+  set_names() %>%
+  map(function(x) wilcox.test(cleaned_data[[x]] ~ cleaned_data$Sex)$p.value < 0.05) %>%
+  enframe() %>%
+  unnest() %>%
+  
+  mutate(across(value, function(x) ifelse(value == TRUE, "Различие между группами есть", "Различие между группами не доказано"))) %>%
+  
+  filter(value == "Различие между группами есть")
+
+```
+
+```{r}
+
+cleaned_data %>%
+  select(where(is.numeric) & !ID) %>% 
+  
+  names() %>% 
+  set_names() %>% 
+  map(function(x) t.test(cleaned_data[[x]] ~ cleaned_data$Sex)$p.value < 0.05) %>% 
+  enframe() %>% 
+  unnest()
+
+```
+
+
+## корреляционный анализ
+
+```{r}
+
+
+
+```
+
+
+
+## регрессионную модель
+
+```{r}
+
+
+
+```
+
+
+## map + ggplot
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

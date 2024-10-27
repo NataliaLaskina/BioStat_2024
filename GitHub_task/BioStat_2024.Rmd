@@ -1,8 +1,8 @@
 ---
-title: "BioStat_2024"
-author: "NataliaLaskina"
-date: "2024-09-06"
-output: word_document
+title = `"BioStat_2024"
+author = `"NataliaLaskina"
+date = `"2024-09-06"
+output = `word_document
 ---
 
 ```{r setup, include=FALSE}
@@ -13,6 +13,44 @@ library(flextable)
 library(stringi)
 library(readxl)
 library(tidyverse)
+library(ggcorrplot)
+
+library(broom)
+
+
+################################################################################
+
+get_cat_table <- function(factor_data, group_variable) {
+  
+  get_cat_table_one_variable <- function(factor_data, group_variable, variable_name) {
+    
+    factor_data %>%
+      count(.data[[group_variable]], .data[[variable_name]], .drop = FALSE) %>%
+      mutate(`Relative frequency` = (n / sum(n)) %>% round(4) %>% `*`(100) %>% str_c("%")) %>%
+      
+      group_by(.data[[group_variable]]) %>%
+      mutate(`Relative frequency by group` = (n / sum(n)) %>% round(4) %>% `*`(100) %>% str_c("%")) %>%
+      ungroup() %>%
+      
+      rename(`Absolute frequency` = n) %>%
+      mutate(`Fisher test, p-value` = table(factor_data[[group_variable]], factor_data[[variable_name]]) %>% 
+               fisher.test() %>% .$p.value %>% round(3),
+             Variable = variable_name) %>%
+      rename(Value := variable_name,
+             Group := group_variable)
+    
+  }
+  
+  factor_data %>%
+    select(!group_variable) %>%
+    names() %>%
+    map_dfr(function(variable_name) get_cat_table_one_variable(factor_data, group_variable, variable_name)) %>%
+    select(Variable, Group, everything())
+  
+}
+
+################################################################################
+
 ```
 
 # Выполнение заданий по курсу на Stepik
@@ -83,7 +121,7 @@ original_data %>%
                 str_replace("HGB", "Hemoglobin")) %>%
   rename(Group = `Визит 0__GRP`) %>%
   mutate(across(where(is.character), function(x) as.factor(x))) -> cleaned_data
-  #переделываем все строковые (chr) данные в факторные(fct, категориальный формат) - для экономии места в оперативной памяти (перекодирует в количественную  : 0-женский, 1-мужской, со словариком этого перекодирования (нам выводится словами), и обращается с переменной, как с категориальной, а не количественной)
+  #переделываем все строковые (chr) данные в факторные(fct, категориальный формат) - для экономии места в оперативной памяти (перекодирует в количественную   = `0-женский, 1-мужской, со словариком этого перекодирования (нам выводится словами), и обращается с переменной, как с категориальной, а не количественной)
   #glimpse()
 
 cleaned_data %>%
@@ -139,3 +177,596 @@ cleaned_data %>%
   
 
 ```
+#Консультация_1
+
+```{r}
+original_data <- read_csv('C:/Users/laskn/BioStat_2024/data/originals/Plasma_Retinol.csv')
+
+original_data %>% glimpse()
+
+#original_data %>% str() можно посмотреть структуру любого объекта, например, внутри регрессионной модели
+
+#lm(Sepal.Length ~ Species, iris) %>% summary() %>% .$terms %>% .[[2]] сначала ображаемся сначала к элементу списка, а потом смотрим его атрибуты (attr())
+```
+
+# Переименование, а также перекодирование факторных переменных
+
+```{r}
+original_data %>% 
+  rename(
+      `Age (years)` = AGE,
+      `Sex` = SEX,
+      `Smoking status` = SMOKSTAT,
+      `Quetelet (weight/(height^2))` = QUETELET,
+      `Vitamin Use` = VITUSE,
+      `Number of calories consumed per day` = CALORIES,
+      `Grams of fat consumed per day` = FAT,
+      `Grams of fiber consumed per day` = FIBER,
+      `Number of alcoholic drinks consumed per week` = ALCOHOL,
+      `Cholesterol consumed (mg per day)` = CHOLESTEROL,
+      `Dietary beta-carotene consumed (mcg per day)` = BETADIET,
+      `Dietary retinol consumed (mcg per day)` = RETDIET,
+      `Plasma beta-carotene (ng/ml)` = BETAPLASMA,
+      `Plasma Retinol (ng/ml)` = RETPLASMA
+  ) %>%
+
+ mutate(
+    
+    across(Sex, function(x) x %>% factor(levels = c(1, 2), labels = c("Male", "Female"))),
+    across(`Smoking status`, function(x) x %>% factor(levels = c(1, 2, 3), labels = c("Never", "Former", "Current Smoker"))),
+    across(`Vitamin Use`, function(x) x %>% factor(levels = c(1, 2, 3), labels = c("Yes, fairly often", "Yes, not often", "No")))
+    
+  ) -> cleaned_data  
+ 
+ 
+```
+
+## filter, slice
+
+```{r}
+
+original_data <- read_csv('C:/Users/laskn/BioStat_2024/data/originals/Plasma_Retinol.csv')
+
+original_data %>% glimpse()
+
+cleaned_data %>% 
+  
+  filter(Sex == "Female") 
+
+  #filter(Sex != "Female") 
+
+```
+
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  
+  filter(Sex == "Female" & `Age (years)` <= 50)
+
+```
+
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  
+  filter(between(`Age (years)`, 50, 55)) #края условий включены
+
+```
+
+```{r}
+cleaned_data %>% #glimpse()
+  
+  filter(`Age (years)` > 50 & `Age (years)` < 55)
+```
+
+```{r}
+cleaned_data %>% #glimpse()
+  
+  filter(`Vitamin Use` %in% c("Yes, fairly often", "Yes, not often")) %>%
+  
+  count(`Vitamin Use`)
+```
+
+```{r}
+cleaned_data %>% #glimpse()
+  
+  filter(!(`Vitamin Use` %in% c("Yes, fairly often", "Yes, not often"))) %>%
+  
+  count(`Vitamin Use`)
+```
+
+```{r}
+cleaned_data %>%
+  head()
+```
+
+```{r}
+
+cleaned_data %>%
+  tail()
+
+```
+
+```{r}
+
+cleaned_data %>%
+  slice(1:10)
+```
+
+```{r}
+
+cleaned_data %>%
+  slice(-(1:10))
+
+```
+
+```{r}
+
+cleaned_data %>%
+  slice_sample(n = 10)
+
+```
+
+```{r}
+
+cleaned_data %>%
+  slice_sample(prop = 0.2)
+
+```
+
+## функции внутри select
+
+```{r}
+
+tibble(
+  
+  week_01 = rnorm(100),
+  week_02 = rnorm(100),
+  week_03 = rnorm(100),
+  week_04 = rnorm(100),
+  week_05 = rnorm(100),
+  week_17 = rnorm(100),
+  random_variable = rbeta(n = 100, shape1 = 1, shape2 = 2)
+  
+) -> example_week_data
+
+example_week_data %>%
+  select(str_c("week_", ifelse(c(1:5, 17) < 10, str_c("0", c(1:5, 17)), c(1:5, 17))))
+  
+all(str_c("week_", 1:5) == paste0("week_", 1:5))
+
+#select(str_c("week_0", 1:5)) так можно было бы легко выбрать только недели с 1 по 5-ю, если бы в таблице были только недели, начинающиеся с 0: 01,02, 03 и тд.
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  select(ID, `Plasma beta-carotene (ng/ml)`)
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  select(ID, "Plasma beta-carotene (ng/ml)")
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  select(contains("Plasma"))
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  select(ID, contains("Plasma"), contains("Dietary")) %>%
+  glimpse()
+
+```
+
+```{r}
+
+cleaned_data %>% #glimpse()
+  select(ID, where(is.numeric)) %>%
+  select(ID, where(function(x) mean(x, na.rm = TRUE) < 100)) %>%
+  
+  glimpse()
+
+```
+
+## стат оценки и визуализацию количественных переменных
+
+### Проверка на нормальность
+
+```{r}
+
+cleaned_data$`Age (years)` %>% shapiro.test()
+
+```
+
+```{r}
+
+cleaned_data$`Age (years)` %>% density() %>% plot()
+
+```
+
+
+```{r}
+
+cleaned_data %>%
+  select(where(is.numeric) & !ID) %>% 
+  
+  map(function(x) x %>% shapiro.test() %>% .$p.value %>% `<`(0.05)) %>%
+  enframe() %>%
+  unnest() %>%
+  
+  filter(value != TRUE) #так смотрим только на переменные с нормальным распределением
+# %>% str() позволяет посмотреть, как называется то, что мы хотим вытащить из теста (p.value например)
+
+```
+
+```{r}
+# то же самое, только через функцию sapply
+
+cleaned_data %>%
+  select(where(is.numeric) & !ID) %>% 
+  
+  sapply(function(x) x %>% shapiro.test() %>% .$p.value %>% `<`(0.05)) %>%
+  enframe() %>%
+  
+  mutate(across(value, function(x) ifelse(value == TRUE, "Распределение отлично от нормального", "Распределение нормальное")))
+  
+
+```
+
+
+## t.test
+
+```{r}
+
+t.test(`Plasma beta-carotene (ng/ml)` ~ Sex, cleaned_data)$p.value < 0.05
+
+```
+
+## wilcox.test 
+
+```{r}
+
+wilcox.test(`Plasma beta-carotene (ng/ml)` ~ Sex, cleaned_data)$p.value < 0.05
+
+```
+
+```{r}
+
+cleaned_data %>%
+  select(where(is.numeric) & !ID) %>% 
+  
+  names() %>%
+  set_names() %>%
+  map(function(x) wilcox.test(cleaned_data[[x]] ~ cleaned_data$Sex)$p.value < 0.05) %>%
+  enframe() %>%
+  unnest() %>%
+  
+  mutate(across(value, function(x) ifelse(value == TRUE, "Различие между группами есть", "Различие между группами не доказано"))) %>%
+  
+  filter(value == "Различие между группами есть")
+
+#  pull(name) выводим только имена переменных, по которым различие выявлено
+
+```
+
+```{r}
+
+cleaned_data %>%
+  select(where(is.numeric) & !ID) %>% 
+  
+  names() %>% 
+  set_names() %>% 
+  map(function(x) t.test(cleaned_data[[x]] ~ cleaned_data$Sex)$p.value < 0.05) %>% 
+  enframe() %>% 
+  unnest()
+
+```
+
+### Создание переменной-разности между двумя этапами измерения
+
+```{r}
+
+cleaned_data %>%
+  select(`Plasma beta-carotene (ng/ml)`) %>%
+  slice(-1) %>%    #это чтобы было четное число
+  mutate(Visit = rep(c("Visit 1", "Visit 2"), times = 314/2)) -> paired_data
+
+paired_data %>%
+  pivot_wider(names_from = Visit, values_from = `Plasma beta-carotene (ng/ml)`) %>%
+  #pivot_longer(everything()) %>%  это чтобы сделать наоборот, everything - это когда нет id
+  unnest() %>%
+  mutate(`Разница между Визитом 1 и Визитом 2` = `Visit 1` - `Visit 2`,
+         ID = row_number()) %>%
+  #так не получилось бы для mean, median и тд, надо было бы использовать rowwise(), чтобы повернуть ориентацию горизонтально. А для суммы-разницы пойдет и без него.
+  group_by(ID) %>%
+  rowwise() %>%
+  
+  mutate(`Среднее значение между Визитами 1 и 2` = mean(c_across(contains("Visit")), na.rm = TRUE)) %>%
+  
+  ungroup()
+
+```
+
+```{r}
+#это был чей-то код, который надо было подправить. Ева вроде бы давала не такой
+
+ statistics_fac <- list(
+    # Абсолютное количество
+  `__Абсолютное количество` = ~length(.x) %>% as.character(),
+    # Относительное количество внутри группы
+  `__Относительное количество внутри группы` = ~(n(.x)/sum(.x)) %>% round(4) %>% `*`(100) %>% str_c(., "%"), 
+  # 95% ДИ (если нет значений, возвращает "Н/П*")
+ `__95% ДИ` = ~ifelse(
+    sum(!is.na(.x)) == 0,
+    "Н/П*",
+    paste0(
+        t.test(.x)$conf.int[1] %>% round(2),
+        "   ",
+        t.test(.x)$conf.int[2] %>% round(2)
+      ) %>% as.character()
+    
+  )
+)
+
+```
+
+## Статистика по категориальным переменным
+
+```{r}
+
+cleaned_data %>%
+  select(where(is.factor)) -> factor_data
+
+get_cat_table(factor_data, "Sex") %>%
+  
+  flextable() %>%
+  theme_box() %>%
+  align(align = "center", part = "all") %>%
+  merge_v(c("Group", "Variable")) %>%
+  merge_v("Variable", target = "Fisher test, p-value")
+
+```
+
+## корреляционный анализ
+
+```{r, fig.height=10, fig.width=10}
+
+cleaned_data %>%
+  select(where(is.numeric) & !ID) %>%
+  corr.test(method = "spearman") -> corr_data
+
+ggcorrplot(corr_data$r, p.mat = corr_data$p, insig = "blank", lab = TRUE)
+
+#внизу треугольник без поправки на множественные сравнения, верхний треугольник с поправкой на множественные сравнения
+
+```
+
+## регрессионную модель
+
+```{r}
+
+cleaned_data %>% 
+  select(!ID) %>%
+  mutate(across(where(is.factor), function(x) x %>% fct_relabel(function(x) x %>% str_c(": ", .)))) -> model_data
+  
+lm(`Plasma beta-carotene (ng/ml)` ~ ., model_data) %>%
+  #stats::step(trace = FALSE) %>%  #спорный способ отбора предикторов
+  #summary()
+  
+  tidy(conf.int = TRUE) %>%
+  
+  mutate(across(c(estimate, std.error, statistic, conf.low, conf.high), function(x) x %>% formatC(format = "f", digits = 2, decimal.mark = ".")),
+         `p.value` = ifelse(`p.value` < 0.001, "<0.001", round(`p.value`, 3)),
+         term = term %>% str_remove_all("`") %>% str_replace("\\(Intercept\\)", "Intercept")) %>%
+  #в видео есть интересные способы удалить ненужные скобочки в названиях (и вроде еще апострофы)
+  unite("95% CI", conf.low, conf.high, sep = ", ") %>%
+  
+  rename(`Переменная` = term, `Коэффициент` = estimate, `Стд.ошибка` = std.error, `Статистика` = statistic) %>%
+  relocate(`95% CI`, .after = `Коэффициент`) %>%
+  
+  flextable() %>%
+  theme_box() %>%
+  align(align = "center", part = "all") %>%
+  bold(i = ~`p.value` %>% str_extract("\\d.\\d{3}") %>% as.numeric() %>% `<`(0.05), j = "p.value") %>%
+  
+  color(i = ~`Коэффициент` > 0 & `p.value` %>% str_extract("\\d.\\d{3}") %>% as.numeric() %>% `<`(0.05), color = "green", j = "Коэффициент") %>%
+  color(i = ~`Коэффициент` < 0 & `p.value` %>% str_extract("\\d.\\d{3}") %>% as.numeric() %>% `<`(0.05), color = "red", j = "Коэффициент") #%>%
+  
+  #bg(i = ~`Коэффициент` > 0 & `p.value` %>% str_extract("\\d.\\d{3}") %>% as.numeric() %>% `<`(0.05), bg = "green", j = "Коэффициент") %>%
+  #bg(i = ~`Коэффициент` < 0 & `p.value` %>% str_extract("\\d.\\d{3}") %>% as.numeric() %>% `<`(0.05), bg = "red", j = "Коэффициент")
+  #это чтобы окрасить не текст, а ячейку
+```
+
+## Мой изначальный код из домашки, сохраняю для себя
+```{r}
+cleaned_data %>%
+  select(cardiovascular_disease, where(is.factor)) %>%
+  mutate(gender = gender %>% as.character() %>% replace_na("Нет данных") %>% 
+         as.factor()) %>%
+  count(cardiovascular_disease, gender) %>%
+  group_by(cardiovascular_disease) %>%
+  mutate(
+    "процент по группе" = (n / sum(n)) %>% round(4) %>% `*` (100) %>% str_c("%"),
+    "95% ДИ " = {
+      n_group <- sum(n) 
+      p <- n / n_group
+      paste0(
+        scales::percent(p - 1.96 * sqrt(p * (1 - p) / n_group), accuracy = 0.01),
+        " - ",
+        scales::percent(p + 1.96 * sqrt(p * (1 - p) / n_group), accuracy = 0.01)
+      )
+    }
+  ) %>%
+  ungroup() %>%
+  mutate(
+    "процент по выборке" = (n / sum(n)) %>% round(4) %>% `*` (100) %>% str_c("%"),
+       n = formatC(n, format = "d", big.mark = "") 
+       )%>%
+  rename("абсолютное количество" = n) %>% 
+  flextable() %>%
+  theme_box() %>%
+  align(align = "center", part = "all") %>%
+  merge_v("cardiovascular_disease")
+
+cleaned_data %>%
+select(cardiovascular_disease, where(is.factor)) %>%
+mutate(cholesterol  = cholesterol  %>% as.character() %>% replace_na("Нет данных") %>% 
+         as.factor()) %>%
+count(cardiovascular_disease, cholesterol) %>%
+group_by(cardiovascular_disease) %>%
+  mutate(
+    "процент по группе" = (n / sum(n)) %>% round(4) %>% `*` (100) %>% str_c("%"),
+    "95% ДИ " = {
+      n_group <- sum(n) 
+      p <- n / n_group
+      paste0(
+        scales::percent(p - 1.96 * sqrt(p * (1 - p) / n_group), accuracy = 0.01),
+        " - ",
+        scales::percent(p + 1.96 * sqrt(p * (1 - p) / n_group), accuracy = 0.01)
+      )
+    }
+  ) %>%
+  ungroup() %>%
+  mutate(
+    "процент по выборке" = (n / sum(n)) %>% round(4) %>% `*` (100) %>% str_c("%"),
+       n = formatC(n, format = "d", big.mark = "") 
+       )%>%
+  rename("абсолютное количество" = n) %>% 
+  flextable() %>%
+  theme_box() %>%
+  align(align = "center", part = "all") %>%
+  merge_v("cardiovascular_disease")
+
+cleaned_data %>%
+select(cardiovascular_disease, where(is.factor)) %>%
+mutate(glucose  = glucose  %>% as.character() %>% replace_na("Нет данных") %>% 
+         as.factor()) %>%
+count(cardiovascular_disease, glucose) %>%
+group_by(cardiovascular_disease) %>%
+  mutate(
+    "процент по группе" = (n / sum(n)) %>% round(4) %>% `*` (100) %>% str_c("%"),
+    "95% ДИ " = {
+      n_group <- sum(n) 
+      p <- n / n_group
+      paste0(
+        scales::percent(p - 1.96 * sqrt(p * (1 - p) / n_group), accuracy = 0.01),
+        " - ",
+        scales::percent(p + 1.96 * sqrt(p * (1 - p) / n_group), accuracy = 0.01)
+      )
+    }
+  ) %>%
+  ungroup() %>%
+  mutate(
+    "процент по выборке" = (n / sum(n)) %>% round(4) %>% `*` (100) %>% str_c("%"),
+       n = formatC(n, format = "d", big.mark = "") 
+       )%>%
+  rename("абсолютное количество" = n) %>% # Переименование колонки n
+  flextable() %>%
+  theme_box() %>%
+  align(align = "center", part = "all") %>%
+  merge_v("cardiovascular_disease")
+
+cleaned_data %>%
+select(cardiovascular_disease, where(is.factor)) %>%
+mutate(smoking  = smoking  %>% as.character() %>% replace_na("Нет данных") %>% 
+         as.factor()) %>%
+count(cardiovascular_disease, smoking) %>%
+group_by(cardiovascular_disease) %>%
+  mutate(
+    "процент по группе" = (n / sum(n)) %>% round(4) %>% `*` (100) %>% str_c("%"),
+    "95% ДИ " = {
+      n_group <- sum(n) 
+      p <- n / n_group
+      paste0(
+        scales::percent(p - 1.96 * sqrt(p * (1 - p) / n_group), accuracy = 0.01),
+        " - ",
+        scales::percent(p + 1.96 * sqrt(p * (1 - p) / n_group), accuracy = 0.01)
+      )
+    }
+  ) %>%
+  ungroup() %>%
+  mutate(
+    "процент по выборке" = (n / sum(n)) %>% round(4) %>% `*` (100) %>% str_c("%"),
+       n = formatC(n, format = "d", big.mark = "") 
+       )%>%
+  rename("абсолютное количество" = n) %>% # Переименование колонки n
+  flextable() %>%
+  theme_box() %>%
+  align(align = "center", part = "all") %>%
+  merge_v("cardiovascular_disease")
+
+cleaned_data %>%
+select(cardiovascular_disease, where(is.factor)) %>%
+mutate(alcohol_intake  = alcohol_intake  %>% as.character() %>% replace_na("Нет данных") %>% 
+         as.factor()) %>%
+count(cardiovascular_disease, alcohol_intake) %>%
+group_by(cardiovascular_disease) %>%
+  mutate(
+    "процент по группе" = (n / sum(n)) %>% round(4) %>% `*` (100) %>% str_c("%"),
+    "95% ДИ " = {
+      n_group <- sum(n) 
+      p <- n / n_group
+      paste0(
+        scales::percent(p - 1.96 * sqrt(p * (1 - p) / n_group), accuracy = 0.01),
+        " - ",
+        scales::percent(p + 1.96 * sqrt(p * (1 - p) / n_group), accuracy = 0.01)
+      )
+    }
+  ) %>%
+  ungroup() %>%
+  mutate(
+    "процент по выборке" = (n / sum(n)) %>% round(4) %>% `*` (100) %>% str_c("%"),
+       n = formatC(n, format = "d", big.mark = "") 
+       )%>%
+  rename("абсолютное количество" = n) %>% # Переименование колонки n
+  flextable() %>%
+  theme_box() %>%
+  align(align = "center", part = "all") %>%
+  merge_v("cardiovascular_disease")
+
+cleaned_data %>%
+select(cardiovascular_disease, where(is.factor)) %>%
+mutate(physical_activity  = physical_activity  %>% as.character() %>% replace_na("Нет данных") %>%
+         as.factor()) %>%
+count(cardiovascular_disease, physical_activity) %>%
+group_by(cardiovascular_disease) %>%
+  mutate(
+    "процент по группе" = (n / sum(n)) %>% round(4) %>% `*` (100) %>% str_c("%"),
+    "95% ДИ " = {
+      n_group <- sum(n) 
+      p <- n / n_group
+      paste0(
+        scales::percent(p - 1.96 * sqrt(p * (1 - p) / n_group), accuracy = 0.01),
+        " - ",
+        scales::percent(p + 1.96 * sqrt(p * (1 - p) / n_group), accuracy = 0.01)
+      )
+    }
+  ) %>%
+  ungroup() %>%
+  mutate(
+    "процент по выборке" = (n / sum(n)) %>% round(4) %>% `*` (100) %>% str_c("%"),
+       n = formatC(n, format = "d", big.mark = "") 
+       )%>%
+  rename("абсолютное количество" = n) %>% # Переименование колонки n
+  flextable() %>%
+  theme_box() %>%
+  align(align = "center", part = "all") %>%
+  merge_v("cardiovascular_disease")
+```
+
+
+
+
+

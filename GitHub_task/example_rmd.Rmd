@@ -1,0 +1,79 @@
+---
+title: "Untitled"
+author: "Eva"
+date: "`r Sys.Date()`"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(readxl)
+library(lubridate)
+
+library(flextable)
+
+##################
+
+```
+
+```{r}
+
+read_csv2("data/raw/team_1.csv") -> original_data
+
+original_data %>%
+  select(contains(c("GRP", "GEN", "VAS", "WBC", "RBC", "HGB"))) %>%
+  rename_with(function(x) x %>% 
+                str_replace("V0_", "Визит 0__") %>% 
+                str_replace("V1_", "Визит 1__") %>% 
+                str_replace("V2_", "Визит 2__") %>%
+                str_replace("CB_", "") %>%
+                str_remove("DEM_") %>%
+                str_replace("GEN", "Sex") %>%                
+                str_replace("WBC", "White blood cells") %>%
+                str_replace("RBC", "Red blood cells") %>%
+                str_replace("HGB", "Hemoglobin")) %>%
+  rename(Group = `Визит 0__GRP`) %>%
+  
+  mutate(across(where(is.character), function(x) as.factor(x))) -> cleaned_data
+
+```
+
+\newpage
+
+# Таблица 1 — Количественные переменные
+
+```{r}
+
+statistics <- list(
+  
+      `_Количество субъектов` = ~length(.x) %>% as.character(),
+      `_Количество (есть данные)` = ~sum(!is.na(.x)) %>% as.character(),
+      `_Нет данных` = ~sum(is.na(.x)) %>% as.character(),
+      `_Ср. знач.` = ~ifelse(sum(!is.na(.x)) == 0, "Н/П*", mean(.x, na.rm = TRUE) %>% round(2) %>% as.character()),
+      `_Станд. отклон.` = ~ifelse(sum(!is.na(.x)) < 3, "Н/П*", sd(.x, na.rm = TRUE) %>% round(2) %>% as.character()),
+      #`_95% ДИ для среднего` = ~sd(.x, na.rm = TRUE) %>% round(2) %>% as.character(),
+      `_мин. - макс.` = ~ifelse(sum(!is.na(.x)) == 0, "Н/П*", paste0(min(.x, na.rm = TRUE) %>% round(2), " - ", max(.x, na.rm = TRUE) %>% round(2))),
+      `_Медиана` = ~ifelse(sum(!is.na(.x)) == 0, "Н/П*", median(.x, na.rm = TRUE) %>% round(2) %>% as.character()),
+      `_Q1 - Q3` = ~ifelse(sum(!is.na(.x)) == 0, "Н/П*", paste0(quantile(.x, 0.25, na.rm = TRUE) %>% round(2), " - ", quantile(.x, 0.75, na.rm = TRUE) %>% round(2)))
+      
+)
+
+cleaned_data %>%
+  select(Group, where(is.numeric)) %>%
+  group_by(Group) %>%
+  summarize(across(where(is.numeric), statistics)) %>%
+  pivot_longer(!Group) %>%
+  separate(name, into = c("Visit", "Variable", "Statistics"), sep = "__") %>%
+  rename(Value = value) %>%
+  relocate(Variable, .before = Visit) %>%
+  
+  flextable() %>%
+  theme_box() %>%
+  align(align = "center", part = "all") %>%
+  merge_v(c("Group", "Visit", "Variable"))
+  
+```
