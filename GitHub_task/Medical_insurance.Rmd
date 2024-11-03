@@ -1,0 +1,92 @@
+---
+title: "Medical_insurance"
+author: "NataliaLaskina"
+date: "2024-11-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(flextable)
+```
+
+```{r}
+
+read_csv('C:/Users/laskn/BioStat_2024/data/originals/HealthInsurance.csv') -> insurance_data
+
+glimpse(insurance_data)
+
+```
+
+```{r}
+
+insurance_data <- insurance_data %>% 
+    mutate(across(c(health, limit, gender, insurance, married, selfemp, region , ethnicity, education), ~ as.factor(.x)))
+
+glimpse(insurance_data)
+```
+
+## Однофакторный анализ: GLM
+
+```{r}
+insurance_data %>% 
+  select(!rownames) %>%
+  mutate(across(where(is.factor), function(x) x %>% fct_relabel(function(x) x %>% str_c(": ", .)))) -> model_data
+  
+glm(`insurance` ~ ., model_data, family = binomial) %>%
+  
+  tidy(conf.int = TRUE) %>%
+  
+  mutate(across(c(estimate, std.error, statistic, conf.low, conf.high), function(x) x %>% formatC(format = "f", digits = 2, decimal.mark = ".")),
+         `p.value` = ifelse(`p.value` < 0.001, "<0.001", round(`p.value`, 3)),
+         term = term %>% str_remove_all("`") %>% str_replace("\\(Intercept\\)", "Intercept")) %>%
+  
+  unite("95% CI", conf.low, conf.high, sep = ", ") %>%
+  
+  rename(`Переменная` = term, `Коэффициент` = estimate, `Стд.ошибка` = std.error, `Статистика` = statistic) %>%
+  relocate(`95% CI`, .after = `Коэффициент`) %>%
+  
+  flextable() %>%
+  theme_box() %>%
+  align(align = "center", part = "all") %>%
+  bold(i = ~`p.value` %>% str_extract("\\d.\\d{3}") %>% as.numeric() %>% `<`(0.05), j = "p.value") %>%
+  
+  color(i = ~`Коэффициент` > 0 & `p.value` %>% str_extract("\\d.\\d{3}") %>% as.numeric() %>% `<`(0.05), color = "green", j = "Коэффициент") %>%
+  color(i = ~`Коэффициент` < 0 & `p.value` %>% str_extract("\\d.\\d{3}") %>% as.numeric() %>% `<`(0.05), color = "red", j = "Коэффициент")
+
+
+
+```
+
+Выводы из результатов регрессионной модели:
+
+o	Самочувствие:
+Люди, которые считают своё здоровье хорошим, чаще имеют медицинскую страховку.
+o	Возраст:
+Вероятность наличия страховки возрастает с возрастом.
+o	Пол:
+Мужчины менее склонны иметь медицинскую страховку в сравнении с женщинами. 
+o	Семейное положение:
+Женатые/замужние люди чаще имеют страховку. 
+o	Размер семьи:
+Большие семьи с меньшей вероятностью приобретают медицинскую страховку.
+Вероятно, большая семья требует больших затрат, что может уменьшить финансовую доступность страховки.
+o	Самозанятость снижает вероятность наличия медицинской страховки.
+o	Регион:
+Южане и жители запада имеют меньше шансов на страхование.
+Вероятно, эти регионы отличаются низким уровнем страхования из-за культурных особенностей или экономических условий.
+o	Этничность:
+Европеоидная раса чаще имеет страховку, чем афро-американцы и представители других этнических групп.
+o	Образование:
+Отсутствие образования, или образование только на уровне старшей школы снижает вероятность владения медицинской страховкой. 
+
+
+
+
+
+
+
+
+
