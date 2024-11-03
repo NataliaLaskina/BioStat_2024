@@ -1,0 +1,257 @@
+---
+title: "Medical_data_specificity_tasks"
+author: "NataliaLaskina"
+date: "2024-11-02"
+output: 
+   html_document:
+       toc: true
+       toc_float:
+           collapsed: false
+           smooth_scroll: true
+       theme: flatly
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(rstatix)
+library(pROC)
+library(readxl)
+library(gtsummary)
+
+```
+
+#Чтение данных
+
+```{r}
+
+trauma_data <- read_excel('C:/Users/laskn/BioStat_2024/data/originals/trauma.xlsx')
+
+trauma_data %>% summary()
+
+```
+#Форматирование данных
+
+```{r}
+
+trauma_data <- trauma_data %>% 
+    mutate(across(c(id, Sex, Death), ~ as.factor(.x)))
+
+trauma_data$Height <- gsub('"', '', trauma_data$Height)
+
+trauma_data$Height <- as.numeric(trauma_data$Height)
+
+trauma_data %>% summary()
+
+```
+
+#Перевод в нужные единицы измерения, добавление переменной BMI
+
+```{r}
+
+trauma_data_cleaned <- trauma_data %>%
+
+    mutate(
+        
+        # Заменим единицы в дюймах на единицы в метрах
+        Height = round(Height * 0.0254, 1),
+        # Преобразуем Weight из фунтов в килограммы
+        Weight = round(Weight * 0.453592, 1),
+        
+       # Заменим "0" на пропущенные значения
+        Hb = na_if(Hb, 0),
+        
+        BMI = (Weight / Height / Height) %>% round(1) 
+        
+        )
+
+trauma_data_cleaned %>% head()
+
+trauma_data_cleaned %>% summary()
+
+```
+#Пациенты со сниженным уровнем гемоглобина
+
+```{r}
+
+trauma_data_cleaned <- trauma_data_cleaned %>%
+  mutate(
+    Hb_Low = case_when(
+      Sex == "Male" & Hb < 13.5 ~ TRUE,
+      Sex == "Female" & Hb < 12 ~ TRUE,
+      TRUE ~ FALSE
+    )
+  )
+
+# Считаем количество пациентов с низким Hb
+n_low_hb <- sum(trauma_data_cleaned$Hb_Low, na.rm = TRUE)
+
+percent_low_hb <- (n_low_hb / nrow(trauma_data_cleaned)) * 100
+
+cat("У", n_low_hb, "пациентов (", round(percent_low_hb, 1), "%) был снижен уровень гемоглобина.\n")
+
+```
+
+#Средний BMI, доля людей с ожирением
+
+```{r}
+
+# Средний ИМТ
+mean_bmi <- mean(trauma_data_cleaned$BMI, na.rm = TRUE)
+sd_bmi <- sd(trauma_data_cleaned$BMI, na.rm = TRUE)
+
+# Доля пациентов с ожирением
+n_obese <- sum(trauma_data_cleaned$BMI > 30, na.rm = TRUE)
+percent_obese <- (n_obese / nrow(trauma_data_cleaned)) * 100
+
+# Выводим результат
+cat("Средний ИМТ:", round(mean_bmi, 2), "(", round(sd_bmi, 2), ")\n")
+cat("Доля пациентов с ожирением:", round(percent_obese, 1), "%\n")
+
+```
+
+#Сравнение показателей по переменной Death
+
+```{r}
+
+trauma_data_cleaned %>% 
+    select(Sex,
+           Age,
+           Height,
+           Weight,
+           BMI,
+           SBP,
+           DBP,
+           FOUR,
+           GSC,
+           Hb,
+           Death) %>% 
+    tbl_summary(by = Death) 
+```
+
+# Анализ ROC-кривых
+## Death ~ Hb
+### ROC-анализ для Death ~ Hb
+
+```{r}
+
+roc_curve_1 <- roc(Death ~ Hb, 
+                   data = trauma_data_cleaned,
+                   ci = T)
+
+roc_curve_1
+
+
+```
+
+###ROC-кривая для Death ~ Hb
+
+```{r, fig.height=3, fig.width=3, dpi=300}
+
+roc_curve_1 %>% 
+    ggroc() + 
+    theme_bw()
+
+```
+
+Площадь под ROC-кривой равна 0.7078. 
+95% двусторонний ДИ для площади под ROC-кривой равен 0.6763-0.7392
+
+Уровень гемоглобина обладает умеренной дискриминационной способностью в предсказании летального исхода в течение 24 часов у пациентов с черепно-мозговой травмой от падения с электросамоката.
+Неидеальный, но информативный предиктор: модель не идеальна, но значительно лучше случайного предсказания (AUC = 0.5).
+Уверенность в оценке: доверительный интервал не включает значение 0.5, что подтверждает статистическую значимость связи между уровнем гемоглобина и вероятностью летального исхода.
+
+Возможные причины "неидеальной" формы кривой:
+
+Возможно, что уровень гемоглобина не линейно связан с летальным исходом. Например, может быть высокий риск смерти при очень низком и очень высоком гемоглобине, а при нормальных значениях риск может быть ниже.
+Другие факторы: вероятно, что летальный исход зависит от многих других факторов, кроме уровня гемоглобина. Например, тяжесть травмы, возраст, сопутствующие заболевания.
+
+### Координаты для Death ~ Hb
+
+```{r}
+roc_curve_1 %>% coords()
+```
+
+###Выбор лучшего порога для Death ~ Hb
+
+```{r}
+roc_curve_1 %>% coords(x = "best", best.method = "closest.topleft") 
+```
+
+Пороговое значение 13.15 является оптимальным для
+предсказания летального исхода в течение 24 часов по уровню гемоглобина. Этот порог обладает
+чувствительностью 0.67 и специфичностью 0.61
+
+## Death ~ GSC
+### ROC-анализ для Death ~ GSC
+
+```{r}
+
+roc_curve_2 <- roc(Death ~ GSC, 
+                   data = trauma_data_cleaned,
+                   ci = T)
+
+roc_curve_2
+```
+
+###ROC-кривая для Death ~ GSC
+
+```{r, fig.height=3, fig.width=3, dpi=300}
+
+roc_curve_2 %>% 
+    ggroc() + 
+    theme_bw()
+
+```
+Площадь под ROC-кривой равна 0.9124. 
+95% двусторонний ДИ для площади под ROC-кривой равен 0.8959-0.9289
+Выглядит, как показатель с почти идеальной дискриминационной способностью в предсказании летального исхода в течение 24 часов у пациентов с черепно-мозговой травмой от падения с электросамоката.
+
+### Координаты для Death ~ GSC
+
+```{r}
+roc_curve_2 %>% coords()
+```
+
+###Выбор лучшего порога для Death ~ GSC
+
+```{r}
+roc_curve_2 %>% coords(x = "best", best.method = "closest.topleft") 
+```
+
+Пороговое значение 7.5 (по шкале между 7 и 8) является оптимальным для
+предсказания летального исхода в течение 24 часов по шкале комы Глазго. Этот порог обладает
+чувствительностью 0.86 и специфичностью 0.81
+
+## ROC-анализ для показателя Death ~ все переменные
+
+```{r}
+
+trauma_data_cleaned %>% names()
+
+trauma_data_cleaned %>% 
+    
+    select("Death",
+           "Age",
+           "Height",
+           "Weight",
+           "BMI",
+           "SBP",
+           "DBP",
+           "FOUR",
+           "GSC",
+           "Hb"
+           ) %>% 
+    
+    pivot_longer(cols = !Death) %>% 
+    
+    group_by(name) %>% 
+    
+    summarise(AUC = roc(Death, value, ci = T)$ci[2] %>% round(3),
+              AUC_LCL = roc(Death, value, ci = T)$ci[1] %>% round(3),
+              AUC_UCL = roc(Death, value, ci = T)$ci[3] %>% round(3))
+```
+
+Наибольшей площадью под ROC-кривой обладает балл по шкале комы FOUR при поступлении - 0.934	. Этот показатель (из имеющихся) с лучшей дискриминационной способностью в предсказании летального исхода в течение 24 часов у пациентов с черепно-мозговой травмой от падения с электросамоката. 
+Наименьшей площадью под ROC-кривой обладает переменная рост (Height) - 0.486 - дискриминационная способность на уровне случайного предсказания.
