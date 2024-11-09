@@ -85,6 +85,8 @@ sl_ds <-
          AGE = as.numeric(AGE),
          TRTP = ARM,
          TRTPN = c(1,2)[match(TRTP, c("XXXX0", "XXXX1"))])
+
+sl_ds %>% glimpse()
 ```
 
 Согласно спецификации, у нас есть ряд важных дат или связанных с ними значений:

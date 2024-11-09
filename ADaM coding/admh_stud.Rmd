@@ -1,0 +1,212 @@
+---
+title: "ADMH coding"
+author: "NataliaLaskina"
+date: "2024-11-08"
+output: html_document
+---
+
+```{=html}
+<style type="text/css">
+body{
+  font-family: Helvetica;
+  font-size: 12pt;
+}
+/* Headers */
+h1, h2{
+  font-size: 16pt;
+}
+</style>
+```
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readxl)
+library(openxlsx)
+
+```
+
+#Подгружаем файлы
+
+```{r}
+
+mh_ds <- read.xlsx("./SDTM/MH_MEDICALHISTORY.xlsx")
+adsl_adam <- read.xlsx("./ADaM-like/ADSL.xlsx")
+
+```
+
+#Работа с доменом ADSL
+Вытащим оттуда переменные:
+STUDYID
+USUBJID
+TRTP
+TRTPN
+
+```{r}
+
+main_ds <- 
+  adsl_adam %>% 
+  select(STUDYID, USUBJID, TRTP, 
+         TRTPN)%>% 
+  mutate(TRTPN = as.integer(TRTPN))
+
+main_ds %>% glimpse()
+
+```
+
+#Работа с доменом MH
+
+```{r}
+
+new_df <- mh_ds %>%
+  filter(!is.na(MHTERM)) %>% 
+  filter(MHCAT == "Medical History") %>% 
+  select(STUDYID, SUBJID, MHSEQ, MHTERM, MHDECOD, MHBODSYS, MHSTDTC, MHENDTC, MHENRTPT
+) %>% 
+  mutate(MHCAT = "Medical History",
+         USUBJID = paste(STUDYID, SUBJID, sep = '-'),
+         MHENRF = ifelse(MHENRTPT == "ONGOING", "ONGOING", "")) %>%
+  select(!STUDYID)
+
+  
+new_df %>% glimpse()
+
+```
+
+#Создание новой переменной ASTDT
+
+```{r} 
+
+fix_date <- function(date_str) {
+   if (is.na(date_str)) { 
+    return(NA_character_)
+  }
+  
+  if (nchar(date_str) == 4) { # Год
+    return(paste0(date_str, "-01-01"))
+  }
+  
+  if (nchar(date_str) == 7) { # Год и месяц
+    return(paste0(date_str, "-01"))
+  }
+  
+  # Полная дата
+  return(date_str)
+}
+
+
+new_df <- new_df %>%
+  mutate(ASTDT = sapply(MHSTDTC, fix_date)) %>% 
+  rowwise() %>%
+  mutate(ASTDT = format(strptime(ASTDT, "%Y-%m-%d"), "%d.%m.%Y")) %>%
+  ungroup()
+
+```
+
+#Создание новой переменной ASTDTF
+
+```{r}
+
+new_df <- new_df %>%
+  mutate(ASTDTF = case_when(
+    is.na(MHSTDTC) ~ "Y",
+    nchar(MHSTDTC) == 4 ~ "D, M",
+    nchar(MHSTDTC) == 7 ~ "D",
+    nchar(MHSTDTC) == 10 & substr(MHSTDTC, 9, 10) == "-01" ~ "",
+    TRUE ~ ""
+  ))
+
+```
+
+#Создание новой переменной AENDT
+
+```{r}
+
+fix_date <- function(date_str) {
+   if (is.na(date_str)) { 
+    return(NA_character_)
+  }
+  
+  if (nchar(date_str) == 4) { # Год
+    return(paste0(date_str, "-01-01"))
+  }
+  
+  if (nchar(date_str) == 7) { # Год и месяц
+    return(paste0(date_str, "-01"))
+  }
+  
+ 
+  return(date_str)
+}
+
+new_df <- new_df %>%
+  mutate(AENDT = if_else(
+    MHENRTPT == "ONGOING", 
+    "", sapply(MHENDTC, fix_date))) %>% 
+  rowwise() %>%
+  mutate(AENDT = format(strptime(AENDT, "%Y-%m-%d"), "%d.%m.%Y")) %>%
+  ungroup()
+
+```
+
+#Создание новой переменной AENDTF
+
+```{r}
+
+new_df <- new_df %>%
+  mutate(AENDTF = case_when(
+    is.na(MHENDTC) ~ "Y",
+    nchar(MHENDTC) == 4 ~ "D, M",
+    nchar(MHENDTC) == 7 ~ "D",
+    nchar(MHENDTC) == 10 & substr(MHENDTC, 9, 10) == "-01" ~ "",
+    TRUE ~ ""
+  ))
+
+```
+
+#Объединение доменов
+
+```{r}
+ADMH <- left_join(main_ds, new_df, by = "USUBJID")
+```
+
+#Работа с финальным датасетом
+
+```{r}
+
+ADMH  <- ADMH %>%
+mutate(MHSEQ = as.integer(MHSEQ),
+       MHENDTC = as.character(MHENDTC))
+
+
+ADMH <- ADMH %>%
+  select(STUDYID,
+         USUBJID,
+         TRTP,
+         TRTPN,
+         MHSEQ,
+         MHCAT,
+         MHTERM,
+         MHDECOD,
+         MHBODSYS,
+         MHSTDTC,
+         ASTDT,
+         ASTDTF,
+         MHENDTC,
+         AENDT,
+         AENDTF,
+         MHENRTPT,
+         MHENRF
+)
+
+ADMH  %>% glimpse()
+
+
+```
+
+#Печать таблицы
+
+```{r}
+write.xlsx(ADMH, "./ADaM-like/ADMH.xlsx")
+```
+
