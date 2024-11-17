@@ -1,0 +1,423 @@
+---
+title: "Advanced_data_visualization"
+author: "NataliaLaskina"
+date: "2024-11-17"
+output: rmarkdown::github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+theme_set(theme_minimal())
+library(ggpubr)
+library(rstatix)
+library(ggstatsplot)
+library(ggpubr)
+library(ggcorrplot)
+library(corrplot)
+library(cluster)
+library(pheatmap)
+library(corrr)
+library(ggfortify)
+library(factoextra)
+library(FactoMineR)
+library(ggbiplot)
+library(plotly)
+library(ggrepel)
+library(tidymodels)
+library(embed)
+library(viridis)
+library(gridExtra)
+```
+
+# 1. Чтение и редактирование данных
+
+```{r}
+
+birthweight <- readRDS("C:/Users/laskn/BioStat_2024/Advanced_data_visualization/very_low_birthweight.RDS") 
+
+glimpse(birthweight)
+
+# Подсчет количества пропусков в каждом столбце
+na_counts <- colSums(is.na(birthweight))
+
+# Удаление столбцов с более чем 100 пропусками
+birthweight_filtered_cols <- birthweight[, na_counts <= 100]
+
+# Удаление строк с пропусками
+birthweight_clean <- na.omit(birthweight_filtered_cols)
+
+#Создание переменной время от рождения до смерти или выписки
+birthweight_clean <- birthweight_clean %>%
+  mutate(
+    time_to_event = ifelse(
+      !is.na(exit) & !is.na(birth),
+      as.numeric(exit - birth), # Время от рождения до выписки
+      NA
+    )
+  )
+
+#Создание переменной id
+birthweight_clean <- birthweight_clean %>%
+  mutate(id = row_number())
+
+glimpse(birthweight_clean)
+
+summary(birthweight_clean)
+```
+
+# 2. Постройте графики плотности распределения для числовых переменных. Удалите выбросы, если таковые имеются. Преобразуйте категориальные переменные в факторы. Для любых двух числовых переменных раскрасьте график по переменной ‘inout’
+
+```{r}
+
+# Преобразуем некоторые переменные в факторные
+
+birthweight_clean <- birthweight_clean %>%
+  mutate(across(c(twn, vent, pneumo, pda, cld, dead, id), ~ factor(.)))
+
+# Функция для определения и удаления выбросов по правилу трёх сигм
+
+find_and_remove_outliers <- function(x) {
+  mean_x <- mean(x, na.rm = TRUE)
+  sd_x <- sd(x, na.rm = TRUE)
+  lower_bound <- mean_x - 3 * sd_x
+  upper_bound <- mean_x + 3 * sd_x
+  ifelse(x >= lower_bound & x <= upper_bound, x, NA) # Заменяем выбросы на NA
+}
+
+#Удаление выбросов
+
+birthweight_clean  <- birthweight_clean %>%
+  mutate_if(is.numeric, find_and_remove_outliers)
+
+sum(is.na(birthweight_clean))
+```
+
+```{r}
+
+#До этого мы уже все строки с NA удалили из датасета, значит, в датасете нашлось 28 выбросов в числовых переменных. Удалим снова строки с NA
+
+# Удаление строк с пропусками
+birthweight_clean <- na.omit(birthweight_clean)
+
+sum(is.na(birthweight_clean))
+
+```
+
+```{r}
+#Построение графиков плотности распределения для числовых переменных
+
+birthweight_numeric <- birthweight_clean %>% select_if(is.numeric)
+
+birthweight_long <- birthweight_numeric %>% 
+  pivot_longer(cols = everything(), names_to = "variable", values_to = "value")
+
+ggplot(birthweight_long, aes(x = value)) +
+  geom_density(fill = "lightblue", alpha = 0.7) +  
+  facet_wrap(~variable, scales = "free") +        
+  labs(title = "Графики плотности распределения числовых переменных",
+       x = "Значение",
+       y = "Плотность")  
+
+```
+
+```{r}
+#Графики плотностей распределения + inout
+
+birthweight_numeric <- birthweight_clean %>% select_if(is.numeric)
+
+# Объединение с фактором inout
+birthweight_long <- birthweight_numeric %>% 
+  bind_cols(inout = birthweight_clean$inout) %>% 
+  pivot_longer(cols = -inout, names_to = "variable", values_to = "value")
+
+ggplot(birthweight_long, aes(x = value, fill = inout)) +
+  geom_density(alpha = 0.7) +
+  facet_wrap(~variable, scales = "free") +
+  labs(title = "Графики плотности распределения числовых переменных по группам 'inout'",
+       x = "Значение",
+       y = "Плотность",
+       fill = "inout")
+```
+
+#  3. Проведите тест на сравнение значений колонки ‘lowph’ между группами в переменной inout. Вид статистического теста определите самостоятельно. Визуализируйте результат через библиотеку 'rstatix'. Как бы вы интерпретировали результат, если бы знали, что более низкое значение lowph ассоциировано с более низкой выживаемостью?
+
+```{r}
+# Проведение теста Уэлча
+stat.test <- birthweight_clean %>%
+  t_test(lowph ~ inout, var.equal = FALSE)
+
+print(stat.test)
+
+# Визуализация результатов
+#Я не нашла, как можно визуализировать через rstatix, зато нашла такое
+
+ggbetweenstats(
+  data = birthweight_clean,
+  x = inout,
+  y = lowph,
+  plot.type = "box",
+  type = "p"
+)
+
+```
+Мы отвергаем нулевую гипотезу о том, что среднее lowph одинаково в двух группах inout. На графике мы видим, что в группе transported оно ниже.Если принять, что более низкое значение lowph ассоциировано с более низкой выживаемостью, получается, что в группе inout - transported более низкая выживаемость.
+ 
+# 4. Сделайте новый датафрейм, в котором оставьте только континуальные или ранговые данные, кроме 'birth', 'year' и 'exit'. Сделайте корреляционный анализ этих данных. Постройте два любых типа графиков для визуализации корреляций.
+ 
+```{r}
+birthweight_clear_2 <- birthweight_clean %>%
+  select(hospstay, lowph, pltct, bwt, gest, apg1) 
+
+birthweight_cor <- cor(birthweight_clear_2)
+
+corrplot(birthweight_cor, method = 'number')
+
+corrplot(birthweight_cor, method = "color", type = "lower", 
+         addCoef.col = "grey30", diag = FALSE,
+         cl.pos = "b", tl.col = "grey10",
+         col = COL2('RdBu', 10))
+
+birthweight_cor %>% 
+  network_plot(min_cor = .0)
+```
+
+# 5. Постройте иерархическую кластеризацию на этом датафрейме.
+
+```{r}
+
+birthweight_scaled <- scale(birthweight_clear_2)
+
+birthweight_dist <- dist(birthweight_scaled,
+                       method = "euclidean")
+as.matrix(birthweight_dist)[1:6, 1:6]
+
+birthweight_dist.hc <- hclust(d = birthweight_dist,
+                     method = "ward.D2")
+
+fviz_dend(birthweight_dist.hc, 
+          cex = 0.6)
+
+#Оптимальное число кластеров
+fviz_nbclust(birthweight_scaled, FUN = hcut, method = "silhouette")
+
+birthweight_kmean <- kmeans(birthweight_clear_2,
+                          centers = 2, # Количество центроидов-кластеров
+                          iter.max = 10, # Максимальное количество итераций-шагов центроидов
+                          nstart = 35) # Какое количество центроидов сгенерировать в начале? Потом автоматически алгоритм сократит их до числа centers, оставив только лучшие. Рекомендуется ставить между 25 и 50, чтобы найти стабильное решение
+
+head(birthweight_kmean)
+
+fviz_nbclust(birthweight_scaled, kmeans, method = "wss") +
+  ggtitle('Birthweight dataset')
+
+```
+
+```{r}
+
+fviz_dend(birthweight_dist.hc, 
+          k = 2, # Задаём число кластеров
+          cex = 0.5, # Задаем размер лейблов
+          k_colors = c("#2E9FDF", "#FC4E07"),
+          color_labels_by_k = TRUE, # Соотнести цвета с кластерами
+          rect = TRUE # Добавить "квадратик" вокруг групп
+)
+
+
+#Оценка
+# Cophentic distance
+birthweight_dist.coph <- cophenetic(birthweight_dist.hc)
+# Корреляция
+cor(birthweight_dist, birthweight_dist.coph)
+
+# Hopkins
+get_clust_tendency(birthweight_scaled, 
+        n = nrow(birthweight_scaled)-1)[1]
+```
+
+# 6. Сделайте одновременный график heatmap и иерархической кластеризации. Интерпретируйте результат.
+
+```{r}
+
+birthweight_dist <- dist(birthweight_scaled)
+
+pheatmap(birthweight_scaled, 
+         show_rownames = FALSE, 
+         clustering_distance_rows = birthweight_dist,
+         clustering_method = "ward.D2", 
+         cutree_rows = 2,
+         cutree_cols = length(colnames(birthweight_scaled)),
+         angle_col = 45, 
+         main = "Dendrograms for clustering rows and columns with heatmap")
+
+```
+Интерпретация. Вообще оценки кластеризации показаци, что наши данные не очень-то хорошо разделяются на кластеры. Мне показалось, что лучше всего здесь разделить только на два кластера, которые более и менее выделяются по переменной hospstay (длительность пребывания в больнице): большая длительность и небольшая. Верхний кластер: этот кластер выделяется относительно высокими значениями hospstay. Это может указывать на группу новорожденных, имеющих более серьезные проблемы со здоровьем, требующие длительного лечения. bwt (вес при рождении), gest (гестационный возраст), lowph (lowest pH in first 4 days of life) в этом кластере действительно кажутся ниже, и выше во втором (нижнем) кластере, гле время пребывания в больнице меньше. pltct (количество тромбоцитов) уже хуже разделяется по этому принципу, и совсем плохо разделяется apg1 (оценка Апгар), хотя все же кажется, что высоких значений апгар и pltct больше в нижнем кластере.
+
+# 7. Проведите PCA анализ на этих данных. Проинтерпретируйте результат. Нужно ли применять шкалирование для этих данных перед проведением PCA?
+
+Применять шкалирование нужно, так как переменные имеют разные единицы измерения и диапазоны значений.
+
+```{r}
+
+birthweight_full.pca <- prcomp(birthweight_clear_2, 
+                        scale = T)
+
+summary(birthweight_full.pca)
+
+fviz_eig(birthweight_full.pca, addlabels = T, ylim = c(0, 40))
+
+
+```
+
+```{r}
+fviz_pca_var(birthweight_full.pca, col.var = "contrib")
+```
+
+```{r}
+#топ 3 самых важных переменных с т.зр. их вариации в PC1 и PC2
+
+fviz_pca_var(birthweight_full.pca, 
+             select.var = list(contrib = 3), # Задаём число здесь 
+             col.var = "contrib")
+```
+
+```{r}
+#Посмотрим из чего состоят 1, 2 и 3 главные компоненты
+fviz_contrib(birthweight_full.pca, choice = "var", axes = 1, top = 24) # 1
+fviz_contrib(birthweight_full.pca, choice = "var", axes = 2, top = 24) # 2
+fviz_contrib(birthweight_full.pca, choice = "var", axes = 3, top = 24) # 3
+```
+
+Интерпретация. Две главные компоненты (PC1 и PC2) объясняют значительную часть вариации в данных (60.97%). 
+PC1 (42.93% вариации): сильно коррелирует с bwt (вес при рождении) и gest (гестационный возраст). Это говорит о том, что большая часть вариации в данных связана с различиями в весе при рождении и гестационном возрасте. Более тяжелые дети, рожденные после более длительной гестации, формируют один конец PC1, а дети с меньшим весом и более коротким гестационным возрастом — другой. Соответственно,переменные bwt и gest скоррелированы друг с другом: более длительный срок беременности, как правило, приводит к более высокому весу при рождении.
+PC2 (18.04% вариации): сильно коррелирует с pltct (количество тромбоцитов), т.е. количество тромбоцитов является важным фактором, влияющим на вариацию данных, при этом pltct не скоррелирован с переменными bwt и gest.
+
+Другие переменные имеют меньшее влияние на первые две главные компоненты, эти факторы менее важны для объяснения общей вариации в данных, их влияние проявляется в других главных компонентах (hospstay и lowph вносят наибольший вклад в третью компоненту).
+
+ hospstay (длительность пребывания в больнице) отрицательно коррелирует с bwt (вес при рождении) и с gest (гестационный возраст). Более тяжелые дети, как правило, требуют меньшего медицинского вмешательства и, следовательно, более короткого пребывания в больнице. Также, как и более длительный гестационный возраст, как правило, связан с более зрелым и здоровым новорожденным, требующим меньшего медицинского вмешательства и, следовательно, более короткого пребывания в больнице.
+
+# 8. Постройте biplot график для PCA. Раскрасьте его по значению колонки 'dead'.
+
+```{r}
+
+birthweight_clear_3 <- birthweight_clean %>%
+  select(hospstay, lowph, pltct, bwt, gest, apg1, dead, id)  
+
+ggbiplot_plot <- ggbiplot(birthweight_full.pca, 
+         scale=0, 
+         groups = as.factor(birthweight_clear_3$dead), 
+         ellipse = T,
+         alpha = 0.2) 
+  
+print(ggbiplot_plot)
+
+```
+
+# 9. Переведите последний график в 'plotly'. При наведении на точку нужно, чтобы отображалось id пациента.
+
+```{r}
+pca_data <- data.frame(
+  PC1 = birthweight_full.pca$x[, 1],
+  PC2 = birthweight_full.pca$x[, 2],
+  dead = as.factor(birthweight_clear_3$dead),
+  id = birthweight_clear_3$id
+)
+
+ggbiplot_plot <- ggplot(pca_data, aes(x = PC1, y = PC2, color = dead, text = id)) +
+  geom_point(alpha = 0.5)  # Только точки
+
+ggplotly(ggbiplot_plot, tooltip = "text")
+```
+
+```{r}
+
+ggbiplot_plot <- ggbiplot(birthweight_full.pca, 
+         scale=0, 
+         groups = as.factor(birthweight_clear_3$dead), 
+         ellipse = T,
+         alpha = 0.2) 
+
+ggbiplot_plot <- ggbiplot_plot +
+  geom_point(aes(text = paste("ID:", birthweight_clean$id)),
+             show.legend = FALSE)
+
+ggbiplot_plotly <- ggplotly(ggbiplot_plot, tooltip = "text")
+
+ggbiplot_plotly
+```
+
+Эти два варианта оба не выполняют до конца своей задачи, но это пока лучшее, что у меня вышло.
+
+# 10. Дайте содержательную интерпретацию PCA анализу. Почему использовать колонку 'dead' для выводов об ассоциации с выживаемостью некорректно? 
+
+Насколько я поняла по тому, как расположены и куда ведут векторы на графике ggbiplot_plot, данный PCA анализ не объясняет ассоциации с выживаемостью по переменной dead.
+Кроме того, PCA предоставляет полезную информацию о взаимосвязях между непрерывными переменными, но не следует делать выводы о связи с бинарной зависимой переменной, такой как dead, непосредственно из этого анализа. Категориальная переменная dead включена только для визуализации, чтобы увидеть, как группы разделяются в пространстве PC1 и PC2. Дальше нужно применять другие методы анализа, например, анализ выживаемости, или логистическую регрессию.
+
+# 11. Приведите ваши данные к размерности в две колонки через UMAP. Сравните результаты отображения точек между алгоритмами PCA и UMAP.
+
+```{r, message=FALSE,warning=FALSE}
+
+umap_prep <- recipe(~., data = birthweight_clear_2) %>% 
+  step_normalize(all_predictors()) %>% 
+  step_umap(all_predictors()) %>%  
+  prep() %>%   
+  juice() 
+
+```
+
+```{r}
+
+umap_prep %>%
+  ggplot(aes(UMAP1, UMAP2)) + 
+  geom_point(aes(shape = as.character(birthweight_kmean$cluster),
+                 color = birthweight_clear_3$dead),
+             alpha = 0.7, size = 2) + 
+  labs(color = "Dead", shape = "Cluster")
+ 
+
+```
+PCA предполагает линейные взаимосвязи между переменными. UMAP не делает таких предположений и может лучше отображать нелинейные структуры данных. PCA стремится сохранить глобальную структуру данных. UMAP больше фокусируется на сохранении локальной близости точек.
+
+# 12. Давайте самостоятельно увидим, что снижение размерности – это группа методов, славящаяся своей неустойчивостью. Измените основные параметры UMAP (n_neighbors и min_dist) и проанализируйте, как это влияет на результаты.
+```{r}
+
+# Определение функции plot_umap
+plot_umap <- function(data, n_neighbors, min_dist, title) {
+  umap_prep <- recipe(~., data = data) %>%
+    step_normalize(all_predictors()) %>%
+    step_umap(all_predictors(), neighbors = n_neighbors, min_dist = min_dist) %>%
+    prep() %>%
+    juice()
+
+  ggplot(umap_prep, aes(UMAP1, UMAP2)) +
+    geom_point(aes(shape = as.character(birthweight_kmean$cluster),
+                   color = birthweight_clear_3$dead),
+               alpha = 0.7, size = 2) +
+    labs(color = "Dead", shape = "Cluster") 
+}
+
+
+# Различные комбинации параметров
+plots <- list(
+  plot_umap(birthweight_clear_2, n_neighbors = 5, min_dist = 0.1, "n_neighbors = 5, min_dist = 0.1"),
+  plot_umap(birthweight_clear_2, n_neighbors = 15, min_dist = 0.1, "n_neighbors = 15, min_dist = 0.1"),
+  plot_umap(birthweight_clear_2, n_neighbors = 5, min_dist = 0.5, "n_neighbors = 5, min_dist = 0.5"),
+  plot_umap(birthweight_clear_2, n_neighbors = 15, min_dist = 0.5, "n_neighbors = 15, min_dist = 0.5")
+)
+
+# Отображение графиков
+do.call(grid.arrange, c(plots, ncol = 2))
+
+```
+
+Графики демонстрируют, что изменение параметров UMAP существенно влияет на результаты снижения размерности. Выбор оптимальных параметров зависит от конкретных данных и цели анализа. 
+
+min_dist контролирует степень отталкивания между точками. Более высокое значение min_dist (0.5) приводит к более равномерному распределению точек, раздвигая их друг от друга. 
+
+Увеличение n_neighbors (нижний ряд) привело к более гладкому и менее фрагментированному распределению точек. Кажется, что левая панель (min_dist = 0.1) показывает более плотные кластеры с лучшим разделением, чем правая панель (min_dist = 0.5).
+
+Задания 13-15 я не успела сделать. Возможно ли досдать ее и получить комментарии, если остальное успел сдать до дедлайна?
+
+
+
