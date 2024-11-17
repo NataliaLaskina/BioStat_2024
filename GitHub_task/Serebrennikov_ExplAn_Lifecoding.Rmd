@@ -1,0 +1,66 @@
+---
+title: 'Эксплораторный анализ - 3'
+author: "Дмитрий Серебренников"
+output: 
+  html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Загрузим данные и пакеты
+
+```{r}
+library(tidyverse)
+theme_set(theme_minimal())
+```
+
+...
+
+[Body Fat Prediction Dataset](https://www.kaggle.com/datasets/fedesoriano/body-fat-prediction-dataset).
+
+Variables:
+
+1. Density determined from underwater weighing
+2. Percent body fat from Siri's (1956) equation
+3. Age (years)
+4. Weight (lbs)
+5. Height (inches)
+6. Neck circumference (cm)
+7. Chest circumference (cm)
+8. Abdomen 2 circumference (cm)
+9. Hip circumference (cm)
+10. Thigh circumference (cm)
+11. Knee circumference (cm)
+12. Ankle circumference (cm)
+13. Biceps (extended) circumference (cm)
+14. Forearm circumference (cm)
+15. Wrist circumference (cm)
+
+```{r}
+df <- read.csv('bodyfat.csv')
+```
+
+
+# Эксплораторный анализ
+
+```{}
+ЗАДАНИЕ: Проведите эксплораторный анализ данных bodyfat за 25 минут. Вы вольны самостоятельно решить какой стратегией пойти, но напомню, что сначала вы должны проанализировать общую структуру данных датасета (как строк, так и колонок), а потом можете сосредоточиться на одном сюжете и детально рассмотреть его.
+
+NB: Поскольку мы учимся *эксплораторному анализу* не предполагается, что вы будете использовать статистические тесты и моделирование.
+```
+
+Решение написать в чанке ниже и прислать в зум-чат по истечению времени:
+
+```{r}
+
+```
+
+
+
+
+
+
+
+

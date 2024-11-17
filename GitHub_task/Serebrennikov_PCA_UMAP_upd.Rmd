@@ -28,6 +28,8 @@ df_full <- read.csv('diabetes.csv') %>%
   select(-(bp.2s:bp.2d)) %>% 
   filter(if_all(where(is.numeric), ~!is.na(.))) # Remove rows with NA in numeric column. Another approach - imputation (e.g. via nearest neighbors)
 
+library(skimr)
+
 skimr::skim(df_full)
 ```
 

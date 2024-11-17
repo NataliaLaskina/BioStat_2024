@@ -302,7 +302,7 @@ library(ggplot2)
 observed=-4
 
 # Define the degrees of freedom for the t-distribution
-df <- 20  # Degrees of freedom
+df <- 29  # Degrees of freedom
 
 # Create a sequence of x values
 x_values <- seq(-4, 4, by = 0.01)  # Adjust the range and step size as needed
@@ -311,7 +311,7 @@ x_values <- seq(-4, 4, by = 0.01)  # Adjust the range and step size as needed
 pdf_t <- dt(x_values, df)
 
 # Квантили
-quantiles <- c(0.05, 1)
+quantiles <- c(0, 0.95)
 
 #quantile_values <- qnorm(quantiles, mean = 0, sd = 1)
 
@@ -432,10 +432,10 @@ library(ggplot2)
 
 #?quantile
 
-observed=5
+observed=-0.79
 
 # Определение степеней свободы для t-распределения
-df <- 6  # Степени свободы
+df <- 16  # Степени свободы
 
 # Создание последовательности значений x
 x_values <- seq(-4, 4, by = 0.01)  # Подстройте диапазон и размер шага по мере необходимости
@@ -543,7 +543,7 @@ x_values <- seq(-4, 4, by = 0.01)
 pdf_normal <- dnorm(x_values, mean = 0, sd = 1)
 
 # Квантили
-quantiles <- c(0.025, 0.975)
+quantiles <- c(0, 0.95)
 
 quantile_values <- qnorm(quantiles, mean = 0, sd = 1)
 
@@ -836,8 +836,8 @@ ggplot(pdf_data, aes(x = x, y = Probability)) +
 library(ggplot2)
 
 # Определение параметров степеней свободы для F-распределения
-df1 <- 5  # Степени свободы числителя
-df2 <- 5  # Степени свободы знаменателя
+df1 <- 10  # Степени свободы числителя
+df2 <- 10  # Степени свободы знаменателя
 
 # Создание последовательности значений x
 x_values <- seq(0.01, 5, by = 0.01)  # Подстраивайте диапазон и шаг по мере необходимости
@@ -853,7 +853,7 @@ critical_value_lower <- qf(quantiles[1], df1, df2)
 critical_value_upper <- qf(quantiles[2], df1, df2)
 
 # Расчет наблюдаемого значения F (замените на ваше фактическое наблюдаемое значение)
-observed_f_value <- 1  # Замените на ваше реальное наблюдаемое значение
+observed_f_value <- 0.25  # Замените на ваше реальное наблюдаемое значение
 
 # Создание data frame для построения графика
 pdf_data <- data.frame(x = x_values, Probability = pdf_fisher)
