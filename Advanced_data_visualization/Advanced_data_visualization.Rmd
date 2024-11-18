@@ -2,7 +2,7 @@
 title: "Advanced_data_visualization"
 author: "NataliaLaskina"
 date: "2024-11-17"
-output: rmarkdown::github_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -49,6 +49,8 @@ birthweight_filtered_cols <- birthweight[, na_counts <= 100]
 birthweight_clean <- na.omit(birthweight_filtered_cols)
 
 #Создание переменной время от рождения до смерти или выписки
+#Я сделала эту переменную, так как она описана в тексте задания, но в дальнейшем ее не использовала, так как не очень поняла, зачем она нужна. Это ведь по сути та же hopstay - время, проведенное в больнице, только в не очень понятных единицах.
+
 birthweight_clean <- birthweight_clean %>%
   mutate(
     time_to_event = ifelse(
@@ -65,6 +67,7 @@ birthweight_clean <- birthweight_clean %>%
 glimpse(birthweight_clean)
 
 summary(birthweight_clean)
+
 ```
 
 # 2. Постройте графики плотности распределения для числовых переменных. Удалите выбросы, если таковые имеются. Преобразуйте категориальные переменные в факторы. Для любых двух числовых переменных раскрасьте график по переменной ‘inout’
@@ -203,9 +206,9 @@ fviz_dend(birthweight_dist.hc,
 fviz_nbclust(birthweight_scaled, FUN = hcut, method = "silhouette")
 
 birthweight_kmean <- kmeans(birthweight_clear_2,
-                          centers = 2, # Количество центроидов-кластеров
-                          iter.max = 10, # Максимальное количество итераций-шагов центроидов
-                          nstart = 35) # Какое количество центроидов сгенерировать в начале? Потом автоматически алгоритм сократит их до числа centers, оставив только лучшие. Рекомендуется ставить между 25 и 50, чтобы найти стабильное решение
+                          centers = 2, 
+                          iter.max = 10, 
+                          nstart = 35) 
 
 head(birthweight_kmean)
 
@@ -252,7 +255,7 @@ pheatmap(birthweight_scaled,
          main = "Dendrograms for clustering rows and columns with heatmap")
 
 ```
-Интерпретация. Вообще оценки кластеризации показаци, что наши данные не очень-то хорошо разделяются на кластеры. Мне показалось, что лучше всего здесь разделить только на два кластера, которые более и менее выделяются по переменной hospstay (длительность пребывания в больнице): большая длительность и небольшая. Верхний кластер: этот кластер выделяется относительно высокими значениями hospstay. Это может указывать на группу новорожденных, имеющих более серьезные проблемы со здоровьем, требующие длительного лечения. bwt (вес при рождении), gest (гестационный возраст), lowph (lowest pH in first 4 days of life) в этом кластере действительно кажутся ниже, и выше во втором (нижнем) кластере, гле время пребывания в больнице меньше. pltct (количество тромбоцитов) уже хуже разделяется по этому принципу, и совсем плохо разделяется apg1 (оценка Апгар), хотя все же кажется, что высоких значений апгар и pltct больше в нижнем кластере.
+Интерпретация. Вообще оценки кластеризации показали, что наши данные не очень-то хорошо разделяются на кластеры. Мне показалось, что лучше всего здесь разделить только на два кластера, которые более и менее выделяются по переменной hospstay (длительность пребывания в больнице): большая длительность и небольшая. Верхний кластер: этот кластер выделяется относительно высокими значениями hospstay. Это может указывать на группу новорожденных, имеющих более серьезные проблемы со здоровьем, требующие длительного лечения. bwt (вес при рождении), gest (гестационный возраст), lowph (lowest pH in first 4 days of life) в этом кластере действительно кажутся ниже, и выше во втором (нижнем) кластере, гле время пребывания в больнице меньше. pltct (количество тромбоцитов) уже хуже разделяется по этому принципу, и совсем плохо разделяется apg1 (оценка Апгар), хотя все же кажется, что высоких значений апгар и pltct больше в нижнем кластере.
 
 # 7. Проведите PCA анализ на этих данных. Проинтерпретируйте результат. Нужно ли применять шкалирование для этих данных перед проведением PCA?
 
@@ -324,10 +327,10 @@ pca_data <- data.frame(
   id = birthweight_clear_3$id
 )
 
-ggbiplot_plot <- ggplot(pca_data, aes(x = PC1, y = PC2, color = dead, text = id)) +
-  geom_point(alpha = 0.5)  # Только точки
+ggbiplot <- ggplot(pca_data, aes(x = PC1, y = PC2, color = dead, text = id)) +
+  geom_point(alpha = 0.5)  
 
-ggplotly(ggbiplot_plot, tooltip = "text")
+ggplotly(ggbiplot, tooltip = "text")
 ```
 
 ```{r}
@@ -338,11 +341,11 @@ ggbiplot_plot <- ggbiplot(birthweight_full.pca,
          ellipse = T,
          alpha = 0.2) 
 
-ggbiplot_plot <- ggbiplot_plot +
-  geom_point(aes(text = paste("ID:", birthweight_clean$id)),
+ggbiplot_2 <- ggbiplot_plot +
+  geom_point(aes(text = paste("ID:", birthweight_clear_3$id)),
              show.legend = FALSE)
 
-ggbiplot_plotly <- ggplotly(ggbiplot_plot, tooltip = "text")
+ggbiplot_plotly <- ggplotly(ggbiplot_2, tooltip = "text")
 
 ggbiplot_plotly
 ```
@@ -417,7 +420,576 @@ min_dist контролирует степень отталкивания меж
 
 Увеличение n_neighbors (нижний ряд) привело к более гладкому и менее фрагментированному распределению точек. Кажется, что левая панель (min_dist = 0.1) показывает более плотные кластеры с лучшим разделением, чем правая панель (min_dist = 0.5).
 
-Задания 13-15 я не успела сделать. Возможно ли досдать ее и получить комментарии, если остальное успел сдать до дедлайна?
+
+# 13. Давайте самостоятельно увидим, что снижение размерности – это группа методов, славящаяся своей неустойчивостью. Пермутируйте 50% и 100% колонки 'bwt'. Проведите PCA и UMAP анализ. Наблюдаете ли вы изменения в куммулятивном проценте объяснённой вариации PCA? В итоговом представлении данных на биплотах для PCA? Отличается ли визуализация данных?
+
+## Пермутация 50% колонки 'bwt'
+```{r}
+birthweight_permuted <- birthweight_clear_3
+
+# Количество строк для пермутации
+n_to_permute <- nrow(birthweight_permuted) * 0.5
+
+# Выбираем случайные индексы
+indices <- sample(1:nrow(birthweight_permuted), n_to_permute)
+
+# Перемешиваем значения bwt для выбранных индексов
+shuffled_bwt <- sample(birthweight_permuted$bwt[indices])
+
+# Обновляем таблицу
+birthweight_permuted$bwt[indices] <- shuffled_bwt
+```
+
+```{r}
+birthweight_full.pca_2 <- prcomp(select(birthweight_permuted, -dead, -id), scale = TRUE)
+
+summary(birthweight_full.pca_2)
+
+fviz_eig(birthweight_full.pca_2, addlabels = T, ylim = c(0, 40))
+
+#Посмотрим из чего состоят 1, 2 и 3 главные компоненты
+fviz_contrib(birthweight_full.pca_2 , choice = "var", axes = 1, top = 24) # 1
+fviz_contrib(birthweight_full.pca_2 , choice = "var", axes = 2, top = 24) # 2
+fviz_contrib(birthweight_full.pca_2 , choice = "var", axes = 3, top = 24) # 3
+```
+
+```{r}
+fviz_pca_var(birthweight_full.pca_2, col.var = "contrib")
+
+
+fviz_pca_var(birthweight_full.pca_2, 
+             select.var = list(contrib = 3), # Задаём число здесь 
+             col.var = "contrib")
+```
+```{r}
+
+ggbiplot_plot_2 <- ggbiplot(birthweight_full.pca_2, 
+         scale=0, 
+         groups = as.factor(birthweight_permuted$dead), 
+         ellipse = T,
+         alpha = 0.2) 
+  
+print(ggbiplot_plot_2)
+```
+Две главные компоненты (PC1 и PC2) до пермутации объясняли 60.97% вариации в данных, а теперь 55,2 %.  Вклад разных переменных в объяснение вариации в каждой из трех главных компонент по отдельности изменился очень сильно по сравнению с первым анализом,хотя три переменных, вносящих наибольший вклад в анализ, остались те же. Но по остальным переменным длина векторов увеличилась, и hostplay уже не так сильно отрицательно скоррелирован gest и bwt. По остальным переменным также немного поменялось расположение векторов относительно друг друга. Расположение точек поменялось, но в общем похоже. 
+
+```{r}
+
+umap_prep <- recipe( ~ ., data = birthweight_permuted) %>%
+  step_rm(id, dead) %>%
+  step_normalize(all_predictors()) %>% 
+  step_umap(all_predictors()) %>%  
+  prep() %>%   
+  juice()
+
+umap_prep %>%
+  ggplot(aes(UMAP1, UMAP2)) + 
+  geom_point(aes(color = birthweight_permuted$dead),
+             alpha = 0.7, size = 2) + 
+  labs(color = "Dead")
+```
+Расположение точек прилично поменялось.
+
+## Пермутация 100% колонки 'bwt'
+
+```{r}
+birthweight_permuted_2 <- birthweight_clear_3
+
+# Пермутация всех строк в bwt
+birthweight_permuted_2$bwt <- sample(birthweight_permuted_2$bwt)
+
+```
+
+```{r}
+birthweight_full.pca_3 <- prcomp(select(birthweight_permuted_2, -dead, -id), scale = TRUE)
+
+summary(birthweight_full.pca_3)
+
+fviz_eig(birthweight_full.pca_3, addlabels = T, ylim = c(0, 40))
+
+#Посмотрим из чего состоят 1, 2 и 3 главные компоненты
+fviz_contrib(birthweight_full.pca_3 , choice = "var", axes = 1, top = 24) # 1
+fviz_contrib(birthweight_full.pca_3 , choice = "var", axes = 2, top = 24) # 2
+fviz_contrib(birthweight_full.pca_3 , choice = "var", axes = 3, top = 24) # 3
+```
+
+```{r}
+
+fviz_pca_var(birthweight_full.pca_3, col.var = "contrib")
+
+
+fviz_pca_var(birthweight_full.pca_3, 
+             select.var = list(contrib = 3), # Задаём число здесь 
+             col.var = "contrib")
+```
+
+```{r}
+
+ggbiplot_plot_3 <- ggbiplot(birthweight_full.pca_3, 
+         scale=0, 
+         groups = as.factor(birthweight_permuted_2$dead), 
+         ellipse = T,
+         alpha = 0.2) 
+  
+print(ggbiplot_plot_3)
+```
+Теперь все поменялось, конечно, драматически. Если во втором варианте еще можно было узнать первый, то теперь все совершенно по другому: и переменные, вносящие наибольший вклад в вариацию данных другие, и расположение векторов относительно друг друга, как и их длина и направление. Расположение точек сильно другое (в первом изменении не так сильно поменялось), как и форма и расположение эллипсов. Две главные компоненты объясняют теперь только 50.8% вариации данных.
+
+```{r}
+umap_prep <- recipe( ~ ., data = birthweight_permuted_2) %>%
+  step_rm(id, dead) %>%
+  step_normalize(all_predictors()) %>% 
+  step_umap(all_predictors()) %>%  
+  prep() %>%   
+  juice()
+
+umap_prep %>%
+  ggplot(aes(UMAP1, UMAP2)) + 
+  geom_point(aes(color = birthweight_permuted_2$dead),
+             alpha = 0.7, size = 2) + 
+  labs(color = "Dead")
+```
+По UMAP вообще все три версии сильно отличаются друг от друга, в то время, как в PCA во втором варианте было еще более и менее похоже на первый.
+
+# 14. Давайте проведем анализ чувствительности. Проведите анализ, как в шагах 4-6 для оригинального с удалением всех строк с пустыми значениями (т.е. включая колонки с количеством пропущенных значений больше 100), а затем для оригинального датафрейма с импутированием пустых значений средним или медианой. Как отличаются получившиеся результаты? В чем преимущества и недостатки каждого подхода?
+
+## Первый вариант - для удаления всех строк с пустыми значениями
+
+Я решила также удалять выбросы во всех новых вариантах данных, так как в первом варианте я провела весть анализ с удаленными выбросами, и так будет корректнее их сравнивать (осознание, что и в первом варианте, вероятно, это надо было сделать только для задания 2, пришло ко мне слишком поздно).
+
+```{r}
+
+# Удаление строк с пропусками
+birthweight_clean_4 <- na.omit(birthweight)
+
+glimpse(birthweight_clean_4)
+
+birthweight_clean_5 <- birthweight_clean_4 %>%
+  select(hospstay, lowph, pltct, bwt, gest, apg1, lol) 
+
+# Функция для определения и удаления выбросов по правилу трёх сигм
+
+find_and_remove_outliers <- function(x) {
+  mean_x <- mean(x, na.rm = TRUE)
+  sd_x <- sd(x, na.rm = TRUE)
+  lower_bound <- mean_x - 3 * sd_x
+  upper_bound <- mean_x + 3 * sd_x
+  ifelse(x >= lower_bound & x <= upper_bound, x, NA) # Заменяем выбросы на NA
+}
+
+#Удаление выбросов
+
+birthweight_clean_5  <- birthweight_clean_5 %>%
+  mutate_if(is.numeric, find_and_remove_outliers)
+
+birthweight_clean_5  <- na.omit(birthweight_clean_5)
+
+```
+```{r}
+ 
+birthweight_cor_new <- cor(birthweight_clean_5)
+
+corrplot(birthweight_cor_new, method = 'number')
+
+corrplot(birthweight_cor_new, method = "color", type = "lower", 
+         addCoef.col = "grey30", diag = FALSE,
+         cl.pos = "b", tl.col = "grey10",
+         col = COL2('RdBu', 10))
+
+birthweight_cor_new %>% 
+  network_plot(min_cor = .0)
+
+```
+
+```{r}
+birthweight_scaled_new <- scale(birthweight_clean_5)
+
+birthweight_dist_new <- dist(birthweight_scaled_new,
+                       method = "euclidean")
+as.matrix(birthweight_dist_new)[1:6, 1:6]
+
+birthweight_dist.hc_new <- hclust(d = birthweight_dist_new,
+                     method = "ward.D2")
+
+fviz_dend(birthweight_dist.hc_new, 
+          cex = 0.6)
+
+#Оптимальное число кластеров
+fviz_nbclust(birthweight_scaled_new, FUN = hcut, method = "silhouette")
+
+birthweight_kmean_new <- kmeans(birthweight_clean_5,
+                          centers = 2, 
+                          iter.max = 10, 
+                          nstart = 35) 
+
+head(birthweight_kmean_new)
+
+fviz_nbclust(birthweight_scaled_new, kmeans, method = "wss") +
+  ggtitle('Birthweight dataset')
+```
+
+```{r}
+fviz_dend(birthweight_dist.hc_new, 
+          k = 2, # Задаём число кластеров
+          cex = 0.5, # Задаем размер лейблов
+          k_colors = c("#2E9FDF", "#FC4E07"),
+          color_labels_by_k = TRUE, # Соотнести цвета с кластерами
+          rect = TRUE # Добавить "квадратик" вокруг групп
+)
+
+
+#Оценка
+# Cophentic distance
+birthweight_dist.coph_new <- cophenetic(birthweight_dist.hc_new)
+# Корреляция
+cor(birthweight_dist_new, birthweight_dist.coph_new)
+
+# Hopkins
+get_clust_tendency(birthweight_scaled_new, 
+        n = nrow(birthweight_scaled_new)-1)[1]
+```
+
+```{r}
+birthweight_dist_new <- dist(birthweight_scaled_new)
+
+pheatmap(birthweight_scaled_new, 
+         show_rownames = FALSE, 
+         clustering_distance_rows = birthweight_dist_new,
+         clustering_method = "ward.D2", 
+         cutree_rows = 2,
+         cutree_cols = length(colnames(birthweight_scaled_new)),
+         angle_col = 45, 
+         main = "Dendrograms for clustering rows and columns with heatmap")
+```
+У нас добавилась еще одна переменная, продолжительность родов: lol.Это довольно сильно отразилось на анализе корреляций, его визуализация выглядит теперь иначе. А вот на кластеризации, на мой взгляд, отразилось меньше: и оценки ее такие же (не очень подходят эти данные для кластеризации), и выделила я бы также только два кластера. Более длительное нахождение в больнице - более низкие значения по gest, bwt и lowph. Самые длительные роды тоже в этом кластере, впрочем, длительность родов вообще ни с чем не скоррелирована. pltct и apg1 также по прежнему хуже вписываются в эту картину.
+
+## Второй вариант - для импутирования пустых значений средним.
+
+```{r}
+
+birthweight <- birthweight %>%
+  mutate(across(c(twn, vent, pneumo, pda, cld, dead, magsulf, meth, toc), ~ factor(.)))
+
+birthweight_2 <- birthweight %>%
+  mutate(across(where(is.integer), ~ifelse(is.na(.x), round(mean(.x, na.rm = TRUE)), .x))) %>%
+  mutate(across(where(is.numeric), ~ifelse(is.na(.x), mean(.x, na.rm = TRUE), .x)))
+
+birthweight_clean_6 <- birthweight_2 %>%
+  select(hospstay, lowph, pltct, bwt, gest, apg1, lol)
+
+sum(is.na(birthweight_clean_6))
+
+# Функция для определения и удаления выбросов по правилу трёх сигм
+
+find_and_remove_outliers <- function(x) {
+  mean_x <- mean(x, na.rm = TRUE)
+  sd_x <- sd(x, na.rm = TRUE)
+  lower_bound <- mean_x - 3 * sd_x
+  upper_bound <- mean_x + 3 * sd_x
+  ifelse(x >= lower_bound & x <= upper_bound, x, NA) # Заменяем выбросы на NA
+}
+
+#Удаление выбросов
+
+birthweight_clean_6  <- birthweight_clean_6 %>%
+  mutate_if(is.numeric, find_and_remove_outliers)
+
+birthweight_clean_6  <- na.omit(birthweight_clean_6)
+
+```
+
+```{r}
+birthweight_cor_new_2 <- cor(birthweight_clean_6)
+
+corrplot(birthweight_cor_new_2, method = 'number')
+
+corrplot(birthweight_cor_new_2, method = "color", type = "lower", 
+         addCoef.col = "grey30", diag = FALSE,
+         cl.pos = "b", tl.col = "grey10",
+         col = COL2('RdBu', 10))
+
+birthweight_cor_new_2 %>% 
+  network_plot(min_cor = .0)
+```
+
+```{r}
+birthweight_scaled_new_2 <- scale(birthweight_clean_6)
+
+birthweight_dist_new_2 <- dist(birthweight_scaled_new_2,
+                       method = "euclidean")
+as.matrix(birthweight_dist_new_2)[1:6, 1:6]
+
+birthweight_dist.hc_new_2 <- hclust(d = birthweight_dist_new_2,
+                     method = "ward.D2")
+
+fviz_dend(birthweight_dist.hc_new_2, 
+          cex = 0.6)
+
+#Оптимальное число кластеров
+fviz_nbclust(birthweight_scaled_new_2, FUN = hcut, method = "silhouette")
+
+birthweight_kmean_new_2 <- kmeans(birthweight_clean_6,
+                          centers = 3, 
+                          iter.max = 10, 
+                          nstart = 35) 
+
+head(birthweight_kmean_new_2)
+
+fviz_nbclust(birthweight_scaled_new_2, kmeans, method = "wss") +
+  ggtitle('Birthweight dataset')
+```
+
+```{r}
+fviz_dend(birthweight_dist.hc_new_2, 
+          k = 3, # Задаём число кластеров
+          cex = 0.5, # Задаем размер лейблов
+          k_colors = c("#2E9FDF", "#FC4E07", "red"),
+          color_labels_by_k = TRUE, # Соотнести цвета с кластерами
+          rect = TRUE # Добавить "квадратик" вокруг групп
+)
+
+
+#Оценка
+# Cophentic distance
+birthweight_dist.coph_new_2 <- cophenetic(birthweight_dist.hc_new_2)
+# Корреляция
+cor(birthweight_dist_new_2, birthweight_dist.coph_new_2)
+
+# Hopkins
+get_clust_tendency(birthweight_scaled_new_2, 
+        n = nrow(birthweight_scaled_new_2)-1)[1]
+```
+
+```{r}
+
+birthweight_dist_new_2 <- dist(birthweight_scaled_new_2)
+
+pheatmap(birthweight_scaled_new_2, 
+         show_rownames = FALSE, 
+         clustering_distance_rows = birthweight_dist_new_2,
+         clustering_method = "ward.D2", 
+         cutree_rows = 3,
+         cutree_cols = length(colnames(birthweight_scaled_new_2)),
+         angle_col = 45, 
+         main = "Dendrograms for clustering rows and columns with heatmap")
+```
+Получился анализ как-будто совершенно других данных. Мне не кажется он адекватным и отражающим реальную картину, данные очень сильно исказились.Разница в значениях внутри переменных выровнялась, на heatmap это сильно видно, данные больше не такие контрасные (теперь по нескольким оставшимся "контрастам" данные лучше делятся на кластеры, но насколько это адекватно).
+
+Подход 1: Удаление столбцов с большим количеством NA, затем удаление строк с NA
+
+Преимущества:
+
+Эффективность: если есть столбцы с крайне высоким процентом NA, их удаление перед удалением строк может существенно сократить размер датасета, что может ускорить дальнейшие вычисления и снизить сложность алгоритмов. Это может быть критично для больших датасетов.
+
+Сохранение информации: удаляя столбцы с большим процентом пропущенных значений, мы сохраняем информацию из столбцов, которые содержат более полные данные. Это часто более разумно, чем просто удалять все строки, где есть хоть одно NA.
+
+Недостатки:
+
+Потеря информации: удаление столбцов может означать потерю важной информации, связанной с этими переменными, если она все же важна для дальнейшего анализа. Перед удалением стоит убедиться, что столбцы, содержащие пропущенные значения, не являются ключевыми для анализа. В наших данных мы таким подходом потеряли одну переменную - продолжительность родов.
+
+Подход «на глаз»: выбор порога (100 NA) — произволен. Может быть сложно определить оптимальный порог.
+
+Подход 2: Сразу удаление всех строк с NA
+
+Преимущества:
+
+Простота: это самый простой и быстрый метод.
+
+Таким способом в датасет попали все переменные, подходящие для дальнейшего анализа, потери переменных не было.
+
+Недостатки:
+
+Сильная потеря данных, искажение результатов: этот метод ведет к потере большой части информации. Удаление большого количества строк (из-за наличия переменных с большим количеством пропусков пострадают и переменные, в которых такого количества пропусков нет) может исказить распределение данных, что может повлиять на достоверность дальнейшего анализа.
+
+Подход 3: Замена NA средним (или медианой, модой)
+
+Преимущества:
+
+Сохранение всех данных: этот метод сохраняет все данные в наборе данных.
+Простота: относительно просто реализуется.
+
+Недостатки:
+
+Искажение данных: замена NA на среднее значение может сильно исказить распределение данных, что может повлиять на результаты. Это особенно важно, если NA сильно отличаются от большинства значений в столбце.
+Принятие предположений: метод предполагает, что пропущенные значения случайны или можно предположить их наличие. Среднее значение может не отражать реального распределения данных, в особенности если NA – результат систематического пропуска данных, а не ошибки.
+
+Выбор лучшего метода зависит от конкретной ситуации и данных.
+
+Если предполагается, что пропущенных значений немного, или они случайны, вполне может подойти замена NA средним или медианой.
+
+Если есть столбцы с очень большим количеством NA, и мы хотим сохранить как можно больше данных, но при этом не хотим терять большую часть информации: тогда первым делом удаляем столбцы с высоким процентом NA, и потом строки.
+
+Если пропуски значений систематичны, или если есть сомнения в том, как NA влияют на данные: тогда проще удалить строки с пропущенными значениями. Или, если возможно, попробовать найти причину появления NA и попытаться восстановить данные.
+
+# 15. Давайте проведем анализ чувствительности. Сделайте то же, что в пункте 14, но для методов снижения размерности – PCA и UMAP. Проанализируйте результаты.
+
+Для обоих вариантов (с удаленными строками с NA или замененными NA на среднее) при попытке провести PCA анализ я получила ошибку: "Ошибка в svd(x, nu = 0, nv = k) : нулевое измерение". Погуглив, я пришла к выводу, что причина в переменной lol - длительность родов (которая как раз не попадала в анализ в изначальном варианте работы с NA - сначала удалить столбцы с большим количеством NA, а затем только строки с NA) - эта переменная более чем на треть состоит из нулей (нули ставили в случаях кесарева сечения). Принято решение заменить ноль на маленькое значение, так как нули в данном случае действительно представляют собой не истинное отсутствие значения, а очень маленькое значение, которое было занулено в результате округления.
+
+## Первый вариант - для удаления всех строк с пустыми значениями
+
+```{r}
+
+birthweight_clean_4 <- na.omit(birthweight)
+
+birthweight_clean_7 <- birthweight_clean_4 %>%
+  select(hospstay, lowph, pltct, bwt, gest, apg1, lol, dead) 
+
+# Функция для определения и удаления выбросов по правилу трёх сигм
+
+find_and_remove_outliers <- function(x) {
+  mean_x <- mean(x, na.rm = TRUE)
+  sd_x <- sd(x, na.rm = TRUE)
+  lower_bound <- mean_x - 3 * sd_x
+  upper_bound <- mean_x + 3 * sd_x
+  ifelse(x >= lower_bound & x <= upper_bound, x, NA) # Заменяем выбросы на NA
+}
+
+#Удаление выбросов
+
+birthweight_clean_7  <- birthweight_clean_7 %>%
+  mutate_if(is.numeric, find_and_remove_outliers)
+
+birthweight_clean_7  <- na.omit(birthweight_clean_7)
 
 
 
+birthweight_modified <- birthweight_clean_7
+birthweight_modified$lol <- birthweight_modified$lol + 0.01
+```
+
+```{r}
+birthweight_full.pca_new <- prcomp(select(birthweight_modified, -dead),
+                        scale = T)
+
+summary(birthweight_full.pca_new)
+
+fviz_eig(birthweight_full.pca_new, addlabels = T, ylim = c(0, 40))
+
+#Посмотрим из чего состоят 1, 2 и 3 главные компоненты
+fviz_contrib(birthweight_full.pca_new , choice = "var", axes = 1, top = 24) # 1
+fviz_contrib(birthweight_full.pca_new , choice = "var", axes = 2, top = 24) # 2
+fviz_contrib(birthweight_full.pca_new , choice = "var", axes = 3, top = 24) # 3
+
+
+```
+
+```{r}
+fviz_pca_var(birthweight_full.pca_new, col.var = "contrib")
+
+
+fviz_pca_var(birthweight_full.pca_new, 
+             select.var = list(contrib = 3), # Задаём число здесь 
+             col.var = "contrib")
+```
+
+```{r}
+
+ggbiplot_plot_new <- ggbiplot(birthweight_full.pca_new, 
+         scale=0, 
+         groups = as.factor(birthweight_modified$dead), 
+         ellipse = T,
+         alpha = 0.2) 
+  
+print(ggbiplot_plot_new)
+
+
+```
+
+Изменения произошли, но, как ни странно, более и менее напоминает при этом изначальный вариант.
+Две главные компоненты (PC1 и PC2) объясняют 56,4% вариации в данных.  Вклад разных переменных в объяснение вариации в каждой из трех главных компонент по отдельности изменился по сравнению с первым анализом, стала играть роль переменная lol.Но три переменных, вносящих наибольший вклад в анализ, остались те же (и направления их векторов плюс-минус тоже, хоть и немного изменились). Стали больше скоррелированы друг с другом bwt и lowph (соответственно, отрицательно скореллированы с hospstay). 
+
+
+```{r}
+umap_prep <- recipe( ~ ., data = birthweight_modified) %>%
+  step_rm(dead) %>%
+  step_normalize(all_predictors()) %>% 
+  step_umap(all_predictors()) %>%  
+  prep() %>%   
+  juice()
+
+umap_prep %>%
+  ggplot(aes(UMAP1, UMAP2)) + 
+  geom_point(aes(color = birthweight_modified$dead),
+             alpha = 0.7, size = 2) + 
+  labs(color = "Dead")
+```
+
+Ну где-то очень отдаленно тоже напоминает изначальный вариант.
+
+## Второй вариант - для импутирования пустых значений средним.
+
+```{r}
+
+birthweight_clean_8 <- birthweight_2 %>%
+  select(hospstay, lowph, pltct, bwt, gest, apg1, lol, dead)
+
+
+# Функция для определения и удаления выбросов по правилу трёх сигм
+
+find_and_remove_outliers <- function(x) {
+  mean_x <- mean(x, na.rm = TRUE)
+  sd_x <- sd(x, na.rm = TRUE)
+  lower_bound <- mean_x - 3 * sd_x
+  upper_bound <- mean_x + 3 * sd_x
+  ifelse(x >= lower_bound & x <= upper_bound, x, NA) # Заменяем выбросы на NA
+}
+
+#Удаление выбросов
+
+birthweight_clean_8  <- birthweight_clean_8 %>%
+  mutate_if(is.numeric, find_and_remove_outliers)
+
+birthweight_clean_8  <- na.omit(birthweight_clean_8)
+
+birthweight_modified_2 <- birthweight_clean_8
+birthweight_modified_2$lol <- birthweight_modified_2$lol + 0.01
+```
+
+```{r}
+birthweight_full.pca_new_2 <- prcomp(select(birthweight_modified_2, -dead), scale = TRUE)
+
+summary(birthweight_full.pca_new_2)
+
+fviz_eig(birthweight_full.pca_new_2, addlabels = T, ylim = c(0, 40))
+
+#Посмотрим из чего состоят 1, 2 и 3 главные компоненты
+fviz_contrib(birthweight_full.pca_new_2 , choice = "var", axes = 1, top = 24) # 1
+fviz_contrib(birthweight_full.pca_new_2 , choice = "var", axes = 2, top = 24) # 2
+fviz_contrib(birthweight_full.pca_new_2 , choice = "var", axes = 3, top = 24) # 3
+```
+
+```{r}
+
+fviz_pca_var(birthweight_full.pca_new_2, col.var = "contrib")
+
+
+fviz_pca_var(birthweight_full.pca_new_2, 
+             select.var = list(contrib = 3), # Задаём число здесь 
+             col.var = "contrib")
+```
+
+```{r}
+ggbiplot_plot_new_2 <- ggbiplot(birthweight_full.pca_new_2, 
+         scale=0, 
+         groups = as.factor(birthweight_modified_2$dead), 
+         ellipse = T,
+         alpha = 0.2) 
+  
+print(ggbiplot_plot_new_2)
+```
+
+```{r}
+umap_prep <- recipe( ~ ., data = birthweight_modified_2) %>%
+  step_rm(dead) %>%
+  step_normalize(all_predictors()) %>% 
+  step_umap(all_predictors()) %>%  
+  prep() %>%   
+  juice()
+
+umap_prep %>%
+  ggplot(aes(UMAP1, UMAP2)) + 
+  geom_point(aes(color = birthweight_modified_2$dead),
+             alpha = 0.7, size = 2) + 
+  labs(color = "Dead")
+```
+Тут снова получился анализ как-будто совершенно других данных (изменилось все), и мне по прежнему кажется, что замена NA на среднее в данном случае неадекватный подход.
