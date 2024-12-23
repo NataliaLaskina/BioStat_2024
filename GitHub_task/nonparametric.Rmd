@@ -1,0 +1,68 @@
+---
+title: "Non-parametric tests"
+output: html_document
+date: "2024-12-05"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(brunnermunzel)
+
+```
+
+## MWW
+
+```{r MWW}
+
+num_centers <- 1000 # Сколько центров поучаствует в эксперименте?
+
+sample_size <- 10 # Количество пациентов в группе
+
+df_trial <- rbind(
+  data.frame(
+    center_ID = rep(1:num_centers, each = sample_size),
+    group = "A",
+    biomarker = rnorm(sample_size*num_centers, mean = 100, sd = 1)
+  ),
+  data.frame(
+    center_ID = rep(1:num_centers, each = sample_size),
+    group = "B",
+    biomarker = rnorm(sample_size*num_centers, mean = 100, sd = 1)
+  )
+)
+
+ggplot(df_trial, aes(x = biomarker, color = group)) +
+  geom_density() +
+  theme_bw()
+  
+trial_results <- df_trial %>% 
+  group_by(center_ID) %>% 
+  nest() %>% 
+  mutate(test_result = purrr::map(data, ~ wilcox.test(biomarker ~ group, .x)) ) %>% 
+  mutate(glance_result = purrr::map(test_result, ~ broom::tidy(.x)) ) %>% 
+  dplyr::select(-c(data,test_result)) %>% 
+  unnest(glance_result)
+
+table(trial_results$p.value < 0.05)
+
+```
+
+## BM
+
+```{r BM, echo=FALSE}
+
+trial_results <- df_trial %>% 
+  group_by(center_ID) %>% 
+  nest() %>% 
+  mutate(test_result = purrr::map(data, ~ brunnermunzel.test(biomarker ~ group, .x)) ) %>% 
+  mutate(glance_result = purrr::map(test_result, ~ broom::tidy(.x)) ) %>% 
+  dplyr::select(-c(data,test_result)) %>% 
+  unnest(glance_result)
+
+table(trial_results$p.value < 0.05)
+
+
+```
+

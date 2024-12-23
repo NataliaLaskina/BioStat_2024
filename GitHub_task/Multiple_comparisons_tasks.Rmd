@@ -1,0 +1,141 @@
+---
+title: "Multiple_Comparisons_task"
+author: "NataliaLaskina"
+date: "2024-12-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(rstatix)
+library(emmeans)
+
+```
+
+```{r}
+soccer_general <- read.csv("soccer.csv", sep=";")[, 2:6] %>%
+  mutate(Position = as.factor(Position),
+         Nationality = as.factor(Nationality),
+         Age = as.numeric(Age),
+         Height = as.numeric(Height)) %>%
+  filter(Nationality %in% c("Spanish", "Italian", "German", "English", "Argentinian"))
+
+set.seed(1)
+
+soccer_wrk <- soccer_general[sample(1:nrow(soccer_general), 150), ] %>%
+  mutate(Nationality = factor(Nationality))
+```
+
+Есть ли разница между средним ростом футболистов, играющих на разных позициях? 1. Постройте доверительные интервалы для попарных разниц между средними (без поправок и с поправкой Бонферрони). Покрывают ли интервалы реальную разницу между средним ростом? Иллюстрации приветствуются. 2. Проведите попарные тесты для разниц между средними (без поправок, с поправкой Холма и поправкой Бенджамини-Хохберга). Сколько открытий получилось в каждом случае? Сколько из них ложные?
+
+Hint: вам может пригодиться функция pairwise.t.test. Hint 2: параметр задайте параметр pool.sd = FALSE.
+
+```{r}
+
+# Попарный t-тест без поправок
+pairwise_t_test_results <- soccer_general %>%
+  pairwise_t_test(Height ~ Position, p.adjust.method = "none", pool.sd = FALSE)
+
+
+# Попарный t-тест с поправкой Бонферрони
+pairwise_t_test_bonferroni <- soccer_general %>%
+  pairwise_t_test(Height ~ Position, p.adjust.method = "bonferroni", pool.sd = FALSE)
+
+# Вывод результатов
+
+print(pairwise_t_test_results)
+
+print(pairwise_t_test_bonferroni)
+```
+
+```{r}
+# Модель ANOVA
+model <- aov(Height ~ Position, data = soccer_general)
+
+# Попарные сравнения с поправкой Бонферрони
+p_bon <- emmeans(model, pairwise ~ Position, adjust = "bonferroni", infer = c(TRUE, TRUE))
+
+print(p_bon)
+
+# Попарные сравнения  без поправок
+p_no_adj <- emmeans(model, pairwise ~ Position, infer = c(TRUE, TRUE))
+print(pwc_no_adj)
+
+
+plot(p_bon, comparisons = TRUE) +
+  labs(title = "Попарные сравнения среднего роста с поправкой Бонферрони",
+       x = "Средний рост" , y = "Позиция")
+
+plot(pwc_no_adj, comparisons = TRUE) +
+  labs(title = "Попарные сравнения среднего роста без поправок",
+       x = "Средний рост" , y = "Позиция")
+```
+
+```{r}
+mean_heights <- soccer_general%>% 
+  group_by(Position) %>% 
+  summarize(Mean_Height = mean(Height))
+
+mean_heights
+```
+
+```{r}
+differences <- expand.grid(mean_heights$Position, mean_heights$Position) %>%
+  mutate(Difference = abs(mean_heights$Mean_Height[match(Var1, mean_heights$Position)] -
+                            mean_heights$Mean_Height[match(Var2, mean_heights$Position)]))
+
+differences
+```
+
+```{r}
+# Функция для расчета доверительного интервала (без изменений)
+calculate_ci <- function(mean_diff, se, df, conf.level = 0.95) {
+  t_critical <- qt(1 - (1 - conf.level) / 2, df = df)
+  margin_of_error <- t_critical * se
+  lower_bound <- mean_diff - margin_of_error
+  upper_bound <- mean_diff + margin_of_error
+  return(c(lower = lower_bound, upper = upper_bound))
+}
+
+# Попарные t-тесты без поправок
+pt_no_corr <- pairwise.t.test(soccer_general$Height, soccer_general$Position, p.adjust.method = "none", pool.sd = FALSE)
+
+# Преобразование результатов в data.frame с доверительными интервалами
+pairwise_results_no_correction <- data.frame(
+  group1 = rep(rownames(pt_no_corr$p.value), ncol(pt_no_corr$p.value)),
+  group2 = rep(colnames(pt_no_corr$p.value), each = nrow(pt_no_corr$p.value)),
+  p.value = as.vector(pt_no_corr$p.value),
+  mean_diff = as.vector(pt_no_corr$diff),
+  se = as.vector(pt_no_corr$se),
+  df = as.vector(pt_no_corr$parameter)
+) %>% 
+  mutate(ci = map2(mean_diff, se, ~calculate_ci(.x, .y, df))) %>%
+  unnest_wider(ci)
+
+# Попарные t-тесты с поправкой Бонферрони
+pt_bonf <- pairwise.t.test(soccer_general$Height, soccer_general$Position, p.adjust.method = "bonferroni", pool.sd = FALSE)
+
+# Преобразование результатов в data.frame с доверительными интервалами
+pairwise_results_bonferroni <- data.frame(
+  group1 = rep(rownames(pt_bonf$p.value), ncol(pt_bonf$p.value)),
+  group2 = rep(colnames(pt_bonf$p.value), each = nrow(pt_bonf$p.value)),
+  p.value = as.vector(pt_bonf$p.value),
+  mean_diff = as.vector(pt_bonf$diff),
+  se = as.vector(pt_bonf$se),
+  df = as.vector(pt_bonf$parameter)
+) %>% 
+  mutate(ci = map2(mean_diff, se, ~calculate_ci(.x, .y, df))) %>%
+  unnest_wider(ci)
+
+
+print("Попарные сравнения без поправок:")
+print(pairwise_results_no_correction)
+
+print("\nПопарные сравнения с поправкой Бонферрони:")
+print(pairwise_results_bonferroni)
+```
+
