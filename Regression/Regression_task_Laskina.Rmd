@@ -1,0 +1,899 @@
+---
+title: "Regression_task_Laskina"
+author: "NataliaLaskina"
+date: "2025-01-16"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float: true
+editor_options:
+  chunk_output_type: inline
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+library(tidyverse)
+library(gtsummary)
+library(modelsummary)
+library(GGally)
+library(broom)
+library(ggfortify)
+library(ggResidpanel)
+library(performance)
+library(lmtest)
+library(sandwich)
+library(emmeans)
+library(readxl)
+library(openxlsx)
+library(car)
+library(MASS)
+
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, error = FALSE)
+```
+
+## **Чтение данных**
+
+```{r}
+HW <- read.xlsx("./HW_data.xlsx")
+
+HW %>% head()
+
+
+HW  %>%
+  glimpse()
+```
+
+## **Расчет показателя Физическая активность**
+
+Физическая активность будет рассчитываться по показателю MET (Metabolic
+Equivalent of Task) - это физиологическая мера, выражающая энергозатраты
+на физическую активность. 1 MET равен потреблению кислорода в состоянии
+покоя. Это стандартизированная мера, широко используемая в исследованиях
+физической активности и общественного здоровья.
+
+Формула расчета для каждого вида активности:
+
+MET-минуты в неделю = (MET интенсивность) × (минуты активности) × (дни в
+неделю)
+
+Рабочая активность: Высокая интенсивность (PAQ605, PAQ610, PAD615): 8
+MET × минуты в день × дни в неделю
+
+Умеренная интенсивность (PAQ620, PAQ625, PAD630): 4 MET × минуты в день
+× дни в неделю
+
+Транспортная активность (PAQ635, PAQ640, PAD645): Ходьба/велосипед: 3.3
+MET × минуты в день × дни в неделю
+
+Рекреационная активность: Высокая интенсивность (PAQ650, PAQ655,
+PAD660): 8 MET × минуты в день × дни в неделю
+
+Умеренная интенсивность (PAQ665, PAQ670, PAD675): 4 MET × минуты в день
+× дни в неделю
+
+Общий показатель физической активности:
+
+Общие MET-минуты = Сумма MET-минут всех видов активности
+
+Категоризация общей физической активности:
+
+Низкая: \< 600 MET-минут в неделю Средняя: 600-1500 MET-минут в неделю
+Высокая: \> 1500 MET-минут в неделю
+
+Стандартные коэффициенты MET: 1 MET = потребление кислорода в состоянии
+покоя (≈3.5 мл O₂/кг/мин). Легкая активность: 1.1-2.9 ME. Умеренная
+активность: 3-5.9 MET (поэтому используется коэффициент 4). Интенсивная
+активность: ≥6 MET (поэтому используется коэффициент 8). Ходьба: 3.3 MET
+(стандартный коэффициент для обычной ходьбы). 
+В руководстве GPAQ (Global Physical Activity Questionnaire) ВОЗ используются 
+именно эти коэффициенты для расчета общей физической активности.
+
+Предполагаем, что эффект физической активности в отношении гликированного 
+гемоглобина будет выражаться в том, что при увеличении физической активности 
+уровеннь гликированного гемоглобина будет снижаться..
+
+```{r}
+# Создаем функцию для расчета MET-минут в неделю для каждого типа активности
+calculate_met_minutes <- function(has_activity, days_per_week, minutes_per_day, met_value) {
+  # Проверяем, есть ли активность
+  ifelse(has_activity == 1, 
+         # Если да, рассчитываем MET-минуты
+         as.numeric(days_per_week) * as.numeric(minutes_per_day) * met_value,
+         # Если нет, возвращаем 0
+         0)
+}
+
+# Рассчитываем Physical Activity для каждого наблюдения
+HW$Physical_activity <- 
+  # Рабочая активность высокой интенсивности (8 MET)
+  calculate_met_minutes(HW$PAQ605, HW$PAQ610, HW$PAD615, 8) +
+  
+  # Рабочая активность умеренной интенсивности (4 MET)
+  calculate_met_minutes(HW$PAQ620, HW$PAQ625, HW$PAD630, 4) +
+  
+  # Транспортная активность (3.3 MET)
+  calculate_met_minutes(HW$PAQ635, HW$PAQ640, HW$PAD645, 3.3) +
+  
+  # Рекреационная активность высокой интенсивности (8 MET)
+  calculate_met_minutes(HW$PAQ650, HW$PAQ655, HW$PAD660, 8) +
+  
+  # Рекреационная активность умеренной интенсивности (4 MET)
+  calculate_met_minutes(HW$PAQ665, HW$PAQ670, HW$PAD675, 4)
+
+# Создаем категориальную версию переменной
+HW$Physical_activity_cat <- cut(HW$Physical_activity,
+                                breaks = c(-Inf, 600, 1500, Inf),
+                                labels = c("Низкая", "Средняя", "Высокая"),
+                                right = FALSE)
+
+# Базовая проверка распределения
+summary(HW$Physical_activity)
+table(HW$Physical_activity_cat)
+
+# Создаем гистограмму распределения
+hist(HW$Physical_activity, 
+     main = "Распределение Physical Activity (MET-минуты в неделю)",
+     xlab = "MET-минуты в неделю",
+     breaks = 50)
+```
+
+## **Ковариаты. Показатель Smoking**
+
+Ковариаты, включенные в модель для коррекции эффекта физической
+активности в отношении гликированного гемоглобина, согласно
+ациклическому графу (DAG)1: Comorbidities,Race,Sex,Smoking. Информация о
+Race и Sex имеется напрямую в нашем датасете.
+
+Для оценки Smoking: в датасете есть переменные SMQ020 - Smoked at least
+100 cigarettes in life: yes or no, и SMQ040 - Do you now smoke
+cigarettes: Every day, Some days, Not at all. Из этих двух переменных
+можно создать более информативную категориальную переменную уровня курения,
+учитывающую как историю курения, так и текущий статус.
+
+Создаем переменную Smoking_status с следующими категориями:
+
+Never smoker (Никогда не курил) - SMQ020 = "No"; 
+Current smoker (Текущий курильщик) - SMQ020 = "Yes" и SMQ040 = "Every day" 
+или "Some days";
+Former smoker (Бывший курильщик) - SMQ020 = "Yes" и SMQ040 = "Not at
+all".
+
+```{r}
+
+# Создаем новую переменную Smoking_status
+HW$Smoking_status <- factor(
+  case_when(
+    HW$SMQ020 == 2 ~ "Never smoker",
+    HW$SMQ020 == 1 & HW$SMQ040 %in% c(1,2) ~ "Current smoker",
+    HW$SMQ020 == 1 & HW$SMQ040 == 3 ~ "Former smoker",
+    TRUE ~ NA_character_
+  ),
+  levels = c("Never smoker", "Former smoker", "Current smoker")
+)
+
+table(HW$Smoking_status, useNA = "ifany")
+```
+
+## **Ковариаты. Показатель Comorbidities**
+
+Показатель Comorbidities (Сопутствующие заболевания). Из предоставленных
+данных можно создать индекс коморбидности, учитывая следующие
+хронические заболевания:
+
+Сердечно-сосудистые заболевания: MCQ160C - Coronary heart disease;
+MCQ160B - Congestive heart failure; MCQ160E - Heart attack; MCQ160F -
+Stroke; BPQ020 - Hypertension.
+
+Респираторные заболевания: MCQ010 - Asthma (если MCQ035 = "Yes" -
+текущая астма); MCQ160O - COPD.
+
+Эндокринные заболевания: MCQ160m - Thyroid problem (если MCQ170m =
+"Yes" - текущая проблема); DIQ010 - Diabetes.
+
+Онкологические заболевания: MCQ220 - Cancer or malignancy.
+
+Такой индекс можно использовать как количественную переменную (число
+заболеваний), так и как категориальную переменную
+(нет/одно/множественные заболевания).
+
+Диабет намеренно не включаем, так как он тесно связан с уровнем
+гликированного гемоглобина (Hb1Ac). Будем учитывать только текущие
+случаи астмы и проблем с щитовидной железой.
+
+```{r}
+# Создаем бинарные переменные для каждого заболевания
+# (1 = есть заболевание, 0 = нет заболевания)
+
+HW$Comorbidities <- 
+  # Сердечно-сосудистые
+  as.numeric(HW$MCQ160C == 1) +  # Coronary heart disease
+  as.numeric(HW$MCQ160B == 1) +  # Heart failure
+  as.numeric(HW$MCQ160E == 1) +  # Heart attack
+  as.numeric(HW$MCQ160F == 1) +  # Stroke
+  as.numeric(HW$BPQ020 == 1) +   # Hypertension
+  
+  # Респираторные
+  as.numeric(HW$MCQ010 == 1 & HW$MCQ035 == 1) +  # Current asthma
+  as.numeric(HW$MCQ160O == 1) +  # COPD
+  
+  # Эндокринные (кроме диабета, т.к. это может быть связано с исходом)
+  as.numeric(HW$MCQ160M == 1 & HW$MCQ170M == 1) +  # Current thyroid problem
+  
+  # Онкологические
+  as.numeric(HW$MCQ220 == 1)     # Cancer
+
+# Создаем категориальную версию
+HW$Comorbidities_cat <- factor(
+  case_when(
+    HW$Comorbidities == 0 ~ "No comorbidities",
+    HW$Comorbidities == 1 ~ "One comorbidity",
+    HW$Comorbidities >= 2 ~ "Multiple comorbidities"
+  ),
+  levels = c("No comorbidities", "One comorbidity", "Multiple comorbidities")
+)
+
+# Проверяем распределение
+table(HW$Comorbidities, useNA = "ifany")
+table(HW$Comorbidities_cat, useNA = "ifany")
+```
+
+## **Подготовка данных для модели**
+
+```{r}
+HW_model <- HW %>%
+  dplyr:: select (SEQN, LBXGH, Physical_activity, RIDRETH3, RIAGENDR, Smoking_status, Comorbidities_cat)
+
+HW_model <- HW_model %>%
+  rename(`Glycated hemoglobin (HbA1c)` = LBXGH) %>%
+    rename(`ID` = `SEQN`) %>%
+    rename(`Gender` = `RIAGENDR`) %>%
+    rename(`Race` = `RIDRETH3`) %>% 
+    mutate(
+      across(Gender, function(x) x %>% factor(levels = c(1, 2), labels = c("Male", "Female"))), 
+      across(Race, function(x) x %>% factor(levels = c(1, 2, 3, 4, 6, 7), labels = c("Mexican American", "Other Hispanic", "Non-Hispanic White", "Non-Hispanic Black", "Non-Hispanic Asian", "Other Race - Including Multi-Racial")))) 
+
+glimpse(HW_model)
+```
+
+## **Описательная статистика**
+
+```{r}
+tbl_summary(
+  HW_model, include = -c(ID), 
+  type = list(all_continuous() ~ "continuous2"),
+  statistic = list(
+    all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}-{p75})", "{min}-{max}")
+  )) %>%
+  modify_footnote(everything() ~ NA) %>%
+  bold_labels()
+```
+
+## **Эксплораторный анализ (графики)**
+### Количественные переменные
+
+```{r, fig.width=9, fig.height=8}
+ggpairs(
+  HW_model %>% dplyr::select(`Glycated hemoglobin (HbA1c)`, Physical_activity), 
+  upper = list(continuous = wrap("points", alpha = 0.5, size = 1),
+               combo = wrap("points", alpha = 0.5, size = 1),
+               disrete = "blank"),
+  lower = list(continuous = "cor",
+               discrete = "count",
+               combo = wrap("box_no_facet", outlier.size = 0.5)),
+  diag = list(continuous = "barDiag",
+              discrete = "barDiag"),
+  showStrips = TRUE, progress = FALSE) +
+  theme_bw(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),
+        panel.grid.minor = element_blank(),
+        strip.placement = "outside",
+        strip.background = element_rect(color = "white", fill = "#EFEBE9"),
+        strip.text = element_text(size = 10, face = "bold"))
+
+```
+
+### Категориальные переменные
+#### Gender
+
+```{r}
+
+ggplot(HW_model, aes(x = Gender, y = `Glycated hemoglobin (HbA1c)`)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(title = "HbA1c levels by Gender")
+
+ggplot(HW_model, aes(x = Gender, y = Physical_activity)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(title = "Physical Activity by Gender")
+```
+
+####Race
+
+```{r}
+ggplot(HW_model, aes(x = Race, y = `Glycated hemoglobin (HbA1c)`)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(title = "HbA1c levels by Race")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggplot(HW_model, aes(x = Race, y = Physical_activity)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(title = "Physical Activity by Race")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+####Smoking_status
+
+```{r}
+ggplot(HW_model, aes(x = Smoking_status , y = `Glycated hemoglobin (HbA1c)`)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(title = "HbA1c levels by Smoking_status ")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggplot(HW_model, aes(x = Smoking_status , y = Physical_activity)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(title = "Physical Activity by Smoking_status ")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+####Comorbidities_cat
+
+```{r}
+ggplot(HW_model, aes(x = Comorbidities_cat , y = `Glycated hemoglobin (HbA1c)`)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(title = "HbA1c levels by Comorbidities_cat ")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggplot(HW_model, aes(x = Comorbidities_cat , y = Physical_activity)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(title = "Physical Activity by Comorbidities_cat ")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+ggplot(HW_model, 
+       aes(x = Physical_activity, 
+           y = `Glycated hemoglobin (HbA1c)`, 
+           color = Gender)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE) +
+  facet_wrap(~Smoking_status) +
+  theme_bw() +
+  labs(title = "HbA1c vs Physical Activity by Smoking Status and Gender")
+
+ggplot(HW_model, 
+       aes(x = Physical_activity, 
+           y = `Glycated hemoglobin (HbA1c)`, 
+           color = Gender)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE) +
+  facet_wrap(~Comorbidities_cat) +
+  theme_bw() +
+  labs(title = "HbA1c vs Physical Activity by Comorbidities_cat and Gender")
+```
+
+```{r}
+# Cleveland dot plot
+ggplot(HW_model, 
+       aes(y = reorder(Race, `Glycated hemoglobin (HbA1c)`), 
+           x = `Glycated hemoglobin (HbA1c)`)) +
+  geom_point(stat = "summary", fun = "mean") +
+  geom_errorbarh(stat = "summary", 
+                 fun.data = "mean_se", 
+                 height = 0) +
+  theme_bw() +
+  labs(y = "Race", 
+       x = "Mean HbA1c Level", 
+       title = "Mean HbA1c Levels by Race")
+
+ggplot(HW_model, 
+       aes(y = reorder(Comorbidities_cat, `Glycated hemoglobin (HbA1c)`), 
+           x = `Glycated hemoglobin (HbA1c)`)) +
+  geom_point(stat = "summary", fun = "mean") +
+  geom_errorbarh(stat = "summary", 
+                 fun.data = "mean_se", 
+                 height = 0) +
+  theme_bw() +
+  labs(y = "Comorbidities_cat", 
+       x = "Mean HbA1c Level", 
+       title = "Mean HbA1c Levels by Comorbidities_cat")
+
+ggplot(HW_model, 
+       aes(y = reorder(Smoking_status, `Glycated hemoglobin (HbA1c)`), 
+           x = `Glycated hemoglobin (HbA1c)`)) +
+  geom_point(stat = "summary", fun = "mean") +
+  geom_errorbarh(stat = "summary", 
+                 fun.data = "mean_se", 
+                 height = 0) +
+  theme_bw() +
+  labs(y = "Smoking_status", 
+       x = "Mean HbA1c Level", 
+       title = "Mean HbA1c Levels by Smoking_status")
+
+```
+
+## **Линейная модель с ковариатами**
+
+```{r}
+
+HW_fit <- lm(`Glycated hemoglobin (HbA1c)` ~ Physical_activity + Gender + Race + Smoking_status + Comorbidities_cat, data = HW_model)
+
+print(HW_fit)
+```
+
+
+```{r}
+HW_fit_sum <- summary(HW_fit)
+HW_fit_sum
+```
+
+```{r}
+broom::tidy(HW_fit, conf.int = TRUE)
+```
+
+```{r}
+broom::augment(HW_fit) %>% head()
+```
+
+```{r}
+HW_fit_gof <- broom::glance(HW_fit)
+HW_fit_gof %>% head()
+```
+
+### **Интерпретация полученной модели с ковариатами**
+
+Physical_activity: β = 6.403e-06 (p = 0.356)
+Очень малый и статистически незначимый эффект физической активности.
+
+У не-испаноязычных белых уровень HbA1c в среднем на 0.49 единиц
+    ниже, чем у мексиканских американцев. У представителей других рас
+    уровень HbA1c в среднем на 0.60 единиц ниже.
+
+Сопутствующие заболевания: при наличии одного сопутствующего
+    заболевания уровень HbA1c в среднем на 0.22 единицы выше. При наличии
+    множественных сопутствующих заболеваний уровень HbA1c в среднем на
+    0.64 единицы выше.
+
+Gender: нет статистически значимых различий между
+полами. 
+
+Smoking_status (референтная группа - Never smoker):
+Статус курения не показывает значимой связи с уровнем HbA1c.
+
+Диагностика остатков: Min: -1.7606, Max: 7.8883. Большой разброс остатков
+и наличие экстремальных значений указывают на проблемы с моделью. Медиана
+остатков (-0.1613) отлична от нуля, что говорит о возможной
+систематической ошибке. Низкий R-squared указывает на слабую
+объяснительную способность модели.
+
+### **Диагностика модели с ковариатами**
+
+```{r}
+autoplot(HW_fit)
+```
+
+```{r}
+resid_panel(HW_fit, plots = "R")
+```
+
+#### QQ-plot и гистограмма
+
+```{r, fig.height=4, fig.width=8}
+resid_panel(HW_fit, plots = c("qq", "hist"))
+```
+
+#### Residuals vs Leverage
+
+```{r, fig.height=4, fig.width=8}
+resid_panel(HW_fit, plots = c("lev", "cookd"))
+```
+
+#### Мультиколлинеарность
+
+```{r}
+vif(HW_fit)
+```
+
+Проанализируем диагностические графики:
+
+QQ-plot и гистограмма остатков: показывает отклонение от нормальности
+распределения остатков, особенно на "хвостах". Гистограмма остатков
+показывает правостороннюю асимметрию.
+
+Scale-Location plot:
+
+показывает небольшой тренд в разбросе остатков. Присутствуют выбросы
+(точки 181, 389, 587).
+
+Residual plot показывает неравномерное распределение остатков.
+Residual-Leverage plot указывает на наличие влиятельных наблюдений.
+Распределение переменных: Обе количественные переменные имеют сильно
+асимметричное распределение. Между ними очень низкая корреляция
+(-0.007).
+Vif: проблемы c мультиколлинеарностью нет.
+
+## **Линейная модель без ковариат**
+
+```{r}
+
+HW_fit_less <- lm(`Glycated hemoglobin (HbA1c)` ~ Physical_activity, data = HW_model)
+
+print(HW_fit_less)
+
+summary(HW_fit_less)
+```
+
+```{r}
+broom::tidy(HW_fit_less, conf.int = TRUE)
+```
+
+```{r}
+broom::augment(HW_fit_less) %>% head()
+```
+
+```{r}
+HW_fit_gof_2 <- broom::glance(HW_fit_less)
+HW_fit_gof_2 %>% head()
+```
+
+### **Диагностика модели без ковариат**
+
+```{r}
+autoplot(HW_fit_less)
+```
+
+```{r, fig.height=4, fig.width=8}
+resid_panel(HW_fit_less, plots = c("qq", "hist"))
+```
+
+```{r, fig.height=4, fig.width=8}
+resid_panel(HW_fit_less, plots = c("lev", "cookd"))
+
+```
+
+### **Интерпретация полученной модели без ковариат**
+
+Добавление ковариат значительно улучшило объяснительную способность
+модели (R² вырос с ≈0% до 9.5%) Модель с ковариатами статистически
+значима (p < 0.001). Модель без ковариат статистически незначима. Эта модель не 
+лучше, чем простое среднее значение (включение физической активности не улучшает
+предсказательную способность модели без ковариат).
+
+Изменение эффекта физической активности:
+Без ковариат: -1.367e-06 (p = 0.844). 
+С ковариатами: 6.403e-06 (p = 0.356). Направление эффекта изменилось 
+на противоположное. В обеих моделях эффект статистически незначим.
+Это показывает, что сама по себе физическая активность (без учета других
+факторов) не объясняет вариацию в уровне HbA1c, но модель становится
+информативной при добавлении других предикторов.
+Обе модели имеют проблемы с нормальностью распределения остатков и 
+гомоскедастичностью, с выбросами и влиятельными наблюдениями . 
+
+## **Преобразование переменных**
+
+Для улучшения модели приняты решения преодразовать переменные следующим
+образом:
+
+Physical_activity - логарифмирование, т.к.: данные сильно скошены вправо
+(long right tail); большая концентрация значений в левой части
+распределения; наличие экстремальных значений справа.
+
+Используется log1p() вместо простого log() по следующим причинам:
+безопасно работает с нулевыми значениями (log(0) не определен, а
+log1p(0) = 0); 
+Для малых значений x, log1p(x) ≈ x, что сохраняет
+интерпретируемость; 
+Помогает справиться с проблемой
+гетероскедастичности. 
+
+После логарифмирования распределение должно стать
+более симметричным, выбросы должны оказывать меньшее влияние, связь с
+другими переменными может стать более линейной.
+
+Для Glycated hemoglobin (HbA1c) выбрано Box-Cox преобразование выбрано
+по следующим причинам:
+
+На гистограмме видно правостороннее (положительное) скошенное
+распределение, Box-Cox хорошо работает именно с такими распределениями.
+HbA1c всегда имеет положительные значения, Box-Cox предназначен именно
+для положительных данных. Гибкость преобразования: Box-Cox автоматически
+подбирает оптимальный параметр λ. При λ = 0 получаем логарифмическое
+преобразование, при λ = 1 получаем линейное преобразование, при λ = 0.5
+получаем квадратный корень.
+
+Box-Cox преобразование - это семейство степенных преобразований, которое
+помогает сделать распределение данных более близким к нормальному. Оно
+определяется формулой:
+
+y(λ) = (y\^λ - 1)/λ, если λ ≠ 0 y(λ) = log(y), если λ = 0
+
+где:
+
+y - исходные данные λ (лямбда) - параметр преобразования y(λ) -
+преобразованные данные.
+
+```{r}
+
+# Логарифмическое преобразование
+HW_model$Physical_activity_log <- log1p(HW_model$Physical_activity)
+```
+
+```{r}
+# Box-Cox преобразование
+
+bc <- boxcox(HW_model$`Glycated hemoglobin (HbA1c)` ~ 1)
+lambda <- bc$x[which.max(bc$y)]
+HW_model$HbA1c_transformed <- if(lambda == 0) {
+  log(HW_model$`Glycated hemoglobin (HbA1c)`)
+} else {
+  (HW_model$`Glycated hemoglobin (HbA1c)`^lambda - 1)/lambda
+}
+```
+
+```{r}
+# Идентификация выбросов
+outliers <- c(181, 389, 587)
+HW_model_clean <- HW_model[-outliers, ]
+```
+
+## **Модель после преобразования переменных, с ковариатами**
+
+```{r}
+new_HW_fit <- lm(HbA1c_transformed ~ Physical_activity_log + Gender + Race + Smoking_status + Comorbidities_cat, data = HW_model)
+
+print(new_HW_fit )
+```
+
+```{r}
+new_HW_fit_sum <- summary(new_HW_fit)
+new_HW_fit_sum
+```
+
+```{r}
+broom::tidy(new_HW_fit, conf.int = TRUE)
+```
+
+```{r}
+broom::augment(new_HW_fit) %>% head()
+```
+
+```{r}
+HW_fit_gof_3 <- broom::glance(new_HW_fit)
+HW_fit_gof_3 %>% head()
+```
+
+### **Интерпретация модели после преобразования переменных, с ковариатами**
+
+Остатки стали более симметричными и меньше по абсолютной величине (Min:
+-0.0122, Max: 0.0136).
+
+Теперь физическая активность стала значимым предиктором, что совпадает с
+изначальными предположениями. При увеличении логарифма физической
+активности на единицу, преобразованный уровень HbA1c снижается на
+0.00007687 единиц.
+
+Статус курения и пол остаются незначимым предикторами.
+
+Точечная и интервальная оценки: Точечная оценка - это конкретное
+значение коэффициента в модели. В нашем случае для логарифма физической
+активности это β = -7.687e-05 Интервальная оценка - это 95%
+доверительный интервал, [-1.431424e-04 -0.0000105930]
+
+Точечная оценка:
+
+При увеличении логарифма физической активности на одну единицу,
+преобразованный уровень HbA1c в среднем снижается на 0.00007687 единиц
+Поскольку мы использовали логарифмическое преобразование, это означает,
+что при увеличении физической активности на 1%, уровень HbA1c снижается
+примерно на 0.000077%
+
+Интервальная оценка:
+
+С 95% уверенностью мы можем сказать, что истинный эффект увеличения
+логарифма физической активности на единицу находится между снижением
+HbA1c на 0.000143 и 0.0000107 единиц. Поскольку интервал не включает 0,
+эффект статистически значим (что подтверждается p-value = 0.023).
+
+Выводы: 
+
+Из точечной оценки:
+
+Мы видим отрицательную связь между физической активностью и уровнем
+HbA1c. Но эффект очень маленький в абсолютных значениях.
+
+Из интервальной оценки:
+
+Мы можем быть уверены в направлении эффекта (он отрицательный). Размер
+эффекта достаточно стабилен (узкий доверительный интервал).
+
+Клиническая значимость: Чтобы определить клиническую значимость, нам не
+хватает:
+
+Информации о минимальном клинически значимом различии (MCID) для HbA1c;
+Типичного диапазона значений физической активности в выборке;
+Экспертного мнения клиницистов о том, какое изменение HbA1c считается
+существенным для здоровья пациента.
+
+Для более точной оценки клинической значимости было бы полезно:
+
+Получить консультацию эндокринолога. Найти в литературе данные о
+клинически значимых изменениях HbA1c. Пересчитать эффекты в более
+понятных единицах измерения (например, сколько дополнительных минут
+физической активности нужно для снижения HbA1c на 0.1%). В текущем виде,
+учитывая малую величину эффекта, можно предположить, что клиническая
+значимость невелика, но для окончательного вывода нужна дополнительная
+информация.
+
+### **Диагностика модели после преобразования переменных, с ковариатами**
+
+```{r}
+resid_panel(new_HW_fit, plots = "R")
+```
+
+```{r}
+autoplot(new_HW_fit, plots = "R")
+```
+
+#### QQ-plot и гистограмма
+
+```{r, fig.height=4, fig.width=8}
+resid_panel(new_HW_fit, plots = c("qq", "hist"))
+```
+
+#### Residuals vs Leverage
+
+```{r, fig.height=4, fig.width=8}
+resid_panel(new_HW_fit, plots = c("lev", "cookd"))
+```
+
+#### Мультиколлинеарность
+
+```{r}
+vif(new_HW_fit)
+```
+
+```{r}
+par(mfrow = c(2,2))
+plot(new_HW_fit)
+```
+
+Преобразования существенно улучшили модель. Основные предположения
+линейной регрессии теперь выполняются лучше: нормальность остатков,
+гомоскедастичность, линейность связи.
+
+В целом, после преобразований модель выглядит намного лучше и может быть
+использована для анализа. Оставшиеся отклонения от идеальных
+предположений не критичны и типичны для реальных данных.
+
+## **Гипотеза об отсутствии ассоциации между физической активностью и гликиро-
+ванным гемоглобином**
+
+```{r}
+# 1. Можем проверить гипотезу, используя summary модели
+summary(new_HW_fit)  # здесь мы уже видим t-тест и p-значение для Physical_activity_log
+
+# 2. Можно получить доверительный интервал
+confint(new_HW_fit)["Physical_activity_log", ]  # 95% доверительный интервал
+
+# 3. Можно провести формальный t-тест для коэффициента
+
+linearHypothesis(new_HW_fit, "Physical_activity_log = 0")
+
+```
+
+Формулировка гипотез: 
+H₀: β = 0 (нет связи между физической активностью
+и HbA1c); 
+H₁: β ≠ 0 (существует связь между физической активностью и
+HbA1c) 
+Результаты из модели: коэффициент (β) = -7.687e-05; стандартная
+ошибка = 3.377e-05; t-значение = -2.276; p-значение = 0.023062. Критерии
+принятия решения: уровень значимости α = 0.05.
+
+95% доверительный интервал: [-1.431424e-04,-0.0000105930] не включает 0.
+
+Мы отвергаем нулевую гипотезу об отсутствии связи. Существует
+статистически значимая отрицательная ассоциация между физической
+активностью и уровнем гликированного гемоглобина. Эффект очень малый, 
+но стабильный (узкий доверительный интервал).
+Статистическая значимость не обязательно означает клиническую значимость, 
+которая, возможно, не очень большая (размер эффекта очень мал, что ставит под 
+вопрос его практическую значимость).
+Модель объясняет только около 13% вариации в данных, что
+указывает на наличие других важных факторов.
+
+Результаты теста линейной гипотезы:
+
+Коэффициент при Physical_activity_log = 0; p-значение
+(0.02306) < 0.05: отвергаем H₀. Включени ев модел ьпоказателя физической 
+активности значимо улучшает модель, но улучшение небольшое (маленькая разница 
+в RSS).
+Этот тест подтверждает наши предыдущие выводы о наличии статистически
+значимой, но слабой связи между физической активностью и HbA1c.
+
+## **Является ли пол модификатором эффекта физической активности в отношении гликирован-
+ного гемоглобина**?
+
+```{r}
+#Создаем модель с взаимодействием
+model_interaction <- lm(HbA1c_transformed ~ Physical_activity_log*Gender + 
+                       Race + Smoking_status + Comorbidities_cat, 
+                       data = HW_model)
+
+summary(model_interaction)
+
+# Проверяем значимость взаимодействия
+anova(new_HW_fit, model_interaction)  # сравниваем с моделью без взаимодействия
+```
+
+Пол не является модификатором эффекта физической активности на уровень
+HbA1c. Это подтверждается как незначимым коэффициентом взаимодействия,
+так и тестом отношения правдоподобия (ANOVA). Эффект физической
+активности статистически одинаков для мужчин и женщин, разница между группами 
+очень мала и статистически незначима. Нет оснований рекомендовать различные 
+подходы к физической активности для мужчин и женщин с точки зрения влияния на 
+HbA1c. Учитывая эти результаты, нет необходимости проводить отдельный анализ 
+для мужчин и женщин, так как эффект физической активности универсален для обоих 
+полов.
+
+## **Модель после преобразования переменных, без ковариат**
+
+```{r}
+new_HW_fit_less <- lm(HbA1c_transformed ~ Physical_activity_log, data = HW_model)
+
+print(new_HW_fit_less )
+
+summary(new_HW_fit_less)
+```
+
+```{r}
+broom::tidy(new_HW_fit_less, conf.int = TRUE)
+```
+
+```{r}
+broom::augment(new_HW_fit_less) %>% head()
+```
+
+```{r}
+HW_fit_gof_4 <- broom::glance(new_HW_fit_less)
+HW_fit_gof_4 %>% head()
+```
+
+### **Диагностика модели после преобразования переменных, без ковариат**
+
+```{r}
+autoplot(new_HW_fit_less)
+```
+
+```{r, fig.height=4, fig.width=8}
+resid_panel(new_HW_fit_less, plots = c("qq", "hist"))
+```
+
+```{r, fig.height=4, fig.width=8}
+resid_panel(new_HW_fit_less, plots = c("lev", "cookd"))
+
+```
+
+### **Интерпретация модели после преобразования переменных, без ковариат**
+
+Добавление ковариат существенно улучшило объяснительную
+способность модели (R² вырос с 1.73% до 12.81%). Обе модели статистически
+значимы. Эффект физической активности сохраняется значимым даже после
+контроля на ковариаты. Более низкий RSE в модели с ковариатами указывает
+на лучшую точность предсказаний.
+
+Физическая активность может быть связана с другими предикторами
+(например, люди с сопутствующими заболеваниями могут быть менее активны)
+При добавлении ковариат мы учитываем эти взаимосвязи, поэтому более низкая 
+оценка эффекта в модели с ковариатами является более точной, так как учитывает
+влияние других факторов. Сохранение значимости эффекта говорит о том, что
+физическая активность имеет самостоятельное влияние на HbA1c, даже после
+учета других факторов.
